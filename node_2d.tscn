@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=3 uid="uid://dhp4537vgvxjl"]
+
+[ext_resource type="Script" path="res://node_2d.gd" id="1_8ypxd"]
+[ext_resource type="PackedScene" uid="uid://ca4lpkrw027nn" path="res://scenes/ak-47.tscn" id="2_ay3mk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2jiy"]
+size = Vector2(115, 770)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fvptv"]
+size = Vector2(1235, 65)
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_8ypxd")
+
+[node name="ak-47" parent="." instance=ExtResource("2_ay3mk")]
+position = Vector2(975, 272)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(1211, 333)
+shape = SubResource("RectangleShape2D_w2jiy")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(31, 339)
+shape = SubResource("RectangleShape2D_w2jiy")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(607.5, 22.5)
+shape = SubResource("RectangleShape2D_fvptv")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(599, 684)
+shape = SubResource("RectangleShape2D_fvptv")
