@@ -17,9 +17,9 @@ extends RigidBody2D
 var pos = transform;
 var camera
 var label
-var ammo = MAG_AMMO;
-var mags = MAG_AMOUNT;
-var hp = 100;
+var ammo = 0;
+var mags = 0;
+var hp = 1;
 var idname
 var nick = "";
 var withMag : bool = true;
@@ -52,7 +52,12 @@ func _ready():
 	timerToShoot.wait_time = SHOOT_TIME_SPEED;
 	gravity_scale = 0;
 	hp = INIT_HP;
+	ammo = MAG_AMMO;
+	mags = MAG_AMOUNT;
+	hp = INIT_HP;
 	updateScore()
+	updateUI()
+	label.updateHP(hp)
 	
 func setAuthority(id):
 	idname = str(id);
