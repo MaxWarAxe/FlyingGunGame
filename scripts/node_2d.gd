@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var PlayerScene : PackedScene
-@export var PuppetScene : PackedScene
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	var index = 0

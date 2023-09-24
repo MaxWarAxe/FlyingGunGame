@@ -1,23 +1,24 @@
 extends RigidBody2D
-var SHOOT_FORCE = Vector2(-600,0);
-var ANGULAR_SPEED = 5000
-var ANGULAR_VELOCITY = 0;
-var RECOIL_FORCE = 50000;
-var BULLET_SPEED = 2000;
-var SHELL_SPEED = 250;
-var MAG_SPEED = 50;
-var MAG_ROTATION_SPEED = -100;
-var SHELL_ROTATION_SPEED = -100;
-var MAG_AMMO = 30;
-var TIME_TO_RELOAD = 3;
-var SHOOT_TIME_SPEED = 0.1;
-var INIT_HP = 100;
-var BULLET_DAMAGE = 34;
+@export var SHOOT_FORCE = Vector2(-600,0);
+@export var ANGULAR_SPEED = 5000
+@export var ANGULAR_VELOCITY = 0;
+@export var RECOIL_FORCE = 50000;
+@export var BULLET_SPEED = 2000;
+@export var SHELL_SPEED = 250;
+@export var MAG_SPEED = 50;
+@export var MAG_ROTATION_SPEED = -100;
+@export var SHELL_ROTATION_SPEED = -100;
+@export var MAG_AMMO = 30;
+@export var MAG_AMOUNT = 3;
+@export var TIME_TO_RELOAD = 3;
+@export var SHOOT_TIME_SPEED = 0.1;
+@export var INIT_HP = 100;
+@export var BULLET_DAMAGE = 34;
 var pos = transform;
 var camera
 var label
-var ammo = 30;
-var mags = 3;
+var ammo = MAG_AMMO;
+var mags = MAG_AMOUNT;
 var hp = 100;
 var idname
 var nick = "";
