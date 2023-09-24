@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://dhp4537vgvxjl"]
+
+[ext_resource type="Script" path="res://scripts/node_2d.gd" id="1_twv1q"]
+[ext_resource type="PackedScene" uid="uid://ca4lpkrw027nn" path="res://scenes/ak-47/ak-47.tscn" id="2_45rbi"]
+[ext_resource type="Texture2D" uid="uid://nwrnis3kcpq0" path="res://sprites/backgrounds/342482df88e7767b2331e2ca91dbc5e6.jpeg" id="3_fqdlo"]
+[ext_resource type="PackedScene" uid="uid://bmt3i8ybin8a6" path="res://scenes/ak_47_client.tscn" id="3_xcp8y"]
+[ext_resource type="PackedScene" uid="uid://cm57n0ojdlknm" path="res://scenes/moon.tscn" id="4_c6b87"]
+
+[node name="game" type="Node2D"]
+script = ExtResource("1_twv1q")
+PlayerScene = ExtResource("2_45rbi")
+PuppetScene = ExtResource("3_xcp8y")
+
+[node name="342482Df88e7767b2331e2Ca91Dbc5e6" type="Sprite2D" parent="."]
+z_index = -100
+position = Vector2(-267, 297)
+texture = ExtResource("3_fqdlo")
+
+[node name="Moon" parent="." instance=ExtResource("4_c6b87")]
+position = Vector2(-596, 318)
+
+[node name="Moon2" parent="." instance=ExtResource("4_c6b87")]
+position = Vector2(19, -142)
+
+[node name="Moon3" parent="." instance=ExtResource("4_c6b87")]
+position = Vector2(223, 783)
+
+[node name="Moon4" parent="." instance=ExtResource("4_c6b87")]
+position = Vector2(733, 334)
+
+[node name="SpawnPoints" type="Node2D" parent="."]
+
+[node name="0" type="Node2D" parent="SpawnPoints" groups=["SpawnPoints"]]
+position = Vector2(580, 175)
+
+[node name="1" type="Node2D" parent="SpawnPoints" groups=["SpawnPoints"]]
+position = Vector2(374, 297)

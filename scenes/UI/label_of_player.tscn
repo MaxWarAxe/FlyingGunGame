@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://4qjdh10o1oy"]
+
+[ext_resource type="Script" path="res://scenes/UI/label_of_player.gd" id="1_4cy5j"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_jag0b"]
+font_size = 30
+
+[node name="LabelOfPlayer" type="Node2D"]
+script = ExtResource("1_4cy5j")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+offset_right = 287.0
+offset_bottom = 44.0
+
+[node name="NickNameLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "MaxWarAxe"
+label_settings = SubResource("LabelSettings_jag0b")
+
+[node name="Spaces" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "    "
+label_settings = SubResource("LabelSettings_jag0b")
+
+[node name="HPValueLabel" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "100"
+label_settings = SubResource("LabelSettings_jag0b")
+
+[node name="HPText" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+text = "HP"
+label_settings = SubResource("LabelSettings_jag0b")

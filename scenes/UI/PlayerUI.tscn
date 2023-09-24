@@ -1,0 +1,73 @@
+[gd_scene load_steps=6 format=3 uid="uid://cltatitm11wxq"]
+
+[ext_resource type="Theme" uid="uid://bssgbti2ybngk" path="res://themes/MinimalUI.tres" id="1_oxf12"]
+[ext_resource type="Script" path="res://scenes/UI/PlayerUI.gd" id="2_ejmo8"]
+[ext_resource type="PackedScene" uid="uid://cvdk7u1plg38l" path="res://scenes/UI/score_line.tscn" id="3_gaj6w"]
+
+[sub_resource type="Theme" id="Theme_x60xh"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_6nil8"]
+font_size = 48
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+auto_translate = false
+localize_numeral_system = false
+theme = ExtResource("1_oxf12")
+script = ExtResource("2_ejmo8")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_top = 558.0
+offset_right = 172.0
+offset_bottom = 648.0
+alignment = 1
+
+[node name="AmmoLable" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_x60xh")
+theme_type_variation = &"HeaderLarge"
+text = "30"
+label_settings = SubResource("LabelSettings_6nil8")
+
+[node name="Slash" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_x60xh")
+theme_type_variation = &"HeaderLarge"
+text = "/"
+label_settings = SubResource("LabelSettings_6nil8")
+
+[node name="MagsLable" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+theme = SubResource("Theme_x60xh")
+theme_type_variation = &"HeaderLarge"
+text = "3"
+label_settings = SubResource("LabelSettings_6nil8")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Panel" type="Panel" parent="."]
+visible = false
+layout_mode = 2
+offset_left = 244.0
+offset_top = 115.0
+offset_right = 902.0
+offset_bottom = 471.0
+theme = ExtResource("1_oxf12")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 0
+offset_top = 2.0
+offset_right = 658.0
+offset_bottom = 353.0
+theme = ExtResource("1_oxf12")
+
+[node name="ScoreLineMain" parent="Panel/VBoxContainer" instance=ExtResource("3_gaj6w")]
+layout_mode = 2

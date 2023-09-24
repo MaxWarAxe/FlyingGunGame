@@ -1,0 +1,29 @@
+[gd_scene load_steps=2 format=3 uid="uid://cvdk7u1plg38l"]
+
+[ext_resource type="Script" path="res://scenes/UI/score_line.gd" id="1_urnos"]
+
+[node name="ScoreLine" type="HBoxContainer"]
+custom_minimum_size = Vector2(0, 20)
+script = ExtResource("1_urnos")
+
+[node name="Name" type="Label" parent="."]
+custom_minimum_size = Vector2(200, 20)
+layout_mode = 2
+text = "Name"
+
+[node name="Kills" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Kills
+"
+
+[node name="Deaths" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Deaths"
+
+[node name="Ping" type="Label" parent="."]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text = "Ping
+"

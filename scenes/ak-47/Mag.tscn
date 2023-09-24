@@ -1,0 +1,28 @@
+[gd_scene load_steps=3 format=3 uid="uid://cpjons5plii23"]
+
+[ext_resource type="Script" path="res://scenes/ak-47/Mag.gd" id="1_ay6cf"]
+[ext_resource type="Texture2D" uid="uid://cu33c2trme6k7" path="res://sprites/ak-47/mag.png" id="1_bggc1"]
+
+[node name="Mag" type="RigidBody2D"]
+collision_layer = 512
+collision_mask = 512
+mass = 0.01
+gravity_scale = 0.0
+script = ExtResource("1_ay6cf")
+
+[node name="Mag" type="Sprite2D" parent="."]
+position = Vector2(2.53636, 1.49995)
+scale = Vector2(0.355691, 0.355691)
+texture = ExtResource("1_bggc1")
+
+[node name="Mag-Polygon" type="CollisionPolygon2D" parent="."]
+position = Vector2(2.50002, 3.99995)
+scale = Vector2(1.55, 1.8)
+polygon = PackedVector2Array(-8.06452, -12.2222, 1.6129, -12.2222, 2.25806, -5.55556, 5.48387, 0.555555, 10.6452, 6.11111, 2.90323, 10, -5.48387, 2.77778, -8.70968, -4.44444)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
