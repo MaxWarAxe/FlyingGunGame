@@ -73,13 +73,16 @@ properties/4/watch = true
 [node name="awp" type="RigidBody2D" groups=["Player"]]
 collision_layer = 3
 collision_mask = 3
-mass = 0.1
+mass = 0.05
 inertia = 1000.0
 center_of_mass_mode = 1
 physics_material_override = SubResource("PhysicsMaterial_c7557")
 gravity_scale = 0.0
 angular_damp_mode = 1
 script = SubResource("GDScript_km1r5")
+SHOOT_FORCE = Vector2(-30000, 0)
+ANGULAR_SPEED = 3000
+RECOIL_FORCE = 500000
 MAG_AMMO = 5
 SHOOT_TIME_SPEED = 1.0
 BULLET_DAMAGE = 100
