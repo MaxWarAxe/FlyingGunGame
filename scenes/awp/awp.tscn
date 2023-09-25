@@ -19,6 +19,37 @@ resource_name = "awp"
 script/source = "extends \"res://scripts/ak-47.gd\"
 
 
+func _process(delta):
+	if idname == str(multiplayer.get_unique_id()):
+		camera.zoom.x = lerp(camera.zoom.x, targetZoom,0.5)
+		camera.zoom.y = lerp(camera.zoom.y, targetZoom,0.5)
+	label.position = position
+	checkDeath()
+	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+		if(Input.is_action_just_pressed(\"shoot\")):
+			unzoom();
+			
+		if(Input.is_action_just_released(\"shoot\")):
+			targetZoom = INIT_ZOOM
+			if timerToShoot.is_stopped():
+				shoot();
+				timerToShoot.start();
+			
+		if(Input.is_action_pressed(\"rotate_left\")):
+			rotate_left();
+		if(Input.is_action_just_pressed(\"show_score\")):
+			updateScore()
+			camera.showScore()
+		if(Input.is_action_just_released('show_score')):
+			camera.hideScore();
+			
+		if(Input.is_action_pressed(\"rotate_right\")):
+			rotate_right();
+		if(Input.is_action_just_pressed(\"reload\") and timerToReload.is_stopped()):
+			reload()
+			
+func unzoom():
+	targetZoom = 0.2;
 
 
 func _on_timer_to_shoot_timeout():
@@ -156,6 +187,14 @@ one_shot = true
 
 [node name="TimerToShoot" type="Timer" parent="."]
 one_shot = true
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+position = Vector2(168, -11.5)
+scale = Vector2(1, 0.166667)
+points = PackedVector2Array(-1, -0.6, 5000, -0.6)
+width = 20.0
+default_color = Color(1, 0, 0, 1)
 
 [connection signal="timeout" from="TimerToReload" to="." method="_on_timer_to_reload_timeout"]
 [connection signal="timeout" from="TimerToShoot" to="." method="_on_timer_to_shoot_timeout"]

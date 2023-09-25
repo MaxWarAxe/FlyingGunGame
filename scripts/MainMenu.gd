@@ -5,6 +5,8 @@ var peer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AnimationPlayer.set_autoplay("logomove")
+	$AnimationPlayer.play("logomove")
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
@@ -75,3 +77,11 @@ func _on_start_button_button_down():
 	StartGame.rpc()
 
 
+
+
+func _on_video_stream_player_finished():
+	$VideoStreamPlayer.play()
+
+
+func _on_host_button_mouse_entered():
+	pass # Replace with function body.

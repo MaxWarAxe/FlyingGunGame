@@ -14,6 +14,7 @@ extends RigidBody2D
 @export var SHOOT_TIME_SPEED = 0.1;
 @export var INIT_HP = 100;
 @export var BULLET_DAMAGE = 34;
+@export var INIT_ZOOM = 0.5;
 var pos = transform;
 var camera
 var label
@@ -24,7 +25,7 @@ var idname
 var nick = "";
 var withMag : bool = true;
 var lastDealer;
-
+var targetZoom = INIT_ZOOM;
 signal died(id);
 
 @export var bulletScene : PackedScene
@@ -45,6 +46,8 @@ func _ready():
 		camera = cameraScene.instantiate();
 		get_tree().get_root().add_child(camera)
 		camera.nodeToSpectate = self
+		camera.zoom = Vector2(INIT_ZOOM,INIT_ZOOM)
+		$Line2D.visible = true;
 	setUpLabel();
 	timerToShoot = get_node("TimerToShoot")
 	timerToReload = get_node("TimerToReload")
@@ -55,6 +58,7 @@ func _ready():
 	ammo = MAG_AMMO;
 	mags = MAG_AMOUNT;
 	hp = INIT_HP;
+	targetZoom = INIT_ZOOM;
 	updateScore()
 	updateUI()
 	label.updateHP(hp)
@@ -85,6 +89,8 @@ func checkDeath():
 
 func _process(delta):
 	label.position = position
+	camera.zoom.x = lerp(camera.zoom.x, targetZoom,0.5)
+	camera.zoom.y = lerp(camera.zoom.y, targetZoom,0.5)
 	checkDeath()
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		if(Input.is_action_pressed("shoot") and (timerToShoot.is_stopped())):

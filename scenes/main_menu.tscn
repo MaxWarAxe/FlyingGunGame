@@ -1,6 +1,67 @@
-[gd_scene load_steps=2 format=3 uid="uid://cqbxk4mrnbg6w"]
+[gd_scene load_steps=15 format=3 uid="uid://cqbxk4mrnbg6w"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_kouje"]
+[ext_resource type="VideoStream" path="res://sprites/backgrounds/back.ogv" id="2_akl55"]
+[ext_resource type="Texture2D" uid="uid://g11co051emv6" path="res://sprites/ui/gunforce_spots.png" id="3_ikrjt"]
+[ext_resource type="Texture2D" uid="uid://byvdjsnq2qwgb" path="res://sprites/ui/host_unfocus.png" id="3_o1dls"]
+[ext_resource type="Texture2D" uid="uid://cj1hyr3gkhlyx" path="res://sprites/ui/gunforce_logo_2.png" id="4_oa5un"]
+[ext_resource type="Texture2D" uid="uid://c0y3cjiug1dc" path="res://sprites/ui/join_unfocus.png" id="4_skbyu"]
+[ext_resource type="Theme" uid="uid://cg4l8cs6svhxt" path="res://sprites/ui/main_menu_theme.tres" id="5_cj1b1"]
+[ext_resource type="Texture2D" uid="uid://i8spb5yigv3i" path="res://sprites/ui/quit_unfocus.png" id="7_kkhbx"]
+[ext_resource type="Texture2D" uid="uid://nw5705yu1r2b" path="res://sprites/ui/join_focus.png" id="7_mvfhb"]
+[ext_resource type="Texture2D" uid="uid://d1bw3e5c0wsue" path="res://sprites/ui/quit_focus.png" id="9_prmo2"]
+
+[sub_resource type="Animation" id="Animation_ck8e5"]
+resource_name = "logomove"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GunforceSpots:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.7, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.277992, 0.277992), Vector2(0.3, 0.3), Vector2(0.278, 0.278)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GunforceLogo2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.5, 3.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.174533, -0.174533, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("VBoxContainer:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5, 3.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0872665, 0.0872665, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8rbgy"]
+_data = {
+"logomove": SubResource("Animation_ck8e5")
+}
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4rp44"]
+texture = ExtResource("7_mvfhb")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ap4ud"]
+texture = ExtResource("9_prmo2")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -11,39 +72,80 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kouje")
 
-[node name="HostButton" type="Button" parent="."]
+[node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 layout_mode = 0
-offset_left = 76.0
-offset_top = 229.0
-offset_right = 364.0
-offset_bottom = 333.0
-text = "HOST"
-
-[node name="JoinButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 399.0
-offset_top = 228.0
-offset_right = 672.0
-offset_bottom = 334.0
-text = "JOIN
-"
+offset_top = -2.0
+offset_right = 1281.0
+offset_bottom = 723.0
+stream = ExtResource("2_akl55")
+autoplay = true
+expand = true
 
 [node name="StartButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 721.0
-offset_top = 232.0
-offset_right = 967.0
-offset_bottom = 336.0
+offset_left = 984.0
+offset_top = 477.0
+offset_right = 1230.0
+offset_bottom = 581.0
 text = "START
 "
 
 [node name="NickNameLine" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 371.0
-offset_top = 119.0
-offset_right = 717.0
-offset_bottom = 195.0
+offset_left = 744.0
+offset_top = 26.0
+offset_right = 1090.0
+offset_bottom = 102.0
 
-[connection signal="button_down" from="HostButton" to="." method="_on_host_button_button_down"]
-[connection signal="button_down" from="JoinButton" to="." method="_on_join_button_button_down"]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "logomove"
+speed_scale = 0.5
+libraries = {
+"": SubResource("AnimationLibrary_8rbgy")
+}
+
+[node name="GunforceSpots" type="Sprite2D" parent="."]
+position = Vector2(285, 144)
+scale = Vector2(0.297742, 0.297742)
+texture = ExtResource("3_ikrjt")
+
+[node name="GunforceLogo2" type="Sprite2D" parent="."]
+position = Vector2(281, 144)
+rotation = -0.0761124
+scale = Vector2(0.232625, 0.232625)
+texture = ExtResource("4_oa5un")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.723
+anchor_top = 0.448
+anchor_right = 0.723
+anchor_bottom = 0.448
+offset_left = -266.44
+offset_top = -214.56
+offset_right = 253.56
+offset_bottom = 201.44
+rotation = 0.0380562
+pivot_offset = Vector2(240, 230)
+theme = ExtResource("5_cj1b1")
+
+[node name="HostButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("5_cj1b1")
+icon = ExtResource("3_o1dls")
+
+[node name="JoinButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxTexture_4rp44")
+icon = ExtResource("4_skbyu")
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_styles/hover = SubResource("StyleBoxTexture_ap4ud")
+icon = ExtResource("7_kkhbx")
+
+[connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
 [connection signal="button_down" from="StartButton" to="." method="_on_start_button_button_down"]
+[connection signal="button_down" from="VBoxContainer/HostButton" to="." method="_on_host_button_button_down"]
+[connection signal="button_down" from="VBoxContainer/JoinButton" to="." method="_on_join_button_button_down"]

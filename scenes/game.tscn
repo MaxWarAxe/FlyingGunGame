@@ -1,9 +1,21 @@
-[gd_scene load_steps=5 format=3 uid="uid://dhp4537vgvxjl"]
+[gd_scene load_steps=9 format=3 uid="uid://dhp4537vgvxjl"]
 
 [ext_resource type="Script" path="res://scripts/node_2d.gd" id="1_twv1q"]
 [ext_resource type="PackedScene" uid="uid://c50nhaxhb3qe6" path="res://scenes/awp/awp.tscn" id="2_voe2t"]
 [ext_resource type="Texture2D" uid="uid://nwrnis3kcpq0" path="res://sprites/backgrounds/342482df88e7767b2331e2ca91dbc5e6.jpeg" id="3_fqdlo"]
 [ext_resource type="PackedScene" uid="uid://cm57n0ojdlknm" path="res://scenes/moon.tscn" id="4_c6b87"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqc4v"]
+size = Vector2(716.219, 7381.88)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yaceh"]
+size = Vector2(12177.5, 188)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_55gax"]
+size = Vector2(14868.7, 1004.41)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_feutb"]
+size = Vector2(998.875, 7132.5)
 
 [node name="game" type="Node2D"]
 script = ExtResource("1_twv1q")
@@ -11,25 +23,114 @@ PlayerScene = ExtResource("2_voe2t")
 
 [node name="342482Df88e7767b2331e2Ca91Dbc5e6" type="Sprite2D" parent="."]
 z_index = -100
-position = Vector2(-267, 297)
+position = Vector2(3265.44, 2284)
+scale = Vector2(2.37986, 2.37986)
 texture = ExtResource("3_fqdlo")
-
-[node name="Moon" parent="." instance=ExtResource("4_c6b87")]
-position = Vector2(-596, 318)
-
-[node name="Moon2" parent="." instance=ExtResource("4_c6b87")]
-position = Vector2(19, -142)
-
-[node name="Moon3" parent="." instance=ExtResource("4_c6b87")]
-position = Vector2(223, 783)
-
-[node name="Moon4" parent="." instance=ExtResource("4_c6b87")]
-position = Vector2(733, 334)
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="0" type="Node2D" parent="SpawnPoints" groups=["SpawnPoints"]]
-position = Vector2(580, 175)
+position = Vector2(6153, 802)
 
 [node name="1" type="Node2D" parent="SpawnPoints" groups=["SpawnPoints"]]
-position = Vector2(374, 297)
+position = Vector2(-1336, 3789)
+
+[node name="2" type="Node2D" parent="SpawnPoints" groups=["SpawnPoints"]]
+position = Vector2(3863, -338)
+
+[node name="3" type="Node2D" parent="SpawnPoints" groups=["SpawnPoints"]]
+position = Vector2(7560, 4899)
+
+[node name="Moons" type="Node2D" parent="."]
+
+[node name="Moon" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(-596, 318)
+
+[node name="Moon2" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(2702, -237)
+
+[node name="Moon3" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(394, 3295)
+
+[node name="Moon4" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(4234, 1152)
+
+[node name="Moon5" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(2424, 3165)
+
+[node name="Moon6" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(-1020, 4021)
+
+[node name="Moon7" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(5849, 3374)
+
+[node name="Moon8" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(5355, 4877)
+
+[node name="Moon9" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(7619, 272)
+
+[node name="Moon10" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(6198, -544)
+
+[node name="Moon11" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(-1967, 650)
+
+[node name="Moon12" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(-1764, 2491)
+
+[node name="Moon13" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(3125, 4904)
+
+[node name="Moon14" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(2757, 1932)
+
+[node name="Moon15" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(2909, 1678)
+
+[node name="Moon16" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(2909, 1370)
+
+[node name="Moon17" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(5328, 748)
+
+[node name="Moon18" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(5436, 461)
+
+[node name="Moon19" parent="Moons" instance=ExtResource("4_c6b87")]
+position = Vector2(5723, 398)
+
+[node name="Walls" type="Node2D" parent="."]
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="Walls"]
+collision_layer = 513
+collision_mask = 513
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D3"]
+position = Vector2(-3199.89, 2461.06)
+shape = SubResource("RectangleShape2D_yqc4v")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
+collision_layer = 513
+collision_mask = 513
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
+position = Vector2(3266.25, -1245)
+shape = SubResource("RectangleShape2D_yaceh")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="Walls"]
+position = Vector2(9870.56, 2209.75)
+collision_layer = 513
+collision_mask = 513
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4"]
+position = Vector2(-5514.89, 3995.05)
+shape = SubResource("RectangleShape2D_55gax")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="Walls"]
+collision_layer = 513
+collision_mask = 513
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2"]
+position = Vector2(9870.56, 2209.75)
+shape = SubResource("RectangleShape2D_feutb")
