@@ -1,13 +1,24 @@
 extends Node2D
 
-@export var PlayerScene : PackedScene
+@export var awpScene : PackedScene
+@export var akScene : PackedScene
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func weaponChoose(i) -> Node:
+	match GameManager.Players[i].weapon:
+			"ak":
+				return akScene.instantiate()
+			"awp":
+				return awpScene.instantiate()
+	return null;
+
+@rpc("any_peer","call_local")
+func spawn():
 	var index = 0
 	var currentPlayer
 	for i in GameManager.Players:
-		currentPlayer = PlayerScene.instantiate()
+		
+		currentPlayer = weaponChoose(i)
+		
 		currentPlayer.name = str(GameManager.Players[i].id)
 		currentPlayer.nick = str(GameManager.Players[i].name)
 		currentPlayer.setAuthority(GameManager.Players[i].id)
@@ -18,7 +29,12 @@ func _ready():
 			if spawn.name == str(index):
 				currentPlayer.global_position = spawn.global_position
 		index += 1
-	pass # Replace with function body.
+	pass
+
+func _ready():
+	
+	if multiplayer.get_unique_id() == 1:
+		respawnCall.rpc();
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -34,7 +50,7 @@ func respawnCall(id):
 	var currentPlayer
 	for i in GameManager.Players:
 		if str(GameManager.Players[i].id) == str(id):
-			currentPlayer = PlayerScene.instantiate()
+			currentPlayer = weaponChoose(i)
 			currentPlayer.name = str(GameManager.Players[i].id)
 			currentPlayer.nick = str(GameManager.Players[i].name)
 			currentPlayer.setAuthority(GameManager.Players[i].id)

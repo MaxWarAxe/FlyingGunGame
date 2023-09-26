@@ -89,10 +89,10 @@ func checkDeath():
 
 func _process(delta):
 	label.position = position
-	camera.zoom.x = lerp(camera.zoom.x, targetZoom,0.5)
-	camera.zoom.y = lerp(camera.zoom.y, targetZoom,0.5)
 	checkDeath()
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+		camera.zoom.x = lerp(camera.zoom.x, targetZoom,0.5)
+		camera.zoom.y = lerp(camera.zoom.y, targetZoom,0.5)
 		if(Input.is_action_pressed("shoot") and (timerToShoot.is_stopped())):
 			shoot();
 			timerToShoot.start();

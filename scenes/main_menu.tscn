@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cqbxk4mrnbg6w"]
+[gd_scene load_steps=27 format=3 uid="uid://cqbxk4mrnbg6w"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_kouje"]
 [ext_resource type="VideoStream" path="res://sprites/backgrounds/back.ogv" id="2_akl55"]
@@ -7,9 +7,37 @@
 [ext_resource type="Texture2D" uid="uid://cj1hyr3gkhlyx" path="res://sprites/ui/gunforce_logo_2.png" id="4_oa5un"]
 [ext_resource type="Texture2D" uid="uid://c0y3cjiug1dc" path="res://sprites/ui/join_unfocus.png" id="4_skbyu"]
 [ext_resource type="Theme" uid="uid://cg4l8cs6svhxt" path="res://sprites/ui/main_menu_theme.tres" id="5_cj1b1"]
+[ext_resource type="Texture2D" uid="uid://d3q1cmha310ff" path="res://sprites/awp/awpsprite.png" id="5_da3jo"]
+[ext_resource type="Texture2D" uid="uid://c1ykg4suesxde" path="res://sprites/awp/bolt.png" id="6_23api"]
+[ext_resource type="Texture2D" uid="uid://ctlnpxqxbxjoa" path="res://sprites/awp/mag.png" id="7_k43ei"]
 [ext_resource type="Texture2D" uid="uid://i8spb5yigv3i" path="res://sprites/ui/quit_unfocus.png" id="7_kkhbx"]
 [ext_resource type="Texture2D" uid="uid://nw5705yu1r2b" path="res://sprites/ui/join_focus.png" id="7_mvfhb"]
 [ext_resource type="Texture2D" uid="uid://d1bw3e5c0wsue" path="res://sprites/ui/quit_focus.png" id="9_prmo2"]
+[ext_resource type="Texture2D" uid="uid://brt4kn4bab7t6" path="res://sprites/ui/arrow - focus.png" id="11_q47uy"]
+[ext_resource type="Texture2D" uid="uid://cdlkh1w5lliv3" path="res://sprites/ui/arrow.png" id="12_w5c0n"]
+[ext_resource type="Texture2D" uid="uid://bp7wy43toi1pg" path="res://sprites/ak-47/ak-47-base.png" id="13_u6u6e"]
+[ext_resource type="Texture2D" uid="uid://cu33c2trme6k7" path="res://sprites/ak-47/mag.png" id="14_xwi6s"]
+[ext_resource type="Texture2D" uid="uid://bxyq6gswpy4ul" path="res://sprites/ak-47/bolt.png" id="15_0q7tp"]
+
+[sub_resource type="Animation" id="Animation_hgb1b"]
+resource_name = "moveWeapon"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/NodeContainer/awp:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 0,
+"values": []
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mtqm3"]
+_data = {
+"moveWeapon": SubResource("Animation_hgb1b")
+}
 
 [sub_resource type="Animation" id="Animation_ck8e5"]
 resource_name = "logomove"
@@ -19,7 +47,7 @@ tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/path = NodePath("GunforceSpots:scale")
-tracks/0/interp = 1
+tracks/0/interp = 2
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0, 2.7, 5),
@@ -31,7 +59,7 @@ tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/path = NodePath("GunforceLogo2:rotation")
-tracks/1/interp = 1
+tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0, 1.5, 3.5, 5),
@@ -43,13 +71,37 @@ tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/path = NodePath("VBoxContainer:rotation")
-tracks/2/interp = 1
+tracks/2/interp = 2
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0, 1.5, 3.5, 5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [0.0, -0.0872665, 0.0872665, 0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel/NodeContainer/ak:rotation")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.0, 0.174533]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Panel/NodeContainer/awp:rotation")
+tracks/4/interp = 2
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.0, 0.174533]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8rbgy"]
@@ -63,6 +115,12 @@ texture = ExtResource("7_mvfhb")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ap4ud"]
 texture = ExtResource("9_prmo2")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h5wgw"]
+texture = ExtResource("11_q47uy")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_v453e"]
+texture = ExtResource("11_q47uy")
+
 [node name="MainMenu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -71,6 +129,76 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kouje")
+
+[node name="WeaponAnimation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_mtqm3")
+}
+
+[node name="Target" type="Node2D" parent="."]
+position = Vector2(373, 538)
+scale = Vector2(0.4, 0.4)
+
+[node name="Panel" type="ColorRect" parent="."]
+top_level = true
+clip_children = 1
+layout_mode = 0
+offset_left = 166.0
+offset_top = 400.0
+offset_right = 588.0
+offset_bottom = 699.0
+
+[node name="NodeContainer" type="Node2D" parent="Panel"]
+position = Vector2(208, 137)
+
+[node name="ak" type="Node2D" parent="Panel/NodeContainer"]
+rotation = 0.146837
+scale = Vector2(0.4, 0.35)
+skew = 0.0314621
+
+[node name="Ak-47-base" type="Sprite2D" parent="Panel/NodeContainer/ak"]
+position = Vector2(26.4583, 24)
+texture = ExtResource("13_u6u6e")
+
+[node name="Mag" type="Sprite2D" parent="Panel/NodeContainer/ak"]
+position = Vector2(16.4583, 71.9999)
+texture = ExtResource("14_xwi6s")
+
+[node name="Bolt" type="Sprite2D" parent="Panel/NodeContainer/ak"]
+position = Vector2(1.45833, -10.0001)
+texture = ExtResource("15_0q7tp")
+
+[node name="awp" type="Node2D" parent="Panel/NodeContainer"]
+position = Vector2(-484.5, 0)
+rotation = 0.146837
+scale = Vector2(0.3, 0.3)
+
+[node name="Awpsprite" type="Sprite2D" parent="Panel/NodeContainer/awp"]
+position = Vector2(117, -5.5)
+texture = ExtResource("5_da3jo")
+
+[node name="Bolt" type="Sprite2D" parent="Panel/NodeContainer/awp"]
+position = Vector2(-12.5002, -20.0001)
+texture = ExtResource("6_23api")
+
+[node name="Mag" type="Sprite2D" parent="Panel/NodeContainer/awp"]
+position = Vector2(6.49986, 51.25)
+scale = Vector2(1.03797, 1.02113)
+texture = ExtResource("7_k43ei")
+
+[node name="weaponNameLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.445
+anchor_top = 0.776
+anchor_right = 0.445
+anchor_bottom = 0.776
+offset_left = -19.79
+offset_top = -13.024
+offset_right = 20.21
+offset_bottom = 12.976
+text = "1234
+"
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
 layout_mode = 0
@@ -81,21 +209,21 @@ stream = ExtResource("2_akl55")
 autoplay = true
 expand = true
 
-[node name="StartButton" type="Button" parent="."]
-layout_mode = 0
-offset_left = 984.0
-offset_top = 477.0
-offset_right = 1230.0
-offset_bottom = 581.0
-text = "START
-"
-
 [node name="NickNameLine" type="LineEdit" parent="."]
 layout_mode = 0
 offset_left = 744.0
-offset_top = 26.0
+offset_top = 128.0
 offset_right = 1090.0
-offset_bottom = 102.0
+offset_bottom = 204.0
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(1, 0, 0, 1)
+theme_override_colors/font_uneditable_color = Color(1, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_colors/caret_color = Color(1, 0, 0, 1)
+theme_override_colors/selection_color = Color(1, 0, 0, 1)
+theme_override_colors/clear_button_color = Color(1, 0, 0, 1)
+theme_override_colors/clear_button_color_pressed = Color(1, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "logomove"
@@ -106,12 +234,12 @@ libraries = {
 
 [node name="GunforceSpots" type="Sprite2D" parent="."]
 position = Vector2(285, 144)
-scale = Vector2(0.297742, 0.297742)
+scale = Vector2(0.289661, 0.289661)
 texture = ExtResource("3_ikrjt")
 
 [node name="GunforceLogo2" type="Sprite2D" parent="."]
 position = Vector2(281, 144)
-rotation = -0.0761124
+rotation = -0.160755
 scale = Vector2(0.232625, 0.232625)
 texture = ExtResource("4_oa5un")
 
@@ -123,12 +251,17 @@ anchor_top = 0.448
 anchor_right = 0.723
 anchor_bottom = 0.448
 offset_left = -266.44
-offset_top = -214.56
+offset_top = -85.56
 offset_right = 253.56
-offset_bottom = 201.44
-rotation = 0.0380562
+offset_bottom = 333.44
+rotation = 0.0803774
 pivot_offset = Vector2(240, 230)
 theme = ExtResource("5_cj1b1")
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "START
+"
 
 [node name="HostButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -145,7 +278,31 @@ layout_mode = 2
 theme_override_styles/hover = SubResource("StyleBoxTexture_ap4ud")
 icon = ExtResource("7_kkhbx")
 
+[node name="ArrowLeft" type="Button" parent="."]
+layout_mode = 2
+offset_left = 184.0
+offset_top = 521.0
+offset_right = 434.0
+offset_bottom = 649.0
+scale = Vector2(-0.5, 0.5)
+theme = ExtResource("5_cj1b1")
+theme_override_styles/hover = SubResource("StyleBoxTexture_h5wgw")
+icon = ExtResource("12_w5c0n")
+
+[node name="ArrowRight" type="Button" parent="."]
+layout_mode = 2
+offset_left = 560.0
+offset_top = 517.0
+offset_right = 810.0
+offset_bottom = 645.0
+scale = Vector2(0.5, 0.5)
+theme = ExtResource("5_cj1b1")
+theme_override_styles/hover = SubResource("StyleBoxTexture_v453e")
+icon = ExtResource("12_w5c0n")
+
 [connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
-[connection signal="button_down" from="StartButton" to="." method="_on_start_button_button_down"]
+[connection signal="button_down" from="VBoxContainer/StartButton" to="." method="_on_start_button_button_down"]
 [connection signal="button_down" from="VBoxContainer/HostButton" to="." method="_on_host_button_button_down"]
 [connection signal="button_down" from="VBoxContainer/JoinButton" to="." method="_on_join_button_button_down"]
+[connection signal="pressed" from="ArrowLeft" to="." method="_on_arrow_left_pressed"]
+[connection signal="pressed" from="ArrowRight" to="." method="_on_arrow_right_pressed"]

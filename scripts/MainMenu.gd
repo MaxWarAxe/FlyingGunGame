@@ -1,22 +1,47 @@
 extends Control
 @export var Address = "127.0.0.1"
 @export var port = 8910
-var peer
 
+@export var WEAPON_SWITCH_SPEED = 0.05;
+var peer
+var weaponIndex = 0;
+@onready var  weaponAmount = $Panel/NodeContainer.get_children(true).size();
+@onready var target = $Target.global_position;
+@onready var targetWeapon = $Target.global_position;
+@onready var movePos = $Target.global_position.x;
+var containerPos;
+var currentWeaponName;
+var weaponsPoses = []
 # Called when the node enters the scene tree for the first time.
+func updatePoses():
+	weaponsPoses.clear()
+	for i in range ($Panel/NodeContainer.get_children(false).size()):
+		var weapon = $Panel/NodeContainer.get_child(i,false)
+		weaponsPoses.append(weapon.global_position)
+		
+		if(weaponIndex == i):
+			currentWeaponName = weapon.name;
+			$Panel/weaponNameLabel.text = currentWeaponName;
+		
+
 func _ready():
-	$AnimationPlayer.set_autoplay("logomove")
-	$AnimationPlayer.play("logomove")
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connection_failed)
 	if "--server" in OS.get_cmdline_args():
 		HostGame()
+	
+	
+	$AnimationPlayer.set_autoplay("logomove")
+	$AnimationPlayer.play("logomove")
+	
+	updatePoses()
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
-
+	$Panel/NodeContainer.global_position.x = lerp($Panel/NodeContainer.global_position.x,movePos,WEAPON_SWITCH_SPEED)
+	
 func peer_connected(id):
 	print("Player connected" + str(id));
 
@@ -68,7 +93,8 @@ func SendPlayerInformation(name,id):
 			"name" : name,
 			"id" : id,
 			"kills" : 0,
-			"deaths" : 0
+			"deaths" : 0,
+			"weapon" : currentWeaponName
 		}
 	if multiplayer.is_server():
 		for i in GameManager.Players:
@@ -85,3 +111,20 @@ func _on_video_stream_player_finished():
 
 func _on_host_button_mouse_entered():
 	pass # Replace with function body.
+
+
+func _on_arrow_right_pressed():
+	weaponIndex += 1;
+	if(weaponIndex == weaponAmount):
+		weaponIndex = 0;
+	updatePoses()
+	targetWeapon = weaponsPoses[weaponIndex]
+	movePos = $Panel/NodeContainer.global_position.x + target.x - targetWeapon.x
+
+func _on_arrow_left_pressed():
+	weaponIndex -= 1;
+	if(weaponIndex < 0):
+		weaponIndex = weaponAmount-1;
+	updatePoses()
+	targetWeapon = weaponsPoses[weaponIndex]
+	movePos = $Panel/NodeContainer.global_position.x + target.x - targetWeapon.x
