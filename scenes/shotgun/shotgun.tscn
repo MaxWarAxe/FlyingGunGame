@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cjopwk7hfoibb"]
+
+[ext_resource type="Texture2D" uid="uid://ckotpobjyie62" path="res://sprites/shotgun/MP-133.png" id="1_p8cav"]
+
+[node name="shotgun" type="Node2D"]
+
+[node name="Mp-133" type="Sprite2D" parent="."]
+scale = Vector2(2.925, 2.925)
+texture = ExtResource("1_p8cav")
