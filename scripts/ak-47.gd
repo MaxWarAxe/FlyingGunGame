@@ -80,9 +80,9 @@ func updateScore():
 func checkDeath():
 	if(multiplayer.get_unique_id() == 1):
 		if(hp <= 0):
-			die.rpc();
 			GameManager.addDeath.rpc(idname)
 			GameManager.addKill.rpc(lastDealer)
+			die.rpc();
 			emit_signal("died",idname)
 
 
@@ -173,7 +173,7 @@ func add_bullet():
 	var bullet = bulletScene.instantiate();
 	get_tree().get_root().add_child(bullet)
 	bullet.damage = BULLET_DAMAGE;
-	bullet.shooter = self.name;
+	bullet.shooter = self.idname;
 	bullet.global_position = $Barrel.global_position;
 	bullet.global_rotation = $Barrel.global_rotation;
 	bullet.velocity = BULLET_SPEED * Vector2.UP.rotated($Barrel.global_rotation);

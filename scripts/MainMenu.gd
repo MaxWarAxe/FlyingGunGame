@@ -56,14 +56,14 @@ func peer_disconnected(id):
 	
 func connected_to_server():
 	print("connected to Server");
-	SendPlayerInformation.rpc_id(1, $NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName)
+	SendPlayerInformation.rpc_id(1, $VBoxContainer/NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName)
 	
 func connection_failed():
 	print("connection failed");
 
 func _on_host_button_button_down():
 	HostGame()
-	SendPlayerInformation($NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName)
+	SendPlayerInformation($VBoxContainer/NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName)
 	
 func _on_join_button_button_down():
 	peer = ENetMultiplayerPeer.new()
@@ -134,3 +134,7 @@ func _on_arrow_left_pressed():
 	updatePoses()
 	targetWeapon = weaponsPoses[weaponIndex]
 	movePos = $Panel/NodeContainer.global_position.x + target.x - targetWeapon.x
+
+
+func _on_quit_button_pressed():
+	get_tree().quit()

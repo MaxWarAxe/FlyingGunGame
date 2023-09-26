@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cqbxk4mrnbg6w"]
+[gd_scene load_steps=30 format=3 uid="uid://cqbxk4mrnbg6w"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_kouje"]
 [ext_resource type="VideoStream" path="res://sprites/backgrounds/back.ogv" id="2_akl55"]
@@ -14,7 +14,9 @@
 [ext_resource type="Texture2D" uid="uid://nw5705yu1r2b" path="res://sprites/ui/join_focus.png" id="7_mvfhb"]
 [ext_resource type="Texture2D" uid="uid://d1bw3e5c0wsue" path="res://sprites/ui/quit_focus.png" id="9_prmo2"]
 [ext_resource type="Texture2D" uid="uid://brt4kn4bab7t6" path="res://sprites/ui/arrow - focus.png" id="11_q47uy"]
+[ext_resource type="Texture2D" uid="uid://dyvsaurckml2c" path="res://sprites/ui/start_focus.png" id="12_aw5qh"]
 [ext_resource type="Texture2D" uid="uid://cdlkh1w5lliv3" path="res://sprites/ui/arrow.png" id="12_w5c0n"]
+[ext_resource type="Texture2D" uid="uid://b3o04lbxl8uht" path="res://sprites/ui/start_unfocus.png" id="13_3dyea"]
 [ext_resource type="Texture2D" uid="uid://bp7wy43toi1pg" path="res://sprites/ak-47/ak-47-base.png" id="13_u6u6e"]
 [ext_resource type="Texture2D" uid="uid://cu33c2trme6k7" path="res://sprites/ak-47/mag.png" id="14_xwi6s"]
 [ext_resource type="Texture2D" uid="uid://bxyq6gswpy4ul" path="res://sprites/ak-47/bolt.png" id="15_0q7tp"]
@@ -77,7 +79,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0, 1.5, 3.5, 5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [0.0, -0.0872665, 0.0872665, 0.0]
+"values": [0.0, -0.0349066, 0.0349066, 0.0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -108,6 +110,9 @@ tracks/4/keys = {
 _data = {
 "logomove": SubResource("Animation_ck8e5")
 }
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_doi2s"]
+texture = ExtResource("12_aw5qh")
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4rp44"]
 texture = ExtResource("7_mvfhb")
@@ -152,7 +157,7 @@ offset_bottom = 699.0
 position = Vector2(208, 137)
 
 [node name="ak" type="Node2D" parent="Panel/NodeContainer"]
-rotation = 0.0578633
+rotation = 0.145444
 scale = Vector2(0.4, 0.35)
 skew = 0.0314621
 
@@ -170,7 +175,7 @@ texture = ExtResource("15_0q7tp")
 
 [node name="awp" type="Node2D" parent="Panel/NodeContainer"]
 position = Vector2(-484.5, 0)
-rotation = 0.0578633
+rotation = 0.145444
 scale = Vector2(0.3, 0.3)
 
 [node name="Awpsprite" type="Sprite2D" parent="Panel/NodeContainer/awp"]
@@ -197,6 +202,7 @@ offset_left = -19.79
 offset_top = -13.024
 offset_right = 20.21
 offset_bottom = 12.976
+theme_override_colors/font_color = Color(1, 0.627451, 0.968627, 1)
 text = "1234
 "
 
@@ -209,22 +215,6 @@ stream = ExtResource("2_akl55")
 autoplay = true
 expand = true
 
-[node name="NickNameLine" type="LineEdit" parent="."]
-layout_mode = 0
-offset_left = 744.0
-offset_top = 128.0
-offset_right = 1090.0
-offset_bottom = 204.0
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_colors/font_selected_color = Color(1, 0, 0, 1)
-theme_override_colors/font_uneditable_color = Color(1, 0, 0, 1)
-theme_override_colors/font_placeholder_color = Color(1, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_colors/caret_color = Color(1, 0, 0, 1)
-theme_override_colors/selection_color = Color(1, 0, 0, 1)
-theme_override_colors/clear_button_color = Color(1, 0, 0, 1)
-theme_override_colors/clear_button_color_pressed = Color(1, 0, 0, 1)
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "logomove"
 speed_scale = 0.5
@@ -234,12 +224,11 @@ libraries = {
 
 [node name="GunforceSpots" type="Sprite2D" parent="."]
 position = Vector2(285, 144)
-scale = Vector2(0.295825, 0.295825)
+scale = Vector2(0.278, 0.278)
 texture = ExtResource("3_ikrjt")
 
 [node name="GunforceLogo2" type="Sprite2D" parent="."]
 position = Vector2(281, 144)
-rotation = -0.163565
 scale = Vector2(0.232625, 0.232625)
 texture = ExtResource("4_oa5un")
 
@@ -250,18 +239,29 @@ anchor_left = 0.723
 anchor_top = 0.448
 anchor_right = 0.723
 anchor_bottom = 0.448
-offset_left = -266.44
-offset_top = -85.56
-offset_right = 253.56
-offset_bottom = 333.44
-rotation = 0.0817825
+offset_left = -250.44
+offset_top = -242.56
+offset_right = 269.56
+offset_bottom = 316.44
 pivot_offset = Vector2(240, 230)
 theme = ExtResource("5_cj1b1")
 
+[node name="NickNameLine" type="LineEdit" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(1, 0, 0, 1)
+theme_override_colors/font_uneditable_color = Color(1, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_colors/caret_color = Color(1, 0, 0, 1)
+theme_override_colors/selection_color = Color(1, 0, 0, 1)
+theme_override_colors/clear_button_color = Color(1, 0, 0, 1)
+theme_override_colors/clear_button_color_pressed = Color(1, 0, 0, 1)
+
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
-text = "START
-"
+theme_override_styles/hover = SubResource("StyleBoxTexture_doi2s")
+icon = ExtResource("13_3dyea")
 
 [node name="HostButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -304,5 +304,6 @@ icon = ExtResource("12_w5c0n")
 [connection signal="button_down" from="VBoxContainer/StartButton" to="." method="_on_start_button_button_down"]
 [connection signal="button_down" from="VBoxContainer/HostButton" to="." method="_on_host_button_button_down"]
 [connection signal="button_down" from="VBoxContainer/JoinButton" to="." method="_on_join_button_button_down"]
+[connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]
 [connection signal="pressed" from="ArrowLeft" to="." method="_on_arrow_left_pressed"]
 [connection signal="pressed" from="ArrowRight" to="." method="_on_arrow_right_pressed"]
