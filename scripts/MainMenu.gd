@@ -1,6 +1,6 @@
 extends Control
 @export var Address = "127.0.0.1"
-@export var port = 8910
+@export var port = 8080
 
 @export var WEAPON_SWITCH_SPEED = 0.05;
 var peer
@@ -25,6 +25,10 @@ func updatePoses():
 		
 
 func _ready():
+	var str : String
+	for i in range(IP.get_local_addresses().size()):
+		str += IP.get_local_addresses()[i] + '\n2';
+	$iplabel.text = str
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
@@ -138,3 +142,11 @@ func _on_arrow_left_pressed():
 
 func _on_quit_button_pressed():
 	get_tree().quit()
+
+
+func _on_ip_text_changed(new_text):
+	Address = new_text
+
+
+func _on_portline_text_changed(new_text):
+	port = new_text.to_int()

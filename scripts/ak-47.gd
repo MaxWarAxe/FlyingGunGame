@@ -148,7 +148,6 @@ func drop_mag():
 func shoot():
 	if(ammo != 0):
 		var barrel = get_node("Barrel")
-		var backOfGun = get_node("Back_of_gun")
 		apply_force(SHOOT_FORCE.rotated(rotation));
 		$AnimationPlayer.play("shoot");
 		apply_torque(-RECOIL_FORCE);

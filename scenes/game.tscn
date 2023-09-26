@@ -1,10 +1,11 @@
-[gd_scene load_steps=10 format=3 uid="uid://dhp4537vgvxjl"]
+[gd_scene load_steps=11 format=3 uid="uid://dhp4537vgvxjl"]
 
 [ext_resource type="Script" path="res://scripts/node_2d.gd" id="1_twv1q"]
 [ext_resource type="PackedScene" uid="uid://c50nhaxhb3qe6" path="res://scenes/awp/awp.tscn" id="2_voe2t"]
 [ext_resource type="Texture2D" uid="uid://nwrnis3kcpq0" path="res://sprites/backgrounds/342482df88e7767b2331e2ca91dbc5e6.jpeg" id="3_fqdlo"]
 [ext_resource type="PackedScene" uid="uid://ca4lpkrw027nn" path="res://scenes/ak-47/ak-47.tscn" id="3_yjeef"]
 [ext_resource type="PackedScene" uid="uid://cm57n0ojdlknm" path="res://scenes/moon.tscn" id="4_c6b87"]
+[ext_resource type="PackedScene" uid="uid://cjopwk7hfoibb" path="res://scenes/shotgun/shotgun.tscn" id="4_jijhl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yqc4v"]
 size = Vector2(716.219, 7381.88)
@@ -22,6 +23,7 @@ size = Vector2(998.875, 7132.5)
 script = ExtResource("1_twv1q")
 awpScene = ExtResource("2_voe2t")
 akScene = ExtResource("3_yjeef")
+shotgunScene = ExtResource("4_jijhl")
 
 [node name="342482Df88e7767b2331e2Ca91Dbc5e6" type="Sprite2D" parent="."]
 z_index = -100

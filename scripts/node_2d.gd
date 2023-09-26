@@ -2,6 +2,7 @@ extends Node2D
 
 @export var awpScene : PackedScene
 @export var akScene : PackedScene
+@export var shotgunScene : PackedScene
 
 func weaponChoose(i) -> Node:
 	match GameManager.Players[i].weapon:
@@ -9,6 +10,8 @@ func weaponChoose(i) -> Node:
 				return akScene.instantiate()
 			"awp":
 				return awpScene.instantiate()
+			"shotgun":
+				return shotgunScene.instantiate()
 	return null;
 
 @rpc("any_peer","call_local")
