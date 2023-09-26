@@ -34,7 +34,7 @@ func spawn():
 func _ready():
 	
 	if multiplayer.get_unique_id() == 1:
-		respawnCall.rpc();
+		spawn.rpc();
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

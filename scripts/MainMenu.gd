@@ -56,14 +56,14 @@ func peer_disconnected(id):
 	
 func connected_to_server():
 	print("connected to Server");
-	SendPlayerInformation.rpc_id(1, $NickNameLine.text,multiplayer.get_unique_id())
+	SendPlayerInformation.rpc_id(1, $NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName)
 	
 func connection_failed():
 	print("connection failed");
 
 func _on_host_button_button_down():
 	HostGame()
-	SendPlayerInformation($NickNameLine.text,multiplayer.get_unique_id())
+	SendPlayerInformation($NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName)
 	
 func _on_join_button_button_down():
 	peer = ENetMultiplayerPeer.new()
@@ -72,6 +72,9 @@ func _on_join_button_button_down():
 	
 @rpc("any_peer","call_local")
 func StartGame():
+	if multiplayer.get_unique_id() == 1:
+		sync.rpc(GameManager.Players)
+	
 	var scene = load("res://scenes/game.tscn").instantiate()
 	get_tree().root.add_child(scene)
 	self.hide()
@@ -87,23 +90,26 @@ func HostGame():
 	
 
 @rpc("any_peer")
-func SendPlayerInformation(name,id):
+func SendPlayerInformation(name,id,weapon):
+	print(weapon)
 	if !GameManager.Players.has(id):
 		GameManager.Players[id] = {
 			"name" : name,
 			"id" : id,
 			"kills" : 0,
 			"deaths" : 0,
-			"weapon" : currentWeaponName
+			"weapon" : weapon
 		}
-	if multiplayer.is_server():
-		for i in GameManager.Players:
-			SendPlayerInformation.rpc(GameManager.Players[i].name,i)
+		if multiplayer.is_server():
+			for i in GameManager.Players:
+				SendPlayerInformation.rpc(GameManager.Players[i].name,i,GameManager.Players[i].weapon)
 func _on_start_button_button_down():
 	StartGame.rpc()
+	
 
-
-
+@rpc("any_peer")
+func sync(players):
+	GameManager.Players = players;
 
 func _on_video_stream_player_finished():
 	$VideoStreamPlayer.play()
