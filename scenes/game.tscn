@@ -141,14 +141,305 @@ collision_mask = 513
 position = Vector2(9870.56, 2209.75)
 shape = SubResource("RectangleShape2D_feutb")
 
-[node name="crate" parent="." instance=ExtResource("7_bk5vn")]
+[node name="Node2D2" type="Node2D" parent="."]
 position = Vector2(-1166, 3529)
 
-[node name="crate2" parent="." instance=ExtResource("7_bk5vn")]
-position = Vector2(-801, 3164)
+[node name="crate2" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(365, -365)
+
+[node name="crate" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+
+[node name="crate4" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate5" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate3" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate6" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate7" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate8" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate9" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate10" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate11" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate12" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate13" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate14" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate15" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate16" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate17" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate18" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate19" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate20" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate21" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(365, -365)
+
+[node name="crate22" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+
+[node name="crate23" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate24" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate25" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate26" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate27" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate28" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate29" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate30" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate31" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate32" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate33" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate34" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate35" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate36" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate37" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate38" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate39" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate40" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate41" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(365, -365)
+
+[node name="crate42" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+
+[node name="crate43" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate44" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate45" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate46" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate47" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate48" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate49" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate50" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate51" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate52" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate53" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate54" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate55" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate56" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate57" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate58" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate59" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate60" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate61" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(365, -365)
+
+[node name="crate62" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+
+[node name="crate63" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate64" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate65" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate66" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate67" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate68" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate69" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate70" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate71" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate72" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate73" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate74" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate75" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate76" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate77" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate78" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate79" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate80" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate81" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(365, -365)
+
+[node name="crate82" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+
+[node name="crate83" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate84" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate85" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate86" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate87" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate88" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate89" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate90" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate91" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate92" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate93" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate94" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate95" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate96" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate97" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
+
+[node name="crate98" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(582, -582)
+
+[node name="crate99" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(217, -217)
+
+[node name="crate100" parent="Node2D2" instance=ExtResource("7_bk5vn")]
+position = Vector2(-148, 148)
 
 [node name="Node2D" parent="." instance=ExtResource("8_d4mav")]
 position = Vector2(-1884, 3378)
 scale = Vector2(7.725, 7.835)
 ITEM_TO_SPAWN = ExtResource("7_bk5vn")
-SPAWN_TIME = 1.0

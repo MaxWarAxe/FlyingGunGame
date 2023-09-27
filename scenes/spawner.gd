@@ -2,7 +2,7 @@ extends Area2D
 #@export var SHAPE : Shape2D
 @export var ITEM_TO_SPAWN : PackedScene
 @export var SPAWN_TIME = 0.1;
-
+var index = 0;
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	$SpawnTimer.wait_time = SPAWN_TIME
@@ -13,10 +13,11 @@ func _process(delta):
 	pass
 
 @rpc("any_peer","call_local","reliable")
-func spawn(pos):
+func spawn(pos,named):
 	var item = ITEM_TO_SPAWN.instantiate()
+	item.name = named
 	get_tree().get_root().add_child(item)
-	item.position = pos
+	item.global_position = pos
 	
 func _on_spawn_timer_timeout():
 	if multiplayer.get_unique_id() == 1:
@@ -28,4 +29,6 @@ func _on_spawn_timer_timeout():
 		
 		var pos = Vector2(global_position.x + posx * scale.x, global_position.y + posy * scale.y)
 		
-		spawn.rpc(pos)
+		spawn.rpc(pos,str("crate" + str(index)))
+		index += 1
+		
