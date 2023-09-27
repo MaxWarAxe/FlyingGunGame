@@ -42,7 +42,7 @@ position = Vector2(-655, 3571)
 position = Vector2(-1336, 3789)
 
 [node name="2" type="Node2D" parent="SpawnPoints" groups=["SpawnPoints"]]
-position = Vector2(3863, -338)
+position = Vector2(700, 405)
 
 [node name="3" type="Node2D" parent="SpawnPoints" groups=["SpawnPoints"]]
 position = Vector2(7560, 4899)
@@ -148,6 +148,7 @@ position = Vector2(-1166, 3529)
 position = Vector2(-801, 3164)
 
 [node name="Node2D" parent="." instance=ExtResource("8_d4mav")]
-position = Vector2(-1581, 3346)
-scale = Vector2(12.615, 7.305)
+position = Vector2(-1884, 3378)
+scale = Vector2(7.725, 7.835)
 ITEM_TO_SPAWN = ExtResource("7_bk5vn")
+SPAWN_TIME = 1.0

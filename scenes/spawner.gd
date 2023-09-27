@@ -1,7 +1,7 @@
 extends Area2D
 #@export var SHAPE : Shape2D
 @export var ITEM_TO_SPAWN : PackedScene
-@export var SPAWN_TIME = 1.0;
+@export var SPAWN_TIME = 0.1;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

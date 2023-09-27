@@ -1,6 +1,6 @@
 extends Control
 @export var Address = "127.0.0.1"
-@export var port = 8080
+@export var port = 7777
 
 @export var WEAPON_SWITCH_SPEED = 0.05;
 var peer
