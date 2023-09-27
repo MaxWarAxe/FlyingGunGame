@@ -4,7 +4,7 @@ var EFFECT_ADD_MAG_PROBABILITY = 100
 var TRASH_SPEED = 500
 var TRASH_MAX_TORQUE = 1000
 var TRASH_AMOUNT = 10;
-var dead=false;
+
 @export var trashScene : PackedScene
 @export var MagEffectPath = "res://scenes/effects/effect_add_mag.tscn"
 # Called when the node enters the scene tree for the first time.
@@ -14,8 +14,6 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if(dead):
-		explode.rpc()
 	pass
 
 func processEffect():
@@ -44,8 +42,7 @@ func _on_body_entered(body):
 	if multiplayer.is_server():
 		var effectPath = processEffect()
 		body.add_effect.rpc_id(body.idname.to_int(),effectPath)
-		#playAnim.rpc()
-		explode.rpc()
+		playAnim.rpc()
 	pass
 @rpc("any_peer","call_local","reliable")
 func playAnim():
@@ -53,7 +50,7 @@ func playAnim():
 
 @rpc("any_peer","call_local","reliable")
 func explode():
-	#call_deferred("spawnTrash")
+	call_deferred("spawnTrash")
 	queue_free()
 func _on_animation_player_animation_finished(anim_name):
-	dead = true
+	explode()
