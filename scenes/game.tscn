@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://dhp4537vgvxjl"]
+[gd_scene load_steps=13 format=3 uid="uid://dhp4537vgvxjl"]
 
 [ext_resource type="Script" path="res://scripts/node_2d.gd" id="1_twv1q"]
 [ext_resource type="PackedScene" uid="uid://c50nhaxhb3qe6" path="res://scenes/awp/awp.tscn" id="2_voe2t"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://ca4lpkrw027nn" path="res://scenes/ak-47/ak-47.tscn" id="3_yjeef"]
 [ext_resource type="PackedScene" uid="uid://cm57n0ojdlknm" path="res://scenes/moon.tscn" id="4_c6b87"]
 [ext_resource type="PackedScene" uid="uid://cjopwk7hfoibb" path="res://scenes/shotgun/shotgun.tscn" id="4_jijhl"]
+[ext_resource type="PackedScene" uid="uid://b1ikf0jr4dmwc" path="res://scenes/crates/crate.tscn" id="7_bk5vn"]
+[ext_resource type="PackedScene" uid="uid://dvbc824ynopdc" path="res://scenes/spawner.tscn" id="8_d4mav"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yqc4v"]
 size = Vector2(716.219, 7381.88)
@@ -34,7 +36,7 @@ texture = ExtResource("3_fqdlo")
 [node name="SpawnPoints" type="Node2D" parent="."]
 
 [node name="0" type="Node2D" parent="SpawnPoints" groups=["SpawnPoints"]]
-position = Vector2(6153, 802)
+position = Vector2(-655, 3571)
 
 [node name="1" type="Node2D" parent="SpawnPoints" groups=["SpawnPoints"]]
 position = Vector2(-1336, 3789)
@@ -138,3 +140,14 @@ collision_mask = 513
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2"]
 position = Vector2(9870.56, 2209.75)
 shape = SubResource("RectangleShape2D_feutb")
+
+[node name="crate" parent="." instance=ExtResource("7_bk5vn")]
+position = Vector2(-1166, 3529)
+
+[node name="crate2" parent="." instance=ExtResource("7_bk5vn")]
+position = Vector2(-801, 3164)
+
+[node name="Node2D" parent="." instance=ExtResource("8_d4mav")]
+position = Vector2(-1581, 3346)
+scale = Vector2(12.615, 0.16)
+ITEM_TO_SPAWN = ExtResource("7_bk5vn")

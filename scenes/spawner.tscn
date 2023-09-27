@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvbc824ynopdc"]
+
+[ext_resource type="Script" path="res://scenes/spawner.gd" id="1_ntgcu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qm3jv"]
+size = Vector2(111, 111)
+
+[node name="Node2D" type="Area2D"]
+script = ExtResource("1_ntgcu")
+
+[node name="Area" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_qm3jv")
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(56, 0)
+
+[node name="Node2D2" type="Node2D" parent="."]
+position = Vector2(0, -55)
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]

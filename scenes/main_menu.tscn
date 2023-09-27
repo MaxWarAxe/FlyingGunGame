@@ -172,7 +172,7 @@ offset_bottom = 699.0
 position = Vector2(208, 137)
 
 [node name="ak" type="Node2D" parent="Panel/NodeContainer"]
-rotation = 0.133256
+rotation = 0.145444
 scale = Vector2(0.4, 0.35)
 skew = 0.0314621
 
@@ -190,7 +190,7 @@ texture = ExtResource("15_0q7tp")
 
 [node name="awp" type="Node2D" parent="Panel/NodeContainer"]
 position = Vector2(-484.5, 0)
-rotation = 0.133256
+rotation = 0.145444
 scale = Vector2(0.3, 0.3)
 
 [node name="Awpsprite" type="Sprite2D" parent="Panel/NodeContainer/awp"]
@@ -208,6 +208,7 @@ texture = ExtResource("7_k43ei")
 
 [node name="shotgun" type="Node2D" parent="Panel/NodeContainer"]
 position = Vector2(-856, 0)
+rotation = 0.0872665
 
 [node name="[design]shotgunV1_02" type="Sprite2D" parent="Panel/NodeContainer/shotgun"]
 position = Vector2(0, 1)
@@ -248,12 +249,11 @@ libraries = {
 
 [node name="GunforceSpots" type="Sprite2D" parent="."]
 position = Vector2(285, 144)
-scale = Vector2(0.278093, 0.278093)
+scale = Vector2(0.278, 0.278)
 texture = ExtResource("3_ikrjt")
 
 [node name="GunforceLogo2" type="Sprite2D" parent="."]
 position = Vector2(281, 144)
-rotation = 0.00227539
 scale = Vector2(0.232625, 0.232625)
 texture = ExtResource("4_oa5un")
 
@@ -268,7 +268,6 @@ offset_left = -250.44
 offset_top = -242.56
 offset_right = 269.56
 offset_bottom = 316.44
-rotation = -0.000455079
 pivot_offset = Vector2(240, 230)
 theme = ExtResource("5_cj1b1")
 

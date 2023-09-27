@@ -26,6 +26,8 @@ func updateScore():
 		$Panel/VBoxContainer.add_child(scoreline)
 		scoreline.changeValues(GameManager.Players[i].name,GameManager.Players[i].kills,GameManager.Players[i].deaths)
 
+func makeReloadAnim(time):
+	$ReloadProgress.reload(time)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass

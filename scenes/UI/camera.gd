@@ -8,6 +8,9 @@ func _ready():
 func updateUI(ammo,mags):
 	$UI.updateUI(ammo,mags)
 
+func makeReloadAnim(time):
+	$UI.makeReloadAnim(time);
+
 func showScore():
 	$UI.showScore();
 

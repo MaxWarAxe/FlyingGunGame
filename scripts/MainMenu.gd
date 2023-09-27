@@ -27,7 +27,7 @@ func updatePoses():
 func _ready():
 	var str : String
 	for i in range(IP.get_local_addresses().size()):
-		str += IP.get_local_addresses()[i] + '\n2';
+		str += IP.get_local_addresses()[i] + '\n';
 	$iplabel.text = str
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)

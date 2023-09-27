@@ -16,7 +16,7 @@ func _process(delta):
 @rpc("any_peer")
 func _on_body_entered(body):
 	if(multiplayer.get_unique_id() == 1):
-		if(body.name == shooter):
+		if(body.idname == shooter):
 			return;
 		if(lastbody != body):		
 			body.deal.rpc(damage,shooter);

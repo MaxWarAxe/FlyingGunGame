@@ -3,7 +3,7 @@ extends "res://scripts/ak-47.gd"
 @export var BULLET_SPREAD = 10;
 
 func shoot():
-	if(ammo != 0):
+	if(ammo != 0 and timerToReload.is_stopped()):
 		var barrel = get_node("Barrel")
 		apply_force(SHOOT_FORCE.rotated(rotation));
 		$AnimationPlayer.play("shoot");
@@ -20,16 +20,17 @@ func add_bullet():
 	for i in range(BULLET_AMOUNT):
 		var rotation = deg_to_rad(rad_to_deg($Barrel.global_rotation) + randf_range(-BULLET_SPREAD,BULLET_SPREAD));
 		var bullet = bulletScene.instantiate();
+		bullet.shooter = self.idname;
 		get_tree().get_root().add_child(bullet)
 		bullet.damage = BULLET_DAMAGE;
-		bullet.shooter = self.idname;
 		bullet.global_position = $Barrel.global_position;
 		bullet.global_rotation = rotation;
 		bullet.velocity = BULLET_SPEED * Vector2.UP.rotated(rotation);
 
 func reload():
-	if(mags != 0):
+	if(mags != 0 and ammo < MAG_AMMO):
 		timerToReload.start()
+		camera.makeReloadAnim(TIME_TO_RELOAD)
 		updateUI()
 
 func addAmmo():

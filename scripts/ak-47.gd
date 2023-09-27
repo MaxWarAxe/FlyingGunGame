@@ -85,8 +85,6 @@ func checkDeath():
 			die.rpc();
 			emit_signal("died",idname)
 
-
-
 func _process(delta):
 	label.position = position
 	checkDeath()
@@ -106,9 +104,8 @@ func _process(delta):
 			
 		if(Input.is_action_pressed("rotate_right")):
 			rotate_right();
-		if(Input.is_action_just_pressed("reload") and timerToReload.is_stopped()):
+		if(Input.is_action_pressed("reload") and timerToReload.is_stopped()):
 			reload()
-			
 
 func updateUI():
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
@@ -120,6 +117,7 @@ func reload():
 			drop_mag.rpc()
 			withMag = false;
 		timerToReload.start()
+		camera.makeReloadAnim(TIME_TO_RELOAD)
 		ammo = 0
 		updateUI()
 
@@ -191,11 +189,8 @@ func _integrate_forces(state):
 		pos = state.transform
 	state.transform = pos
 
-
-
 func _on_timer_timeout():
 	pass # Replace with function body.
-
 
 func _on_timer_to_reload_timeout():
 	addAmmo()

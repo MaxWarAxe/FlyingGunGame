@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://07pia4tcyx40"]
+
+[ext_resource type="Script" path="res://scenes/crates/trash.gd" id="1_tlbdh"]
+[ext_resource type="Texture2D" uid="uid://ctitj414vlvli" path="res://sprites/crate/trash1.png" id="2_4brgs"]
+[ext_resource type="Texture2D" uid="uid://bc64ee76hfrmu" path="res://sprites/crate/trash2.png" id="3_it1mm"]
+[ext_resource type="Texture2D" uid="uid://2wqutxfqw10f" path="res://sprites/crate/trash3.png" id="4_7mhcn"]
+[ext_resource type="Texture2D" uid="uid://ct5c7us8hv48h" path="res://sprites/crate/trash5.png" id="5_3uyjp"]
+[ext_resource type="Texture2D" uid="uid://x8f8i0cg4aqq" path="res://sprites/crate/trash4.png" id="6_xja3b"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x67ao"]
+size = Vector2(32, 38)
+
+[node name="trash" type="RigidBody2D"]
+collision_layer = 512
+collision_mask = 512
+mass = 0.01
+center_of_mass_mode = 1
+gravity_scale = 0.0
+script = ExtResource("1_tlbdh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_x67ao")
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="0" type="Sprite2D" parent="Sprites" groups=["Trash"]]
+visible = false
+scale = Vector2(0.55, 0.55)
+texture = ExtResource("2_4brgs")
+
+[node name="1" type="Sprite2D" parent="Sprites" groups=["Trash"]]
+visible = false
+position = Vector2(-1, -1)
+scale = Vector2(0.484127, 0.484127)
+texture = ExtResource("3_it1mm")
+
+[node name="2" type="Sprite2D" parent="Sprites" groups=["Trash"]]
+visible = false
+position = Vector2(0, -2)
+scale = Vector2(0.709302, 0.709302)
+texture = ExtResource("4_7mhcn")
+
+[node name="4" type="Sprite2D" parent="Sprites" groups=["Trash"]]
+visible = false
+position = Vector2(3, 0)
+scale = Vector2(1.9, 1.9)
+texture = ExtResource("5_3uyjp")
+
+[node name="3" type="Sprite2D" parent="Sprites" groups=["Trash"]]
+visible = false
+position = Vector2(0.999999, 9.53674e-07)
+scale = Vector2(0.576923, 0.576923)
+texture = ExtResource("6_xja3b")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
