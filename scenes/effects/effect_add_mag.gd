@@ -2,7 +2,7 @@ extends Node2D
 
 var MAG_INCREMENT = 5;
 
-func init(body):
+func init():
 	get_parent().mags += MAG_INCREMENT;
 	get_parent().updateUI();
 	queue_free();

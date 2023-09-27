@@ -149,5 +149,5 @@ position = Vector2(-801, 3164)
 
 [node name="Node2D" parent="." instance=ExtResource("8_d4mav")]
 position = Vector2(-1581, 3346)
-scale = Vector2(12.615, 0.16)
+scale = Vector2(12.615, 7.305)
 ITEM_TO_SPAWN = ExtResource("7_bk5vn")

@@ -64,6 +64,10 @@ properties/4/path = NodePath(".:pos")
 properties/4/spawn = true
 properties/4/sync = true
 properties/4/watch = true
+properties/5/path = NodePath(".:itself")
+properties/5/spawn = true
+properties/5/sync = false
+properties/5/watch = false
 
 [node name="shotgun" type="RigidBody2D"]
 collision_layer = 3

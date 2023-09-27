@@ -7,6 +7,7 @@ size = Vector2(111, 111)
 
 [node name="Node2D" type="Area2D"]
 script = ExtResource("1_ntgcu")
+SPAWN_TIME = 0.1
 
 [node name="Area" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_qm3jv")

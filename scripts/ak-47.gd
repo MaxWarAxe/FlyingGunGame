@@ -22,6 +22,7 @@ var ammo = 0;
 var mags = 0;
 var hp = 1;
 var idname
+var itself
 var nick = "";
 var withMag : bool = true;
 var lastDealer;
@@ -37,6 +38,7 @@ signal died(id);
 var timerToShoot
 var timerToReload
 func _ready():
+	itself = self;
 	$MultiplayerSynchronizer.set_multiplayer_authority(idname.to_int())
 	name = idname
 	print("authority " + str($MultiplayerSynchronizer.get_multiplayer_authority()))
@@ -183,7 +185,13 @@ func rotate_right():
 	ANGULAR_VELOCITY += ANGULAR_SPEED * get_process_delta_time();
 	apply_torque(ANGULAR_SPEED);
 
-		
+@rpc("any_peer","reliable","call_local")
+func add_effect(effect):
+	effect = load(effect).instantiate()
+	add_child(effect)
+	effect.init()
+	
+
 func _integrate_forces(state):
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		pos = state.transform
