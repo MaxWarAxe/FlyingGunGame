@@ -47,7 +47,7 @@ func spawnTrash():
 func _on_body_entered(body):
 	if multiplayer.is_server() and !is_instance_of(body,StaticBody2D) and enabled_signals:
 		var effectPath = processEffect()
-		body.add_effect.rpc_id(body.idname.to_int(),effectPath)
+		body.add_effect.rpc(effectPath)
 		playAnim.rpc()
 	pass
 
