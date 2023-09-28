@@ -75,6 +75,9 @@ func setUpLabel():
 	get_tree().get_root().add_child(label);
 	label.setup(nick,hp)
 
+func updateHP():
+	label.updateHP(hp)
+
 func updateScore():
 	if idname == str(multiplayer.get_unique_id()):
 		camera.updateScore()
