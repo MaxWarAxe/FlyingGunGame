@@ -35,11 +35,14 @@ signal died(id);
 @export var magScene : PackedScene
 @export var labelScene : PackedScene
 
+var MagNode
+
 var timerToShoot
 var timerToReload
 func _ready():
 	itself = self;
 	$MultiplayerSynchronizer.set_multiplayer_authority(idname.to_int())
+	MagNode = $Sprites/Mag
 	name = idname
 	print("authority " + str($MultiplayerSynchronizer.get_multiplayer_authority()))
 	print("unique " + str(multiplayer.get_unique_id()))
@@ -135,17 +138,17 @@ func addAmmo():
 
 @rpc("any_peer","call_local")
 func show_mag():
-	$Mag.visible = true;
+	MagNode.visible = true;
 	$"Mag-Polygon".disabled = false;
 
 @rpc("any_peer","call_local")
 func drop_mag():
-	$Mag.visible = false;
+	MagNode.visible = false;
 	$"Mag-Polygon".disabled = true;
 	var mag = magScene.instantiate()
 	get_tree().get_root().add_child(mag)
-	mag.global_position = $Mag.global_position;
-	mag.apply_force(MAG_SPEED * Vector2.UP.rotated($Mag/Position.global_rotation) + linear_velocity);
+	mag.global_position = MagNode.global_position;
+	mag.apply_force(MAG_SPEED * Vector2.UP.rotated(MagNode.find_child("Position").global_rotation) + linear_velocity);
 	mag.apply_torque(MAG_ROTATION_SPEED)
 	
 func shoot():

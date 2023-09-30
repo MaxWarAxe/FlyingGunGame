@@ -16,7 +16,7 @@ resource_name = "shoot"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Bolt:position")
+tracks/0/path = NodePath("Sprites/Bolt:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -28,7 +28,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Bolt2:position")
+tracks/1/path = NodePath("Sprites/Bolt2:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -43,30 +43,30 @@ _data = {
 "shoot": SubResource("Animation_rdifq")
 }
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_emfvq"]
-properties/0/path = NodePath(".:rotation")
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_g2kmh"]
+properties/0/path = NodePath(".:pos")
 properties/0/spawn = true
 properties/0/sync = true
-properties/0/watch = true
-properties/1/path = NodePath(".:angular_velocity")
+properties/0/watch = false
+properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/sync = true
-properties/1/watch = true
-properties/2/path = NodePath(".:custom_integrator")
+properties/1/watch = false
+properties/2/path = NodePath("Sprites/Bolt2:position")
 properties/2/spawn = true
 properties/2/sync = true
-properties/2/watch = true
-properties/3/path = NodePath("Bolt:position")
+properties/2/watch = false
+properties/3/path = NodePath("Sprites/Bolt:position")
 properties/3/spawn = true
 properties/3/sync = true
-properties/3/watch = true
-properties/4/path = NodePath(".:pos")
+properties/3/watch = false
+properties/4/path = NodePath(".:position")
 properties/4/spawn = true
 properties/4/sync = true
-properties/4/watch = true
-properties/5/path = NodePath(".:itself")
+properties/4/watch = false
+properties/5/path = NodePath(".:angular_velocity")
 properties/5/spawn = true
-properties/5/sync = false
+properties/5/sync = true
 properties/5/watch = false
 
 [node name="shotgun" type="RigidBody2D"]
@@ -77,7 +77,8 @@ inertia = 1000.0
 center_of_mass_mode = 1
 angular_damp_mode = 1
 script = ExtResource("1_2ylah")
-SHOOT_FORCE = Vector2(-20000, 0)
+SHOOT_FORCE = Vector2(-40000, 0)
+RECOIL_FORCE = 70000
 MAG_AMMO = 6
 MAG_AMOUNT = 10
 TIME_TO_RELOAD = 1
@@ -89,33 +90,39 @@ cameraScene = ExtResource("4_b1d6r")
 magScene = ExtResource("5_884ws")
 labelScene = ExtResource("6_0onnq")
 
-[node name="Bolt" type="Sprite2D" parent="."]
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Bolt" type="Sprite2D" parent="Sprites"]
 z_index = 2
+use_parent_material = true
 position = Vector2(-20, -3)
 scale = Vector2(3.2, 3)
 texture = ExtResource("1_uc80y")
 
-[node name="Bolt2" type="Sprite2D" parent="."]
+[node name="Bolt2" type="Sprite2D" parent="Sprites"]
 z_index = 3
+use_parent_material = true
 position = Vector2(49, 8.2)
 scale = Vector2(2.874, 2.7)
 texture = ExtResource("2_wucrf")
+
+[node name="BoltBackground" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
+position = Vector2(-20.5506, -2.42)
+scale = Vector2(2.97975, 3.42)
+texture = ExtResource("3_blw0w")
+
+[node name="[design]shotgunV1_02" type="Sprite2D" parent="Sprites"]
+z_index = 2
+use_parent_material = true
+position = Vector2(-2.27374e-13, 0)
+scale = Vector2(2.71875, 2.71875)
+texture = ExtResource("4_6pfwr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_iw2mw")
 }
-
-[node name="BoltBackground" type="Sprite2D" parent="."]
-position = Vector2(-20.5506, -2.42)
-scale = Vector2(2.97975, 3.42)
-texture = ExtResource("3_blw0w")
-
-[node name="[design]shotgunV1_02" type="Sprite2D" parent="."]
-z_index = 2
-position = Vector2(-2.27374e-13, 0)
-scale = Vector2(2.71875, 2.71875)
-texture = ExtResource("4_6pfwr")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(66.6528, 11.9554)
@@ -138,15 +145,13 @@ default_color = Color(1, 0, 0, 1)
 position = Vector2(-20, -4)
 rotation = -0.349066
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-process_mode = 3
-replication_config = SubResource("SceneReplicationConfig_emfvq")
-visibility_update_mode = 1
-
 [node name="TimerToShoot" type="Timer" parent="."]
 one_shot = true
 
 [node name="TimerToReload" type="Timer" parent="."]
 one_shot = true
+
+[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
+replication_config = SubResource("SceneReplicationConfig_g2kmh")
 
 [connection signal="timeout" from="TimerToReload" to="." method="_on_timer_to_reload_timeout"]

@@ -1,0 +1,8 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://v4s3nm56qmx1"]
+
+[ext_resource type="Shader" path="res://shaders/invis.gdshader" id="1_x3jye"]
+
+[resource]
+shader = ExtResource("1_x3jye")
+shader_parameter/dist = 16.0
+shader_parameter/alpha = 1.0

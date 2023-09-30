@@ -1,7 +1,8 @@
 extends Area2D
 
-var EFFECT_ADD_MAG_PROBABILITY = 100
-var EFFECT_ADD_HP_PROBABILITY = 50
+var EFFECT_ADD_MAG_PROBABILITY = 0
+var EFFECT_ADD_HP_PROBABILITY = 0
+var EFFECT_INVIS_PROBABILITY = 100
 
 var TRASH_SPEED = 500
 var TRASH_MAX_TORQUE = 1000
@@ -12,6 +13,7 @@ signal destroyed
 @export var trashScene : PackedScene
 @export var MagEffectPath = "res://scenes/effects/effect_add_mag.tscn"
 @export var HpEffectPath = "res://scenes/effects/add_hp_effect.tscn"
+@export var InvisEffectPath = "res://scenes/effects/invis_effect.tscn"
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
@@ -23,6 +25,8 @@ func _process(delta):
 
 func processEffect():
 	var number = randf_range(0,100)
+	if number < EFFECT_INVIS_PROBABILITY:
+		return InvisEffectPath
 	if number < EFFECT_ADD_HP_PROBABILITY:
 		return HpEffectPath
 	if number < EFFECT_ADD_MAG_PROBABILITY:
