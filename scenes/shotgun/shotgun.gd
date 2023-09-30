@@ -22,7 +22,7 @@ func add_bullet():
 		var bullet = bulletScene.instantiate();
 		bullet.shooter = self.idname;
 		get_tree().get_root().add_child(bullet)
-		bullet.damage = BULLET_DAMAGE;
+		bullet.damage = bullet_damage;
 		bullet.global_position = $Barrel.global_position;
 		bullet.global_rotation = rotation;
 		bullet.velocity = BULLET_SPEED * Vector2.UP.rotated(rotation);

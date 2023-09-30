@@ -4,5 +4,5 @@
 
 [resource]
 shader = ExtResource("1_x3jye")
-shader_parameter/dist = 16.0
+shader_parameter/dist = 15.855
 shader_parameter/alpha = 1.0

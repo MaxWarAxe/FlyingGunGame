@@ -13,9 +13,10 @@ extends RigidBody2D
 @export var TIME_TO_RELOAD = 3;
 @export var SHOOT_TIME_SPEED = 0.1;
 @export var INIT_HP = 100;
-@export var BULLET_DAMAGE = 34;
+@export var BASE_BULLET_DAMAGE = 34;
 @export var INIT_ZOOM = 0.5;
 var pos = transform;
+var bullet_damage = BASE_BULLET_DAMAGE
 var camera
 var label
 var ammo = 0;
@@ -177,7 +178,7 @@ func add_shell():
 func add_bullet():
 	var bullet = bulletScene.instantiate();
 	get_tree().get_root().add_child(bullet)
-	bullet.damage = BULLET_DAMAGE;
+	bullet.damage = bullet_damage;
 	bullet.shooter = self.idname;
 	bullet.global_position = $Barrel.global_position;
 	bullet.global_rotation = $Barrel.global_rotation;

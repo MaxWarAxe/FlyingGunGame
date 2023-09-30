@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://kxvvnmtu4rsu"]
+
+[ext_resource type="Shader" path="res://shaders/lava.gdshader" id="1_m37vf"]
+
+[resource]
+shader = ExtResource("1_m37vf")
+shader_parameter/speed = 1.0
+shader_parameter/tint = Vector4(1, 1, 0, 1)
+shader_parameter/span = 0.3

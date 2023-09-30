@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5428pv7t1wt2"]
+
+[ext_resource type="Script" path="res://scenes/effects/double_damage_effect.gd" id="1_4h11h"]
+
+[node name="double_damage_effect" type="Node2D"]
+script = ExtResource("1_4h11h")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
