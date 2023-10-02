@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://ca4lpkrw027nn"]
+[gd_scene load_steps=16 format=3 uid="uid://ca4lpkrw027nn"]
 
 [ext_resource type="Texture2D" uid="uid://bp7wy43toi1pg" path="res://sprites/ak-47/ak-47-base.png" id="1_mm34q"]
 [ext_resource type="Script" path="res://scripts/ak-47.gd" id="1_pvrhg"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cpjons5plii23" path="res://scenes/ak-47/Mag.tscn" id="5_dh3ds"]
 [ext_resource type="PackedScene" uid="uid://4qjdh10o1oy" path="res://scenes/UI/label_of_player.tscn" id="6_c6o0t"]
 [ext_resource type="PackedScene" uid="uid://b6pnw0nutsac3" path="res://scenes/ak-47/bullet.tscn" id="7_ocxwt"]
+[ext_resource type="PackedScene" uid="uid://dx7vcrdke1pfo" path="res://shaders/particle.tscn" id="11_xqn2q"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3sdts"]
 rough = true
@@ -152,6 +153,10 @@ default_color = Color(1, 0, 0, 1)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_swqss")
+
+[node name="Node2D" parent="." instance=ExtResource("11_xqn2q")]
+visible = false
+position = Vector2(131, -8)
 
 [connection signal="timeout" from="TimerToShoot" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="TimerToReload" to="." method="_on_timer_to_reload_timeout"]
