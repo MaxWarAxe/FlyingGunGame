@@ -8,4 +8,3 @@ var timer
 func _ready():
 	timer = get_node("Timer")
 
-

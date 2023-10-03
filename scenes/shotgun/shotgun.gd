@@ -22,6 +22,7 @@ func add_bullet():
 		var bullet = bulletScene.instantiate();
 		bullet.shooter = self.idname;
 		get_tree().get_root().add_child(bullet)
+		bullet.add_child(load("res://shaders/particle.tscn").instantiate());
 		bullet.damage = bullet_damage;
 		bullet.global_position = $Barrel.global_position;
 		bullet.global_rotation = rotation;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ca4lpkrw027nn"]
+[gd_scene load_steps=15 format=3 uid="uid://ca4lpkrw027nn"]
 
 [ext_resource type="Texture2D" uid="uid://bp7wy43toi1pg" path="res://sprites/ak-47/ak-47-base.png" id="1_mm34q"]
 [ext_resource type="Script" path="res://scripts/ak-47.gd" id="1_pvrhg"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://cpjons5plii23" path="res://scenes/ak-47/Mag.tscn" id="5_dh3ds"]
 [ext_resource type="PackedScene" uid="uid://4qjdh10o1oy" path="res://scenes/UI/label_of_player.tscn" id="6_c6o0t"]
 [ext_resource type="PackedScene" uid="uid://b6pnw0nutsac3" path="res://scenes/ak-47/bullet.tscn" id="7_ocxwt"]
-[ext_resource type="PackedScene" uid="uid://dx7vcrdke1pfo" path="res://shaders/particle.tscn" id="11_xqn2q"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3sdts"]
 rough = true
@@ -81,7 +80,7 @@ labelScene = ExtResource("6_c6o0t")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(-2, 2)
 scale = Vector2(1.2, 1.15)
-polygon = PackedVector2Array(-94.1667, -11.7391, -94.1667, 15.6522, -52.5, -3.47826, -45, -0.869565, -48.3333, 19.1304, -39.1667, 19.1304, -32.5, 0, 11.6667, -1.73913, 100, -7.82609, 60, -19.1304, 38.3333, -21.7391, 2.5, -20.8696, -20.8333, -20.8696, -42.5, -19.1304, -46.6667, -17.3913, -49.1667, -14.7826)
+polygon = PackedVector2Array(-94.1667, -11.7391, -94.1667, 15.6522, -52.5, -3.47826, -45, -0.869565, -48.3333, 19.1304, -39.1667, 19.1304, -32.5, 0, 11.6667, -1.73913, 100, -3.47826, 100, -20, 60, -19.1304, 38.3333, -21.7391, 2.5, -20.8696, -20.8333, -20.8696, -42.5, -19.1304, -46.6667, -17.3913, -49.1667, -14.7826)
 
 [node name="Sprites" type="Node2D" parent="."]
 
@@ -153,10 +152,6 @@ default_color = Color(1, 0, 0, 1)
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_swqss")
-
-[node name="Node2D" parent="." instance=ExtResource("11_xqn2q")]
-visible = false
-position = Vector2(131, -8)
 
 [connection signal="timeout" from="TimerToShoot" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="TimerToReload" to="." method="_on_timer_to_reload_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cqbxk4mrnbg6w"]
+[gd_scene load_steps=33 format=3 uid="uid://cqbxk4mrnbg6w"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_kouje"]
 [ext_resource type="VideoStream" path="res://sprites/backgrounds/back.ogv" id="2_akl55"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://i8spb5yigv3i" path="res://sprites/ui/quit_unfocus.png" id="7_kkhbx"]
 [ext_resource type="Texture2D" uid="uid://nw5705yu1r2b" path="res://sprites/ui/join_focus.png" id="7_mvfhb"]
 [ext_resource type="Texture2D" uid="uid://c7f2ptn4g5l0i" path="res://sprites/shotgun/[design]Shotgun_V1.02.png" id="8_ev5dp"]
+[ext_resource type="Texture2D" uid="uid://bahsq6spat02p" path="res://sprites/uzi/uzi_design.png" id="9_2uxqm"]
 [ext_resource type="Texture2D" uid="uid://d1bw3e5c0wsue" path="res://sprites/ui/quit_focus.png" id="9_prmo2"]
 [ext_resource type="Texture2D" uid="uid://brt4kn4bab7t6" path="res://sprites/ui/arrow - focus.png" id="11_q47uy"]
 [ext_resource type="Texture2D" uid="uid://dyvsaurckml2c" path="res://sprites/ui/start_focus.png" id="12_aw5qh"]
@@ -112,9 +113,21 @@ tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
 tracks/5/path = NodePath("Panel/NodeContainer/shotgun:rotation")
-tracks/5/interp = 1
+tracks/5/interp = 2
 tracks/5/loop_wrap = true
 tracks/5/keys = {
+"times": PackedFloat32Array(1, 2, 3, 4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, 0.0, 0.174533]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Panel/NodeContainer/uzi:rotation")
+tracks/6/interp = 2
+tracks/6/loop_wrap = true
+tracks/6/keys = {
 "times": PackedFloat32Array(1, 2, 3, 4),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
@@ -172,7 +185,7 @@ offset_bottom = 699.0
 position = Vector2(208, 137)
 
 [node name="ak" type="Node2D" parent="Panel/NodeContainer"]
-rotation = 0.145444
+rotation = 0.133256
 scale = Vector2(0.4, 0.35)
 skew = 0.0314621
 
@@ -190,7 +203,7 @@ texture = ExtResource("15_0q7tp")
 
 [node name="awp" type="Node2D" parent="Panel/NodeContainer"]
 position = Vector2(-484.5, 0)
-rotation = 0.145444
+rotation = 0.133256
 scale = Vector2(0.3, 0.3)
 
 [node name="Awpsprite" type="Sprite2D" parent="Panel/NodeContainer/awp"]
@@ -208,12 +221,20 @@ texture = ExtResource("7_k43ei")
 
 [node name="shotgun" type="Node2D" parent="Panel/NodeContainer"]
 position = Vector2(-856, 0)
-rotation = 0.0872665
+rotation = 0.0785398
 
 [node name="[design]shotgunV1_02" type="Sprite2D" parent="Panel/NodeContainer/shotgun"]
 position = Vector2(0, 1)
 scale = Vector2(3.0625, 3.0625)
 texture = ExtResource("8_ev5dp")
+
+[node name="uzi" type="Node2D" parent="Panel/NodeContainer"]
+position = Vector2(-1286, 13)
+
+[node name="UziDesign" type="Sprite2D" parent="Panel/NodeContainer/uzi"]
+position = Vector2(0, 2)
+scale = Vector2(0.134722, 0.134722)
+texture = ExtResource("9_2uxqm")
 
 [node name="weaponNameLabel" type="Label" parent="Panel"]
 layout_mode = 1
@@ -249,11 +270,12 @@ libraries = {
 
 [node name="GunforceSpots" type="Sprite2D" parent="."]
 position = Vector2(285, 144)
-scale = Vector2(0.278, 0.278)
+scale = Vector2(0.278093, 0.278093)
 texture = ExtResource("3_ikrjt")
 
 [node name="GunforceLogo2" type="Sprite2D" parent="."]
 position = Vector2(281, 144)
+rotation = 0.00227539
 scale = Vector2(0.232625, 0.232625)
 texture = ExtResource("4_oa5un")
 
@@ -268,6 +290,7 @@ offset_left = -250.44
 offset_top = -242.56
 offset_right = 269.56
 offset_bottom = 316.44
+rotation = -0.000455079
 pivot_offset = Vector2(240, 230)
 theme = ExtResource("5_cj1b1")
 

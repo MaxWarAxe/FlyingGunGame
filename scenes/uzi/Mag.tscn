@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://x6txbt3folt7"]
+
+[ext_resource type="Texture2D" uid="uid://cdhp5jtqfnc3e" path="res://sprites/uzi/uzi-mag.png" id="1_h0hja"]
+[ext_resource type="Script" path="res://scenes/uzi/Mag.gd" id="1_yntx0"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vsmbv"]
+size = Vector2(12, 27)
+
+[node name="Mag" type="RigidBody2D"]
+collision_layer = 512
+collision_mask = 512
+mass = 0.01
+gravity_scale = 0.0
+script = ExtResource("1_yntx0")
+
+[node name="Mag" type="Sprite2D" parent="."]
+scale = Vector2(0.13, 0.13)
+texture = ExtResource("1_h0hja")
+
+[node name="Mag-Polygon" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_vsmbv")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
