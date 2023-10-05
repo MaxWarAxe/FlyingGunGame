@@ -36,18 +36,13 @@ scale = Vector2(2.37986, 2.37986)
 texture = ExtResource("3_fqdlo")
 
 [node name="SpawnPoints" type="Node2D" parent="."]
+position = Vector2(-232, -172)
 
 [node name="0" type="Node2D" parent="SpawnPoints" groups=["SpawnPoints"]]
-position = Vector2(-655, 3571)
+position = Vector2(699, 544)
 
 [node name="1" type="Node2D" parent="SpawnPoints" groups=["SpawnPoints"]]
-position = Vector2(-1336, 3789)
-
-[node name="2" type="Node2D" parent="SpawnPoints" groups=["SpawnPoints"]]
-position = Vector2(700, 405)
-
-[node name="3" type="Node2D" parent="SpawnPoints" groups=["SpawnPoints"]]
-position = Vector2(7560, 4899)
+position = Vector2(490, 440)
 
 [node name="Moons" type="Node2D" parent="."]
 
@@ -157,3 +152,6 @@ scale = Vector2(104.71, 58.42)
 ITEM_TO_SPAWN = ExtResource("7_bk5vn")
 SPAWN_TIME = 0.4
 MAX_ITEMS = 50
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_path = NodePath("..")

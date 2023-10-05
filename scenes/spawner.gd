@@ -17,11 +17,15 @@ func _process(delta):
 func onCrateDestroy():
 	if multiplayer.get_unique_id() == 1:
 		amount -= 1
+@rpc("any_peer","call_local","reliable")
+func addCrateInfo(pos,name):
+	GameManager.addCrate(pos,name)
 
 @rpc("any_peer","call_local","reliable")
 func spawn(pos,named):
 	var item = ITEM_TO_SPAWN.instantiate()
 	if multiplayer.get_unique_id() == 1:
+		addCrateInfo.rpc(pos,named)
 		item.connect("destroyed",onCrateDestroy)
 	item.name = named
 	get_tree().get_root().add_child(item)

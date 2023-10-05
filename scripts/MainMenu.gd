@@ -5,6 +5,7 @@ extends Control
 @export var WEAPON_SWITCH_SPEED = 0.05;
 var peer
 var weaponIndex = 0;
+var isStarted = false;
 @onready var  weaponAmount = $Panel/NodeContainer.get_children(true).size();
 @onready var target = $Target.global_position;
 @onready var targetWeapon = $Target.global_position;
@@ -46,6 +47,7 @@ func _ready():
 func _process(delta):
 	$Panel/NodeContainer.global_position.x = lerp($Panel/NodeContainer.global_position.x,movePos,WEAPON_SWITCH_SPEED)
 	
+	
 func peer_connected(id):
 	print("Player connected" + str(id));
 
@@ -60,22 +62,43 @@ func peer_disconnected(id):
 	
 func connected_to_server():
 	print("connected to Server");
-	SendPlayerInformation.rpc_id(1, $VBoxContainer/NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName)
-	
+	SendPlayerInformation.rpc_id(1, $VBoxContainer/NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName,0,0,Vector2.ZERO,0,null)
+	askStatus.rpc_id(1,multiplayer.get_unique_id())
+	#await wait()
+	#print(isStarted)
+		
+
+@rpc("any_peer","reliable")
+func setStatus(status):
+	isStarted = status;
+
+func wait():
+	await get_tree().create_timer(1).timeout
+
+@rpc("any_peer","reliable")
+func askStatus(unique_id):
+	if isStarted:
+		StartGame.rpc_id(unique_id)
+		get_tree().get_root().get_node("game").QueueToConnect.append(unique_id)
+		setStatus.rpc_id(unique_id,isStarted);
+
+
 func connection_failed():
 	print("connection failed");
 
 func _on_host_button_button_down():
 	HostGame()
-	SendPlayerInformation($VBoxContainer/NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName)
+	SendPlayerInformation($VBoxContainer/NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName,0,0,Vector2.ZERO,0,null)
 	
 func _on_join_button_button_down():
 	peer = ENetMultiplayerPeer.new()
 	peer.create_client(Address,port)
 	multiplayer.set_multiplayer_peer(peer)
 	
-@rpc("any_peer","call_local")
+	
+@rpc("any_peer","call_local","reliable")
 func StartGame():
+	isStarted = true;
 	if multiplayer.get_unique_id() == 1:
 		sync.rpc(GameManager.Players)
 	
@@ -93,8 +116,8 @@ func HostGame():
 	print("waiting for players")
 	
 
-@rpc("any_peer")
-func SendPlayerInformation(name,id,weapon):
+@rpc("any_peer","reliable")
+func SendPlayerInformation(name,id,weapon,kills,deaths,pos,killsinarow,crates):
 	print(weapon)
 	if !GameManager.Players.has(id):
 		GameManager.Players[id] = {
@@ -102,11 +125,16 @@ func SendPlayerInformation(name,id,weapon):
 			"id" : id,
 			"kills" : 0,
 			"deaths" : 0,
-			"weapon" : weapon
+			"weapon" : weapon,
+			"pos" : Vector2.ZERO,
+			"killsinarow" : 0
 		}
+		if crates != null:
+			GameManager.Crates = crates
 		if multiplayer.is_server():
 			for i in GameManager.Players:
-				SendPlayerInformation.rpc(GameManager.Players[i].name,i,GameManager.Players[i].weapon)
+				SendPlayerInformation.rpc(GameManager.Players[i].name,i,GameManager.Players[i].weapon,GameManager.Players[i].kills,GameManager.Players[i].deaths,GameManager.Players[i].pos,GameManager.Players[i].killsinarow,GameManager.Crates)
+					
 func _on_start_button_button_down():
 	StartGame.rpc()
 	

@@ -72,7 +72,10 @@ func _ready():
 func setAuthority(id):
 	idname = str(id);
 	self.name = str(id);
+	set_multiplayer_authority(id)
 	$MultiplayerSynchronizer.set_multiplayer_authority(id)
+
+
 
 func setUpLabel():
 	label = labelScene.instantiate();
@@ -94,10 +97,15 @@ func checkDeath():
 			die.rpc();
 			emit_signal("died",idname)
 
+@rpc("any_peer")
+func sendpos(id,posit):
+	pos = posit
+	
 func _process(delta):
 	label.position = position
 	checkDeath()
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+		sendpos.rpc(multiplayer.get_unique_id(),pos)
 		camera.zoom.x = lerp(camera.zoom.x, targetZoom,0.5)
 		camera.zoom.y = lerp(camera.zoom.y, targetZoom,0.5)
 		if(Input.is_action_pressed("shoot") and (timerToShoot.is_stopped())):

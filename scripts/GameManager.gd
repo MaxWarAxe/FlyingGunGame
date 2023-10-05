@@ -1,6 +1,6 @@
 extends Node
 var Players = {}
-
+var Crates = {}
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -16,6 +16,11 @@ func addDeath(id):
 	for i in Players:
 		if Players[i].id == id.to_int():
 			Players[i].deaths += 1;
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+func addCrate(pos,name):
+	Crates[name] = {
+		"pos" : pos,
+		"name":name
+	}
+
 func _process(delta):
 	pass

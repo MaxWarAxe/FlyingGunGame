@@ -24,6 +24,7 @@ func _process(delta):
 	label.position = position
 	checkDeath()
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+		sendpos.rpc(multiplayer.get_unique_id(),pos)
 		if(Input.is_action_just_pressed(\"shoot\")):
 			unzoom();
 			
@@ -109,6 +110,7 @@ inertia = 1000.0
 center_of_mass_mode = 1
 physics_material_override = SubResource("PhysicsMaterial_c7557")
 gravity_scale = 0.0
+can_sleep = false
 angular_damp_mode = 1
 script = SubResource("GDScript_km1r5")
 SHOOT_FORCE = Vector2(-30000, 0)
