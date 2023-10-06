@@ -119,7 +119,11 @@ func HostGame():
 @rpc("any_peer","reliable")
 func SendPlayerInformation(name,id,weapon,kills,deaths,pos,killsinarow,crates):
 	print(weapon)
+	
 	if !GameManager.Players.has(id):
+		if crates != null:
+			GameManager.Crates = crates
+			print(crates)	
 		GameManager.Players[id] = {
 			"name" : name,
 			"id" : id,
@@ -129,12 +133,9 @@ func SendPlayerInformation(name,id,weapon,kills,deaths,pos,killsinarow,crates):
 			"pos" : Vector2.ZERO,
 			"killsinarow" : 0
 		}
-		if crates != null:
-			GameManager.Crates = crates
 		if multiplayer.is_server():
 			for i in GameManager.Players:
 				SendPlayerInformation.rpc(GameManager.Players[i].name,i,GameManager.Players[i].weapon,GameManager.Players[i].kills,GameManager.Players[i].deaths,GameManager.Players[i].pos,GameManager.Players[i].killsinarow,GameManager.Crates)
-					
 func _on_start_button_button_down():
 	StartGame.rpc()
 	

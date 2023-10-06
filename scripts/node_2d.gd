@@ -60,7 +60,9 @@ func wait():
 
 @rpc("any_peer","reliable")
 func cloneToNewPlayer():
-	
+	print("WTF")
+	for k in GameManager.Crates:
+		spawner.spawn(GameManager.Crates[k].pos,GameManager.Crates[k].name)
 	var index = 0
 	for i in GameManager.Players:
 		var currentPlayer
@@ -72,8 +74,6 @@ func cloneToNewPlayer():
 			currentPlayer.setAuthority(GameManager.Players[i].id)
 			
 			add_child(currentPlayer)
-			for k in GameManager.Crates:
-				spawner.spawn(GameManager.Crates[k].pos,GameManager.Crates[k].name)
 			currentPlayer.name = str(GameManager.Players[i].id)
 			currentPlayer.connect("died",respawn,0);
 			#for spawn in get_tree().get_nodes_in_group("SpawnPoints"):

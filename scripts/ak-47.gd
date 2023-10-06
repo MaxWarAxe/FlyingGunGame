@@ -145,12 +145,12 @@ func addAmmo():
 	withMag = true
 	updateUI()
 
-@rpc("any_peer","call_local")
+@rpc("any_peer","call_local","reliable")
 func show_mag():
 	MagNode.visible = true;
 	$"Mag-Polygon".disabled = false;
 
-@rpc("any_peer","call_local")
+@rpc("any_peer","call_local","reliable")
 func drop_mag():
 	MagNode.visible = false;
 	$"Mag-Polygon".disabled = true;
@@ -174,7 +174,7 @@ func shoot():
 			withMag = false;
 		updateUI()
 
-@rpc("any_peer","call_local")
+@rpc("any_peer","call_local","reliable")
 func add_shell():
 	var shell = shellScene.instantiate();
 	get_tree().get_root().add_child(shell)
@@ -182,7 +182,7 @@ func add_shell():
 	shell.global_position = $BoltPosition.global_position;
 	shell.apply_torque(SHELL_ROTATION_SPEED)
 
-@rpc("any_peer","call_local")
+@rpc("any_peer","call_local","reliable")
 func add_bullet():
 	var bullet = bulletScene.instantiate();
 	get_tree().get_root().add_child(bullet)
@@ -219,13 +219,13 @@ func _on_timer_timeout():
 func _on_timer_to_reload_timeout():
 	addAmmo()
 
-@rpc("any_peer","call_local")
+@rpc("any_peer","call_local","reliable")
 func deal(damage,shooterid):
 	hp -= damage;
 	lastDealer = shooterid;
 	label.updateHP(hp);
 	
-@rpc("any_peer","call_local")
+@rpc("any_peer","call_local","reliable")
 func die():
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
 		camera.queue_free()

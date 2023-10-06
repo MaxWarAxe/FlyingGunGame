@@ -21,6 +21,10 @@ func addCrate(pos,name):
 		"pos" : pos,
 		"name":name
 	}
+@rpc("any_peer","call_local","reliable")
+func deleteCrate(name):
+	Crates.erase(name)
+
 
 func _process(delta):
 	pass
