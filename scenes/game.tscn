@@ -161,5 +161,5 @@ MAX_ITEMS = 50
 spawn_path = NodePath("..")
 
 [node name="player_spawner" parent="." instance=ExtResource("10_2wl38")]
-position = Vector2(1142, 440)
-scale = Vector2(16.46, 16.46)
+position = Vector2(3370, 2251)
+scale = Vector2(106.485, 54.883)
