@@ -107,10 +107,10 @@ func addConnectedPlayer(id):
 func respawnCall(id):
 	var index = 0
 	var currentPlayer = get_node(id)
-	
-	currentPlayer.hp = currentPlayer.INIT_HP
-	currentPlayer.label.updateHP(currentPlayer.hp)
-	
-	currentPlayer.demandingPos = $player_spawner.calculatePos()
-	currentPlayer.respawning = true;
+	if currentPlayer != null:
+		currentPlayer.hp = currentPlayer.INIT_HP
+		currentPlayer.label.updateHP(currentPlayer.hp)
+		
+		currentPlayer.demandingPos = $player_spawner.calculatePos()
+		currentPlayer.respawning = true;
 	

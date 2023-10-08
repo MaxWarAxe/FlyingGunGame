@@ -60,7 +60,7 @@ _data = {
 "shoot": SubResource("Animation_47dnm")
 }
 
-[node name="uzi" type="RigidBody2D"]
+[node name="uzi" type="RigidBody2D" groups=["Player"]]
 process_mode = 3
 collision_layer = 3
 collision_mask = 3
