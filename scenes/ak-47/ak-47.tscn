@@ -63,6 +63,7 @@ properties/5/sync = true
 properties/5/watch = true
 
 [node name="ak-47" type="RigidBody2D" groups=["Player"]]
+process_mode = 3
 collision_layer = 3
 collision_mask = 3
 mass = 0.05

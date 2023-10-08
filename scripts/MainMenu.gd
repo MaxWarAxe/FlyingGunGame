@@ -68,9 +68,9 @@ func connected_to_server():
 	#print(isStarted)
 		
 
-@rpc("any_peer","reliable")
-func setStatus(status):
-	isStarted = status;
+#@rpc("any_peer","reliable")
+#func setStatus(status):
+#	isStarted = status;
 
 func wait():
 	await get_tree().create_timer(1).timeout
@@ -80,7 +80,7 @@ func askStatus(unique_id):
 	if isStarted:
 		StartGame.rpc_id(unique_id)
 		get_tree().get_root().get_node("game").QueueToConnect.append(unique_id)
-		setStatus.rpc_id(unique_id,isStarted);
+		#setStatus.rpc_id(unique_id,isStarted);
 
 
 func connection_failed():

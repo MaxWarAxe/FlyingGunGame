@@ -16,12 +16,14 @@ extends RigidBody2D
 @export var BASE_BULLET_DAMAGE = 34;
 @export var INIT_ZOOM = 0.5;
 var pos = transform;
-var bullet_damage = BASE_BULLET_DAMAGE
+var demandingPos;
+@onready var bullet_damage = BASE_BULLET_DAMAGE
 var camera
 var label
 var ammo = 0;
 var mags = 0;
 var hp = 1;
+var respawning = false;
 var idname
 var itself
 var nick = "";
@@ -92,15 +94,16 @@ func updateScore():
 func checkDeath():
 	if(multiplayer.get_unique_id() == 1):
 		if(hp <= 0):
+			print("ded")
 			GameManager.addDeath.rpc(idname)
 			GameManager.addKill.rpc(lastDealer)
-			die.rpc();
-			emit_signal("died",idname)
+			die.rpc_id(1);
 
-@rpc("any_peer")
+
+@rpc("any_peer","reliable")
 func sendpos(id,posit):
 	pos = posit
-	
+
 func _process(delta):
 	label.position = position
 	checkDeath()
@@ -210,8 +213,18 @@ func add_effect(effect):
 
 func _integrate_forces(state):
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+		if(respawning):
+			resp(demandingPos,state)
+			respawning = false
 		pos = state.transform
 	state.transform = pos
+
+func resp(newpos,state):
+	state.transform = newpos;
+	print(newpos)
+	print(state.transform)
+	state.linear_velocity = Vector2.ZERO
+	state.angular_velocity = 0
 
 func _on_timer_timeout():
 	pass # Replace with function body.
@@ -227,7 +240,6 @@ func deal(damage,shooterid):
 	
 @rpc("any_peer","call_local","reliable")
 func die():
-	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		camera.queue_free()
-	label.queue_free()
-	queue_free()
+	emit_signal("died",idname)
+	
+	

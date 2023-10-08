@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dhp4537vgvxjl"]
+[gd_scene load_steps=15 format=3 uid="uid://dhp4537vgvxjl"]
 
 [ext_resource type="Script" path="res://scripts/node_2d.gd" id="1_twv1q"]
 [ext_resource type="PackedScene" uid="uid://c50nhaxhb3qe6" path="res://scenes/awp/awp.tscn" id="2_voe2t"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://cx3bjqtqarltf" path="res://scenes/uzi/uzi.tscn" id="5_f77r4"]
 [ext_resource type="PackedScene" uid="uid://b1ikf0jr4dmwc" path="res://scenes/crates/crate.tscn" id="7_bk5vn"]
 [ext_resource type="PackedScene" uid="uid://dvbc824ynopdc" path="res://scenes/spawner.tscn" id="8_d4mav"]
+[ext_resource type="PackedScene" uid="uid://b72t05x406fl" path="res://scenes/player_spawner.tscn" id="10_2wl38"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yqc4v"]
 size = Vector2(716.219, 7381.88)
@@ -23,6 +24,7 @@ size = Vector2(14868.7, 1004.41)
 size = Vector2(998.875, 7132.5)
 
 [node name="game" type="Node2D"]
+position = Vector2(-8, 0)
 script = ExtResource("1_twv1q")
 awpScene = ExtResource("2_voe2t")
 akScene = ExtResource("3_yjeef")
@@ -45,9 +47,10 @@ position = Vector2(699, 544)
 position = Vector2(490, 440)
 
 [node name="Moons" type="Node2D" parent="."]
+position = Vector2(20, -13)
 
 [node name="Moon" parent="Moons" instance=ExtResource("4_c6b87")]
-position = Vector2(-596, 318)
+position = Vector2(-94, 20)
 
 [node name="Moon2" parent="Moons" instance=ExtResource("4_c6b87")]
 position = Vector2(2702, -237)
@@ -139,6 +142,7 @@ position = Vector2(9870.56, 2209.75)
 shape = SubResource("RectangleShape2D_feutb")
 
 [node name="Node2D2" type="Node2D" parent="."]
+visible = false
 position = Vector2(-1166, 3529)
 
 [node name="crate2" parent="Node2D2" instance=ExtResource("7_bk5vn")]
@@ -155,3 +159,7 @@ MAX_ITEMS = 50
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("..")
+
+[node name="player_spawner" parent="." instance=ExtResource("10_2wl38")]
+position = Vector2(1142, 440)
+scale = Vector2(16.46, 16.46)

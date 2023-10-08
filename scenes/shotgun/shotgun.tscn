@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://di8x7pxchmov7" path="res://sprites/shotgun/bolt.png" id="1_uc80y"]
 [ext_resource type="PackedScene" uid="uid://b6pnw0nutsac3" path="res://scenes/ak-47/bullet.tscn" id="2_kyuim"]
 [ext_resource type="Texture2D" uid="uid://bakfc6evdh4ms" path="res://sprites/shotgun/bolt2.png" id="2_wucrf"]
-[ext_resource type="PackedScene" uid="uid://b5tlpc3gx4w7k" path="res://scenes/shotgun/shotgun_shell.tscn" id="3_a6351"]
+[ext_resource type="PackedScene" path="res://scenes/shotgun/shotgun_shell.tscn" id="3_a6351"]
 [ext_resource type="Texture2D" uid="uid://y6qppm248lgo" path="res://sprites/shotgun/boltBackground.png" id="3_blw0w"]
 [ext_resource type="Texture2D" uid="uid://do1oypkm3qus2" path="res://sprites/shotgun/base.png" id="4_6pfwr"]
 [ext_resource type="PackedScene" uid="uid://b0bxe3gpgi154" path="res://scenes/UI/camera.tscn" id="4_b1d6r"]
@@ -13,7 +13,6 @@
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_6l3e5"]
 rough = true
-absorbent = true
 
 [sub_resource type="Animation" id="Animation_rdifq"]
 resource_name = "shoot"
@@ -74,6 +73,7 @@ properties/5/sync = true
 properties/5/watch = false
 
 [node name="shotgun" type="RigidBody2D"]
+process_mode = 3
 collision_layer = 3
 collision_mask = 3
 mass = 0.05

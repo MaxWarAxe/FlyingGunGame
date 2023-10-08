@@ -18,7 +18,6 @@ func updateUI(ammo,mags):
 func updateScore():
 	for n in $Panel/VBoxContainer.get_children():
 		if(n.name != "ScoreLineMain"):
-			remove_child(n)
 			n.queue_free()
 	
 	for i in GameManager.Players:

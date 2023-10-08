@@ -5,13 +5,13 @@ var Crates = {}
 func _ready():
 	pass # Replace with function body.
 
-@rpc("any_peer","call_local")
+@rpc("any_peer","call_local","reliable")
 func addKill(id):
 	for i in Players:
 		if Players[i].id == id.to_int():
 			Players[i].kills += 1;
 
-@rpc("any_peer","call_local")
+@rpc("any_peer","call_local","reliable")
 func addDeath(id):
 	for i in Players:
 		if Players[i].id == id.to_int():
@@ -19,7 +19,7 @@ func addDeath(id):
 func addCrate(pos,name):
 	Crates[name] = {
 		"pos" : pos,
-		"name":name
+		"name": name
 	}
 @rpc("any_peer","call_local","reliable")
 func deleteCrate(name):

@@ -34,9 +34,9 @@ func spawn():
 		add_child(currentPlayer)
 		currentPlayer.connect("died",respawn,0);
 		
-		for spawn in get_tree().get_nodes_in_group("SpawnPoints"):
-			if spawn.name == str(index):
-				currentPlayer.global_position = spawn.global_position
+
+		currentPlayer.demandingPos = $player_spawner.calculatePos()
+		currentPlayer.respawning = true;
 		index += 1
 	pass
 
@@ -51,7 +51,7 @@ func _process(delta):
 		for unID in QueueToConnect:
 			QueueToConnect.erase(unID)
 			cloneToNewPlayer.rpc_id(unID)
-			respawn(unID)
+			addConnectedPlayer.rpc(unID)
 			
 			
 
@@ -76,30 +76,41 @@ func cloneToNewPlayer():
 			add_child(currentPlayer)
 			currentPlayer.name = str(GameManager.Players[i].id)
 			currentPlayer.connect("died",respawn,0);
-			#for spawn in get_tree().get_nodes_in_group("SpawnPoints"):
-				#if spawn.name == str(index):
-					#currentPlayer.global_position = spawn.global_position
+			
+		
 	pass
 
 
 func respawn(id):
+	print("resemited")
 	respawnCall.rpc(id)
+
+@rpc("any_peer","call_local","reliable")
+func addConnectedPlayer(id):
+	var currentPlayer
+	for i in GameManager.Players:
+		if GameManager.Players[i].id == id:
+			currentPlayer = weaponChoose(i)
+			currentPlayer.name = str(GameManager.Players[i].id)
+			currentPlayer.nick = str(GameManager.Players[i].name)
+			currentPlayer.idname = str(GameManager.Players[i].id)
+			currentPlayer.setAuthority(GameManager.Players[i].id)
+			add_child(currentPlayer)
+			currentPlayer.connect("died",respawn,0);
+			
+			
+			currentPlayer.demandingPos = $player_spawner.calculatePos()
+			currentPlayer.respawning = true;
+	pass
 
 @rpc("any_peer","call_local","reliable")
 func respawnCall(id):
 	var index = 0
-	var currentPlayer
-	for i in GameManager.Players:
-		if str(GameManager.Players[i].id) == str(id):
-			currentPlayer = weaponChoose(i)
-			currentPlayer.name = str(GameManager.Players[i].id)
-			currentPlayer.idname = str(GameManager.Players[i].id)
-			currentPlayer.nick = str(GameManager.Players[i].name)
-			currentPlayer.setAuthority(GameManager.Players[i].id)
-			add_child(currentPlayer)
-			
-			currentPlayer.connect("died",respawn,0);
-				
-			for spawn in get_tree().get_nodes_in_group("SpawnPoints"):
-				if spawn.name == str(index):
-					currentPlayer.global_position = spawn.global_position
+	var currentPlayer = get_node(id)
+	
+	currentPlayer.hp = currentPlayer.INIT_HP
+	currentPlayer.label.updateHP(currentPlayer.hp)
+	
+	currentPlayer.demandingPos = $player_spawner.calculatePos()
+	currentPlayer.respawning = true;
+	
