@@ -23,7 +23,7 @@ func updateScore():
 	for i in GameManager.Players:
 		var scoreline = scorelineScene.instantiate()
 		$Panel/VBoxContainer.add_child(scoreline)
-		scoreline.changeValues(GameManager.Players[i].name,GameManager.Players[i].kills,GameManager.Players[i].deaths)
+		scoreline.changeValues(GameManager.Players[i].name,GameManager.Players[i].kills,GameManager.Players[i].deaths,GameManager.Players[i].weapon,GameManager.Players[i].hp,GameManager.Players[i].killsinarow)
 
 func makeReloadAnim(time):
 	$ReloadProgress.reload(time)

@@ -31,6 +31,10 @@ akScene = ExtResource("3_yjeef")
 shotgunScene = ExtResource("4_jijhl")
 uziScene = ExtResource("5_f77r4")
 
+[node name="player_spawner" parent="." instance=ExtResource("10_2wl38")]
+position = Vector2(3370, 2251)
+scale = Vector2(106.485, 54.883)
+
 [node name="342482Df88e7767b2331e2Ca91Dbc5e6" type="Sprite2D" parent="."]
 z_index = -100
 position = Vector2(3265.44, 2284)
@@ -159,7 +163,3 @@ MAX_ITEMS = 50
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("..")
-
-[node name="player_spawner" parent="." instance=ExtResource("10_2wl38")]
-position = Vector2(3370, 2251)
-scale = Vector2(106.485, 54.883)

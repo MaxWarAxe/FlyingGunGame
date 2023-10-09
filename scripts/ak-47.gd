@@ -86,6 +86,7 @@ func setUpLabel():
 
 func updateHP():
 	label.updateHP(hp)
+	GameManager.changeHP.rpc(idname,hp)
 
 func updateScore():
 	if idname == str(multiplayer.get_unique_id()):
@@ -97,6 +98,7 @@ func checkDeath():
 			print("ded")
 			GameManager.addDeath.rpc(idname)
 			GameManager.addKill.rpc(lastDealer)
+			
 			die.rpc_id(1);
 
 
@@ -198,11 +200,11 @@ func add_bullet():
 	
 func rotate_left():
 	ANGULAR_VELOCITY += -ANGULAR_SPEED * get_process_delta_time();
-	apply_torque(-ANGULAR_SPEED);
+	apply_torque(-ANGULAR_SPEED* get_process_delta_time()*100);
 
 func rotate_right():
 	ANGULAR_VELOCITY += ANGULAR_SPEED * get_process_delta_time();
-	apply_torque(ANGULAR_SPEED);
+	apply_torque(ANGULAR_SPEED* get_process_delta_time()*100);
 
 @rpc("any_peer","reliable","call_local")
 func add_effect(effect):
@@ -216,13 +218,14 @@ func _integrate_forces(state):
 		if(respawning):
 			resp(demandingPos,state)
 			respawning = false
+			
 		pos = state.transform
 	state.transform = pos
 
 func resp(newpos,state):
 	state.transform = newpos;
-	print(newpos)
-	print(state.transform)
+	hp = INIT_HP
+	GameManager.changeHP.rpc(idname,hp)
 	state.linear_velocity = Vector2.ZERO
 	state.angular_velocity = 0
 
@@ -237,6 +240,7 @@ func deal(damage,shooterid):
 	hp -= damage;
 	lastDealer = shooterid;
 	label.updateHP(hp);
+	GameManager.changeHP(idname,hp)
 	
 @rpc("any_peer","call_local","reliable")
 func die():

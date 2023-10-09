@@ -50,6 +50,7 @@ func _process(delta):
 	
 func peer_connected(id):
 	print("Player connected" + str(id));
+	#sync.rpc_id(id,GameManager.Players)
 
 func peer_disconnected(id):
 	print("Player disconnected" + str(id));
@@ -62,7 +63,7 @@ func peer_disconnected(id):
 	
 func connected_to_server():
 	print("connected to Server");
-	SendPlayerInformation.rpc_id(1, $VBoxContainer/NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName,0,0,Vector2.ZERO,0,null)
+	SendPlayerInformation.rpc_id(1, $VBoxContainer/NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName,0,0,Vector2.ZERO,0,100,null)
 	askStatus.rpc_id(1,multiplayer.get_unique_id())
 	#await wait()
 	#print(isStarted)
@@ -88,7 +89,7 @@ func connection_failed():
 
 func _on_host_button_button_down():
 	HostGame()
-	SendPlayerInformation($VBoxContainer/NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName,0,0,Vector2.ZERO,0,null)
+	SendPlayerInformation($VBoxContainer/NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName,0,0,Vector2.ZERO,0,100,null)
 	
 func _on_join_button_button_down():
 	peer = ENetMultiplayerPeer.new()
@@ -117,7 +118,7 @@ func HostGame():
 	
 
 @rpc("any_peer","reliable")
-func SendPlayerInformation(name,id,weapon,kills,deaths,pos,killsinarow,crates):
+func SendPlayerInformation(name,id,weapon,kills,deaths,pos,killsinarow,hp,crates):
 	print(weapon)
 	
 	if !GameManager.Players.has(id):
@@ -127,15 +128,16 @@ func SendPlayerInformation(name,id,weapon,kills,deaths,pos,killsinarow,crates):
 		GameManager.Players[id] = {
 			"name" : name,
 			"id" : id,
-			"kills" : 0,
-			"deaths" : 0,
+			"kills" : kills,
+			"deaths" : deaths,
 			"weapon" : weapon,
 			"pos" : Vector2.ZERO,
-			"killsinarow" : 0
+			"killsinarow" : killsinarow,
+			"hp" : hp
 		}
 		if multiplayer.is_server():
 			for i in GameManager.Players:
-				SendPlayerInformation.rpc(GameManager.Players[i].name,i,GameManager.Players[i].weapon,GameManager.Players[i].kills,GameManager.Players[i].deaths,GameManager.Players[i].pos,GameManager.Players[i].killsinarow,GameManager.Crates)
+				SendPlayerInformation.rpc(GameManager.Players[i].name,i,GameManager.Players[i].weapon,GameManager.Players[i].kills,GameManager.Players[i].deaths,GameManager.Players[i].pos,GameManager.Players[i].killsinarow,GameManager.Players[i].hp,GameManager.Crates)
 func _on_start_button_button_down():
 	StartGame.rpc()
 	

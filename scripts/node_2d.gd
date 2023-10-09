@@ -74,7 +74,9 @@ func cloneToNewPlayer():
 			currentPlayer.setAuthority(GameManager.Players[i].id)
 			
 			add_child(currentPlayer)
-			currentPlayer.name = str(GameManager.Players[i].id)
+			currentPlayer.hp = GameManager.Players[i].hp
+			currentPlayer.label.updateHP(currentPlayer.hp)
+			#currentPlayer.name = str(GameManager.Players[i].id)
 			currentPlayer.connect("died",respawn,0);
 			
 		

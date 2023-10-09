@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://b6pnw0nutsac3" path="res://scenes/ak-47/bullet.tscn" id="1_eg26o"]
 [ext_resource type="PackedScene" uid="uid://2nm3lax5bshq" path="res://scenes/ak-47/shell.tscn" id="2_bbcsp"]
 [ext_resource type="PackedScene" uid="uid://b0bxe3gpgi154" path="res://scenes/UI/camera.tscn" id="3_l422y"]
-[ext_resource type="PackedScene" uid="uid://bxjshr3j0xq35" path="res://scenes/awp/Mag.tscn" id="4_hcnql"]
+[ext_resource type="PackedScene" path="res://scenes/awp/Mag.tscn" id="4_hcnql"]
 [ext_resource type="Texture2D" uid="uid://d3q1cmha310ff" path="res://sprites/awp/awpsprite.png" id="5_fnrrm"]
 [ext_resource type="PackedScene" uid="uid://4qjdh10o1oy" path="res://scenes/UI/label_of_player.tscn" id="5_ri7y1"]
 [ext_resource type="Texture2D" uid="uid://ctlnpxqxbxjoa" path="res://sprites/awp/mag.png" id="8_jdx85"]

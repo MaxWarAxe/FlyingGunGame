@@ -5,6 +5,7 @@ func setup(name,hp):
 	$HBoxContainer/HPValueLabel.text = str(hp)
 func updateHP(hp):
 	$HBoxContainer/HPValueLabel.text = str(hp)
+	
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
