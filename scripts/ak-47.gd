@@ -103,6 +103,7 @@ func checkDeath():
 			
 			die.rpc_id(1);
 
+	
 
 @rpc("any_peer","reliable")
 func sendpos(id,posit):

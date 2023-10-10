@@ -3,6 +3,7 @@ extends Control
 var scorelineScene = load("res://scenes/UI/score_line.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	GameManager.connect("streakAdded",playStreakAnimFromServer)
 	pass
 
 func showScore():
@@ -28,6 +29,25 @@ func updateScoreDeff():
 		$Panel/VBoxContainer.add_child(scoreline)
 		scoreline.changeValues(GameManager.Players[i].name,GameManager.Players[i].kills,GameManager.Players[i].deaths,GameManager.Players[i].weapon,GameManager.Players[i].hp,GameManager.Players[i].killsinarow)
 
+func playStreakAnimFromServer(streak):
+	if multiplayer.get_unique_id() == 1:
+		playStreakAnim.rpc(streak)
+
+@rpc("authority")
+func playStreakAnim(streak):
+	match streak:
+		1:
+			$StreakMask/StreakAnim.play("streak1")
+		2:
+			$StreakMask/StreakAnim.play("streak2")
+		3:
+			$StreakMask/StreakAnim.play("streak3")
+		4:
+			$StreakMask/StreakAnim.play("streak4")
+		5:
+			$StreakMask/StreakAnim.play("streak5")
+		_:
+			$StreakMask/StreakAnim.play("streak5")
 func makeReloadAnim(time):
 	$ReloadProgress.reload(time)
 # Called every frame. 'delta' is the elapsed time since the previous frame.

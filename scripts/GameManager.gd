@@ -1,6 +1,8 @@
 extends Node
 var Players = {}
 var Crates = {}
+
+signal streakAdded
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
@@ -11,7 +13,7 @@ func addKill(id):
 		if Players[i].id == id.to_int():
 			Players[i].kills += 1;
 			Players[i].killsinarow += 1;
-
+			emit_signal("streakAdded",Players[i].killsinarow)
 @rpc("any_peer","call_local","reliable")
 func addDeath(id):
 	for i in Players:

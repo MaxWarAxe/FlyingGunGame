@@ -23,6 +23,9 @@ func hideScore():
 func updateScore():
 	UI.updateScore();
 
+func playStreakAnim(streak):
+	UI.playStreakAnim(streak)
+
 func spec():
 	if nodeToSpectate != null:
 		global_position = nodeToSpectate.global_position
