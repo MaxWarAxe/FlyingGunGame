@@ -36,7 +36,9 @@ _data = {
 "fill": SubResource("Animation_fcuv3")
 }
 
-[node name="ReloadProgress" type="Node2D"]
+[node name="ReloadProgress" type="Control"]
+layout_mode = 3
+anchors_preset = 0
 script = ExtResource("1_b60gl")
 
 [node name="Circle" type="TextureProgressBar" parent="."]

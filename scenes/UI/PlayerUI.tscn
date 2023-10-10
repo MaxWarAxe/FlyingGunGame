@@ -1,54 +1,59 @@
-[gd_scene load_steps=7 format=3 uid="uid://cltatitm11wxq"]
+[gd_scene load_steps=6 format=3 uid="uid://cltatitm11wxq"]
 
-[ext_resource type="Theme" uid="uid://bssgbti2ybngk" path="res://themes/MinimalUI.tres" id="1_oxf12"]
 [ext_resource type="Script" path="res://scenes/UI/PlayerUI.gd" id="2_ejmo8"]
 [ext_resource type="PackedScene" uid="uid://cvdk7u1plg38l" path="res://scenes/UI/score_line.tscn" id="3_gaj6w"]
 [ext_resource type="PackedScene" uid="uid://crdl6rubybglb" path="res://scenes/UI/reload_progress.tscn" id="4_2w6g6"]
 
-[sub_resource type="Theme" id="Theme_x60xh"]
-
 [sub_resource type="LabelSettings" id="LabelSettings_6nil8"]
 font_size = 48
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8t33f"]
+bg_color = Color(0.345098, 0.113725, 0.517647, 0.25098)
+
 [node name="Control" type="Control"]
+z_index = 200
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+pivot_offset = Vector2(635.29, 324.71)
 size_flags_horizontal = 3
 size_flags_vertical = 3
 auto_translate = false
 localize_numeral_system = false
-theme = ExtResource("1_oxf12")
 script = ExtResource("2_ejmo8")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
-layout_mode = 0
-offset_left = 56.0
-offset_top = 576.0
-offset_right = 228.0
-offset_bottom = 666.0
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -584.0
+offset_top = 216.0
+offset_right = -412.0
+offset_bottom = 306.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 1
 
 [node name="AmmoLable" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-theme = SubResource("Theme_x60xh")
 theme_type_variation = &"HeaderLarge"
 text = "30"
 label_settings = SubResource("LabelSettings_6nil8")
 
 [node name="Slash" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-theme = SubResource("Theme_x60xh")
 theme_type_variation = &"HeaderLarge"
 text = "/"
 label_settings = SubResource("LabelSettings_6nil8")
 
 [node name="MagsLable" type="Label" parent="HBoxContainer"]
 layout_mode = 2
-theme = SubResource("Theme_x60xh")
 theme_type_variation = &"HeaderLarge"
 text = "3"
 label_settings = SubResource("LabelSettings_6nil8")
@@ -58,22 +63,34 @@ vertical_alignment = 1
 [node name="Panel" type="Panel" parent="."]
 visible = false
 layout_mode = 2
-offset_left = 244.0
-offset_top = 115.0
-offset_right = 1027.0
-offset_bottom = 533.0
-theme = ExtResource("1_oxf12")
+anchor_left = 0.496
+anchor_top = 0.45
+anchor_right = 0.496
+anchor_bottom = 0.45
+offset_left = -390.88
+offset_top = -209.0
+offset_right = 392.12
+offset_bottom = 209.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_8t33f")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
 layout_mode = 0
 offset_top = 2.0
 offset_right = 658.0
 offset_bottom = 353.0
-theme = ExtResource("1_oxf12")
 
 [node name="ScoreLineMain" parent="Panel/VBoxContainer" instance=ExtResource("3_gaj6w")]
 layout_mode = 2
 
 [node name="ReloadProgress" parent="." instance=ExtResource("4_2w6g6")]
-position = Vector2(543, 372)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.464
+anchor_top = 0.454
+anchor_right = 0.464
+anchor_bottom = 0.454
+offset_left = -111.92
+offset_top = 0.119965
+offset_right = -111.92
+offset_bottom = 0.119965
 scale = Vector2(0.21, 0.21)

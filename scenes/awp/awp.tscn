@@ -17,38 +17,33 @@ absorbent = true
 resource_name = "awp"
 script/source = "extends \"res://scripts/ak-47.gd\"
 
-func _process(delta):
-	if idname == str(multiplayer.get_unique_id()):
-		camera.zoom.x = lerp(camera.zoom.x, targetZoom,0.5)
-		camera.zoom.y = lerp(camera.zoom.y, targetZoom,0.5)
-	label.position = position
-	checkDeath()
-	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		sendpos.rpc(multiplayer.get_unique_id(),pos)
-		if(Input.is_action_just_pressed(\"shoot\")):
-			unzoom();
-			
-		if(Input.is_action_just_released(\"shoot\")):
-			targetZoom = INIT_ZOOM
-			if timerToShoot.is_stopped():
-				shoot();
-				timerToShoot.start();
-			
-		if(Input.is_action_pressed(\"rotate_left\")):
-			rotate_left();
-		if(Input.is_action_just_pressed(\"show_score\")):
-			updateScore()
-			camera.showScore()
-		if(Input.is_action_just_released('show_score')):
-			camera.hideScore();
-			
-		if(Input.is_action_pressed(\"rotate_right\")):
-			rotate_right();
-		if(Input.is_action_just_pressed(\"reload\") and timerToReload.is_stopped()):
-			reload()
+var AWP_UNZOOM_VALUE = 0.2
+
+func controls():
+	if(Input.is_action_just_pressed(\"shoot\")):
+		unzoom();
+		
+	if(Input.is_action_just_released(\"shoot\")):
+		camera.targetZoom = Vector2(INIT_ZOOM,INIT_ZOOM)
+		if timerToShoot.is_stopped():
+			shoot();
+			timerToShoot.start();
+		
+	if(Input.is_action_pressed(\"rotate_left\")):
+		rotate_left();
+	if(Input.is_action_just_pressed(\"show_score\")):
+		updateScore()
+		camera.showScore()
+	if(Input.is_action_just_released('show_score')):
+		camera.hideScore();
+		
+	if(Input.is_action_pressed(\"rotate_right\")):
+		rotate_right();
+	if(Input.is_action_just_pressed(\"reload\") and timerToReload.is_stopped()):
+		reload()
 			
 func unzoom():
-	targetZoom = 0.2;
+	camera.targetZoom = Vector2(AWP_UNZOOM_VALUE,AWP_UNZOOM_VALUE);
 
 
 func _on_timer_to_shoot_timeout():
@@ -117,6 +112,7 @@ script = SubResource("GDScript_km1r5")
 SHOOT_FORCE = Vector2(-30000, 0)
 ANGULAR_SPEED = 3000
 RECOIL_FORCE = 500000
+BULLET_SPEED = 4000
 MAG_AMMO = 5
 SHOOT_TIME_SPEED = 1.0
 BASE_BULLET_DAMAGE = 100

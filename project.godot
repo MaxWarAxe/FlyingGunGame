@@ -21,9 +21,15 @@ GameManager="*res://scripts/GameManager.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
-window/stretch/mode="viewport"
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/initial_position_type=0
+window/size/borderless=true
+window/stretch/mode="canvas_items"
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/coi_serviceworker/plugin.cfg")
 
 [input]
 

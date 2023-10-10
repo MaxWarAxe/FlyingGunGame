@@ -1,26 +1,35 @@
 extends Camera2D
 
 var nodeToSpectate
+var UI
+var targetZoom
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	UI = get_node("UI")
 	pass # Replace with function body.
 
 func updateUI(ammo,mags):
-	$UI.updateUI(ammo,mags)
+	UI.updateUI(ammo,mags)
 
 func makeReloadAnim(time):
-	$UI.makeReloadAnim(time);
+	UI.makeReloadAnim(time);
 
 func showScore():
-	$UI.showScore();
+	UI.showScore();
 
 func hideScore():
-	$UI.hideScore();
+	UI.hideScore();
 
 func updateScore():
-	$UI.updateScore();
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+	UI.updateScore();
+
+func spec():
 	if nodeToSpectate != null:
-		position = nodeToSpectate.global_position
+		global_position = nodeToSpectate.global_position
+
+func _process(delta):
+	global_rotation = 0
+	zoom.x = lerp(zoom.x, targetZoom.x,0.5)
+	zoom.y = lerp(zoom.y, targetZoom.y,0.5)
+
 	

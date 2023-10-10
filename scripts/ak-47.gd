@@ -14,7 +14,7 @@ extends RigidBody2D
 @export var SHOOT_TIME_SPEED = 0.1;
 @export var INIT_HP = 100;
 @export var BASE_BULLET_DAMAGE = 34;
-@export var INIT_ZOOM = 0.5;
+@export var INIT_ZOOM = 0.4;
 var pos = transform;
 var demandingPos;
 @onready var bullet_damage = BASE_BULLET_DAMAGE
@@ -37,7 +37,7 @@ signal died(id);
 @export var cameraScene : PackedScene
 @export var magScene : PackedScene
 @export var labelScene : PackedScene
-
+var RemoteTransform
 var MagNode
 
 var timerToShoot
@@ -53,8 +53,10 @@ func _ready():
 	if idname == str(multiplayer.get_unique_id()):
 		camera = cameraScene.instantiate();
 		get_tree().get_root().add_child(camera)
+		#add_child(camera)
 		camera.nodeToSpectate = self
-		camera.zoom = Vector2(INIT_ZOOM,INIT_ZOOM)
+		camera.targetZoom = Vector2(INIT_ZOOM,INIT_ZOOM)
+		
 		$Line2D.visible = true;
 	setUpLabel();
 	timerToShoot = get_node("TimerToShoot")
@@ -110,24 +112,26 @@ func _process(delta):
 	label.position = position
 	checkDeath()
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+		camera.spec()
 		sendpos.rpc(multiplayer.get_unique_id(),pos)
-		camera.zoom.x = lerp(camera.zoom.x, targetZoom,0.5)
-		camera.zoom.y = lerp(camera.zoom.y, targetZoom,0.5)
-		if(Input.is_action_pressed("shoot") and (timerToShoot.is_stopped())):
-			shoot();
-			timerToShoot.start();
-		if(Input.is_action_pressed("rotate_left")):
-			rotate_left();
-		if(Input.is_action_just_pressed("show_score")):
-			updateScore()
-			camera.showScore()
-		if(Input.is_action_just_released('show_score')):
-			camera.hideScore();
-			
-		if(Input.is_action_pressed("rotate_right")):
-			rotate_right();
-		if(Input.is_action_pressed("reload") and timerToReload.is_stopped()):
-			reload()
+		controls()
+
+func controls():
+	if(Input.is_action_pressed("shoot") and (timerToShoot.is_stopped())):
+		shoot();
+		timerToShoot.start();
+	if(Input.is_action_pressed("rotate_left")):
+		rotate_left();
+	if(Input.is_action_just_pressed("show_score")):
+		updateScore()
+		camera.showScore()
+	if(Input.is_action_just_released('show_score')):
+		camera.hideScore();
+		
+	if(Input.is_action_pressed("rotate_right")):
+		rotate_right();
+	if(Input.is_action_pressed("reload") and timerToReload.is_stopped()):
+		reload()
 
 func updateUI():
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():

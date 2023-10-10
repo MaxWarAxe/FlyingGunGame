@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cqbxk4mrnbg6w"]
+[gd_scene load_steps=31 format=3 uid="uid://cqbxk4mrnbg6w"]
 
 [ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_kouje"]
 [ext_resource type="VideoStream" path="res://sprites/backgrounds/back.ogv" id="2_akl55"]
@@ -22,26 +22,6 @@
 [ext_resource type="Texture2D" uid="uid://bp7wy43toi1pg" path="res://sprites/ak-47/ak-47-base.png" id="13_u6u6e"]
 [ext_resource type="Texture2D" uid="uid://cu33c2trme6k7" path="res://sprites/ak-47/mag.png" id="14_xwi6s"]
 [ext_resource type="Texture2D" uid="uid://bxyq6gswpy4ul" path="res://sprites/ak-47/bolt.png" id="15_0q7tp"]
-
-[sub_resource type="Animation" id="Animation_hgb1b"]
-resource_name = "moveWeapon"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Panel/NodeContainer/awp:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(),
-"transitions": PackedFloat32Array(),
-"update": 0,
-"values": []
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_mtqm3"]
-_data = {
-"moveWeapon": SubResource("Animation_hgb1b")
-}
 
 [sub_resource type="Theme" id="Theme_pblbh"]
 
@@ -163,11 +143,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_kouje")
 
-[node name="WeaponAnimation" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_mtqm3")
-}
-
 [node name="Target" type="Node2D" parent="."]
 position = Vector2(373, 538)
 scale = Vector2(0.4, 0.4)
@@ -185,7 +160,7 @@ offset_bottom = 699.0
 position = Vector2(208, 137)
 
 [node name="ak" type="Node2D" parent="Panel/NodeContainer"]
-rotation = 0.133256
+rotation = 0.145444
 scale = Vector2(0.4, 0.35)
 skew = 0.0314621
 
@@ -203,7 +178,7 @@ texture = ExtResource("15_0q7tp")
 
 [node name="awp" type="Node2D" parent="Panel/NodeContainer"]
 position = Vector2(-484.5, 0)
-rotation = 0.133256
+rotation = 0.145444
 scale = Vector2(0.3, 0.3)
 
 [node name="Awpsprite" type="Sprite2D" parent="Panel/NodeContainer/awp"]
@@ -221,7 +196,7 @@ texture = ExtResource("7_k43ei")
 
 [node name="shotgun" type="Node2D" parent="Panel/NodeContainer"]
 position = Vector2(-856, 0)
-rotation = 0.0785398
+rotation = 0.145444
 
 [node name="[design]shotgunV1_02" type="Sprite2D" parent="Panel/NodeContainer/shotgun"]
 position = Vector2(0, 1)
@@ -230,6 +205,7 @@ texture = ExtResource("8_ev5dp")
 
 [node name="uzi" type="Node2D" parent="Panel/NodeContainer"]
 position = Vector2(-1286, 13)
+rotation = 0.145444
 
 [node name="UziDesign" type="Sprite2D" parent="Panel/NodeContainer/uzi"]
 position = Vector2(0, 2)
@@ -253,10 +229,12 @@ text = "1234
 "
 
 [node name="VideoStreamPlayer" type="VideoStreamPlayer" parent="."]
-layout_mode = 0
-offset_top = -2.0
-offset_right = 1281.0
-offset_bottom = 723.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 stream = ExtResource("2_akl55")
 autoplay = true
 expand = true
@@ -270,12 +248,11 @@ libraries = {
 
 [node name="GunforceSpots" type="Sprite2D" parent="."]
 position = Vector2(285, 144)
-scale = Vector2(0.278093, 0.278093)
+scale = Vector2(0.278, 0.278)
 texture = ExtResource("3_ikrjt")
 
 [node name="GunforceLogo2" type="Sprite2D" parent="."]
 position = Vector2(281, 144)
-rotation = 0.00227539
 scale = Vector2(0.232625, 0.232625)
 texture = ExtResource("4_oa5un")
 
@@ -290,7 +267,6 @@ offset_left = -250.44
 offset_top = -242.56
 offset_right = 269.56
 offset_bottom = 316.44
-rotation = -0.000455079
 pivot_offset = Vector2(240, 230)
 theme = ExtResource("5_cj1b1")
 
@@ -305,6 +281,7 @@ theme_override_colors/caret_color = Color(1, 0, 0, 1)
 theme_override_colors/selection_color = Color(1, 0, 0, 1)
 theme_override_colors/clear_button_color = Color(1, 0, 0, 1)
 theme_override_colors/clear_button_color_pressed = Color(1, 0, 0, 1)
+max_length = 15
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
@@ -350,24 +327,34 @@ icon = ExtResource("12_w5c0n")
 
 [node name="ip" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 465.0
-offset_top = 339.0
-offset_right = 645.0
-offset_bottom = 370.0
+offset_left = 118.0
+offset_top = 242.0
+offset_right = 298.0
+offset_bottom = 273.0
 
 [node name="portline" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 496.0
-offset_top = 395.0
-offset_right = 611.0
-offset_bottom = 426.0
+offset_left = 150.0
+offset_top = 285.0
+offset_right = 265.0
+offset_bottom = 316.0
+text = "7777"
 
 [node name="iplabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 196.0
-offset_top = 118.0
-offset_right = 501.0
-offset_bottom = 329.0
+offset_left = 85.0
+offset_top = 242.0
+offset_right = 107.0
+offset_bottom = 268.0
+text = "ip"
+
+[node name="portlabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 81.0
+offset_top = 285.0
+offset_right = 119.0
+offset_bottom = 316.0
+text = "port"
 
 [connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
 [connection signal="button_down" from="VBoxContainer/StartButton" to="." method="_on_start_button_button_down"]

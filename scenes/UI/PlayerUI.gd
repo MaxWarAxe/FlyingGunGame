@@ -3,7 +3,7 @@ extends Control
 var scorelineScene = load("res://scenes/UI/score_line.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	pass
 
 func showScore():
 	$Panel.visible = true;
@@ -16,6 +16,9 @@ func updateUI(ammo,mags):
 	$HBoxContainer/MagsLable.text = str(mags)
 
 func updateScore():
+	call_deferred("updateScoreDeff")
+
+func updateScoreDeff():
 	for n in $Panel/VBoxContainer.get_children():
 		if(n.name != "ScoreLineMain"):
 			n.queue_free()
@@ -29,4 +32,7 @@ func makeReloadAnim(time):
 	$ReloadProgress.reload(time)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
+	print(scale)
+	scale.x = 1/get_parent().zoom.x
+	scale.y = 1/get_parent().zoom.y
 	pass

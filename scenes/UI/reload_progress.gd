@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 func reload(time):
 	$AnimationPlayer.speed_scale = 1.0/time
@@ -6,7 +6,7 @@ func reload(time):
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	clear()
-
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
