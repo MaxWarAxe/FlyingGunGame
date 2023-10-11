@@ -29,11 +29,11 @@ func updateScoreDeff():
 		$Panel/VBoxContainer.add_child(scoreline)
 		scoreline.changeValues(GameManager.Players[i].name,GameManager.Players[i].kills,GameManager.Players[i].deaths,GameManager.Players[i].weapon,GameManager.Players[i].hp,GameManager.Players[i].killsinarow)
 
-func playStreakAnimFromServer(streak):
+func playStreakAnimFromServer(streak,id):
 	if multiplayer.get_unique_id() == 1:
-		playStreakAnim.rpc(streak)
+		playStreakAnim.rpc_id(id.to_int(),streak)
 
-@rpc("authority")
+@rpc("any_peer","call_local")
 func playStreakAnim(streak):
 	match streak:
 		1:

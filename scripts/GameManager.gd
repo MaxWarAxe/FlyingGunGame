@@ -13,7 +13,7 @@ func addKill(id):
 		if Players[i].id == id.to_int():
 			Players[i].kills += 1;
 			Players[i].killsinarow += 1;
-			emit_signal("streakAdded",Players[i].killsinarow)
+			emit_signal("streakAdded",Players[i].killsinarow,id)
 @rpc("any_peer","call_local","reliable")
 func addDeath(id):
 	for i in Players:
