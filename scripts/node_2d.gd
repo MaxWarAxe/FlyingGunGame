@@ -6,6 +6,9 @@ extends Node2D
 @export var uziScene : PackedScene
 @onready var spawner = get_node("spawner")
 var QueueToConnect : Array
+var mainMenu
+signal discon
+
 
 func weaponChoose(i) -> Node:
 	match GameManager.Players[i].weapon:
@@ -52,8 +55,8 @@ func _process(delta):
 			QueueToConnect.erase(unID)
 			cloneToNewPlayer.rpc_id(unID)
 			addConnectedPlayer.rpc(unID)
-			
-			
+
+
 
 func wait():
 	await get_tree().create_timer(5).timeout

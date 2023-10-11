@@ -52,7 +52,6 @@ func makeReloadAnim(time):
 	$ReloadProgress.reload(time)
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(scale)
 	scale.x = 1/get_parent().zoom.x
 	scale.y = 1/get_parent().zoom.y
 	pass

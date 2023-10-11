@@ -97,7 +97,6 @@ func updateScore():
 func checkDeath():
 	if(multiplayer.get_unique_id() == 1):
 		if(hp <= 0):
-			print("ded")
 			GameManager.addDeath.rpc(idname)
 			GameManager.addKill.rpc(lastDealer)
 			
@@ -116,6 +115,18 @@ func _process(delta):
 		camera.spec()
 		sendpos.rpc(multiplayer.get_unique_id(),pos)
 		controls()
+		if(Input.is_action_just_pressed("go_to_menu")):
+			discon()
+
+func discon():
+	multiplayer.multiplayer_peer = null
+	GameManager.clear()
+	for i in get_tree().get_root().get_children():
+		if i.name == "MainMenu":
+			i.show()
+			continue
+		if((i.name != "GameManager")):
+			i.queue_free()
 
 func controls():
 	if(Input.is_action_pressed("shoot") and (timerToShoot.is_stopped())):

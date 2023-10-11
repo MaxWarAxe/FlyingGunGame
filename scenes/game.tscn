@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://dhp4537vgvxjl"]
+[gd_scene load_steps=17 format=3 uid="uid://dhp4537vgvxjl"]
 
 [ext_resource type="Script" path="res://scripts/node_2d.gd" id="1_twv1q"]
 [ext_resource type="PackedScene" uid="uid://c50nhaxhb3qe6" path="res://scenes/awp/awp.tscn" id="2_voe2t"]
@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://dvbc824ynopdc" path="res://scenes/spawner.tscn" id="8_d4mav"]
 [ext_resource type="PackedScene" uid="uid://b72t05x406fl" path="res://scenes/player_spawner.tscn" id="10_2wl38"]
 [ext_resource type="Shader" path="res://shaders/background_shader2.gdshader" id="11_2kp8k"]
-[ext_resource type="Shader" path="res://shaders/barrier_shader.gdshader" id="12_lmjnn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yqc4v"]
 size = Vector2(27317.2, 23655)
@@ -28,23 +27,6 @@ size = Vector2(27556.9, 26393.5)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bfakk"]
 shader = ExtResource("11_2kp8k")
 shader_parameter/bg_color = Vector4(0.085, 0.075, 0.165, 0)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_nhg3u"]
-render_priority = 0
-shader = ExtResource("12_lmjnn")
-shader_parameter/scale = 15.0
-shader_parameter/line_speed = 0.5
-shader_parameter/ripple_speed = 1.564
-shader_parameter/line_color = Vector4(0.2, 1, 1, 1)
-shader_parameter/ripple_color = Vector4(0.6, 0.7, 1, 0.7)
-shader_parameter/surface_color = Vector4(0.01, 0.18, 0.7, 0.4)
-shader_parameter/sphere_size = 2.0
-shader_parameter/pos1 = Vector3(0, 0, 0)
-shader_parameter/pos2 = Vector3(10000, 10000, 10000)
-shader_parameter/pos3 = Vector3(10000, 10000, 10000)
-shader_parameter/pos4 = Vector3(10000, 10000, 10000)
-shader_parameter/pos5 = Vector3(10000, 10000, 10000)
-shader_parameter/pos6 = Vector3(10000, 10000, 10000)
 
 [node name="game" type="Node2D"]
 position = Vector2(-8, 0)
@@ -197,10 +179,3 @@ offset_left = -9002.0
 offset_top = -9500.0
 offset_right = 14885.0
 offset_bottom = 13145.0
-
-[node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_nhg3u")
-offset_left = 582.0
-offset_top = 252.0
-offset_right = 1024.0
-offset_bottom = 714.0

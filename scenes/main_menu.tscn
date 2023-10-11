@@ -327,33 +327,33 @@ icon = ExtResource("12_w5c0n")
 
 [node name="ip" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 118.0
-offset_top = 242.0
-offset_right = 298.0
-offset_bottom = 273.0
+offset_left = 155.0
+offset_top = 336.0
+offset_right = 335.0
+offset_bottom = 367.0
 
 [node name="portline" type="LineEdit" parent="."]
 layout_mode = 0
-offset_left = 150.0
-offset_top = 285.0
-offset_right = 265.0
-offset_bottom = 316.0
+offset_left = 187.0
+offset_top = 379.0
+offset_right = 302.0
+offset_bottom = 410.0
 text = "7777"
 
 [node name="iplabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 85.0
-offset_top = 242.0
-offset_right = 107.0
-offset_bottom = 268.0
+offset_left = 122.0
+offset_top = 336.0
+offset_right = 144.0
+offset_bottom = 362.0
 text = "ip"
 
 [node name="portlabel" type="Label" parent="."]
 layout_mode = 0
-offset_left = 81.0
-offset_top = 285.0
-offset_right = 119.0
-offset_bottom = 316.0
+offset_left = 118.0
+offset_top = 379.0
+offset_right = 156.0
+offset_bottom = 410.0
 text = "port"
 
 [connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]

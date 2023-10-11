@@ -7,6 +7,10 @@ signal streakAdded
 func _ready():
 	pass # Replace with function body.
 
+func clear():
+	Players.clear()
+	Crates.clear()
+
 @rpc("any_peer","call_local","reliable")
 func addKill(id):
 	for i in Players:
@@ -35,5 +39,7 @@ func changeHP(id,hp):
 		if Players[i].id == id.to_int():
 			Players[i].hp = hp;
 
+
+	
 func _process(delta):
 	pass
