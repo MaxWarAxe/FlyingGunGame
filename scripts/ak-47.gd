@@ -118,6 +118,7 @@ func _process(delta):
 		if(Input.is_action_just_pressed("go_to_menu")):
 			discon()
 
+
 func discon():
 	multiplayer.multiplayer_peer = null
 	GameManager.clear()
