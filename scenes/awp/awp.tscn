@@ -116,6 +116,7 @@ BULLET_SPEED = 4000
 MAG_AMMO = 5
 SHOOT_TIME_SPEED = 1.0
 BASE_BULLET_DAMAGE = 100
+BORDER_FORCE = 2500
 bulletScene = ExtResource("1_eg26o")
 shellScene = ExtResource("2_bbcsp")
 cameraScene = ExtResource("3_l422y")

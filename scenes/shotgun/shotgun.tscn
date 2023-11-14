@@ -90,6 +90,7 @@ MAG_AMOUNT = 10
 TIME_TO_RELOAD = 1
 SHOOT_TIME_SPEED = 1.0
 BASE_BULLET_DAMAGE = 17
+BORDER_FORCE = 2500
 bulletScene = ExtResource("2_kyuim")
 shellScene = ExtResource("3_a6351")
 cameraScene = ExtResource("4_b1d6r")
