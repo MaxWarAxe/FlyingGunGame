@@ -4,6 +4,9 @@ extends Node2D
 @export var akScene : PackedScene
 @export var shotgunScene : PackedScene
 @export var uziScene : PackedScene
+
+@export var border_mins := Vector2(0,0)
+@export var border_maxs := Vector2(12175,6855)
 @onready var spawner = get_node("spawner")
 var QueueToConnect : Array
 var mainMenu
@@ -35,6 +38,7 @@ func spawn():
 		currentPlayer.idname = str(GameManager.Players[i].id)
 		currentPlayer.setAuthority(GameManager.Players[i].id)
 		add_child(currentPlayer)
+		currentPlayer.set_borders(border_mins, border_maxs)
 		currentPlayer.connect("died",respawn,0);
 		
 

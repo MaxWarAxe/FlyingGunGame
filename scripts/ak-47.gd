@@ -15,10 +15,11 @@ extends RigidBody2D
 @export var INIT_HP = 100;
 @export var BASE_BULLET_DAMAGE = 34;
 @export var INIT_ZOOM = 0.4;
+@export var BORDER_FORCE := 100
 var pos = transform;
 var demandingPos;
 @onready var bullet_damage = BASE_BULLET_DAMAGE
-var camera
+var camera : Camera2D
 var label
 var ammo = 0;
 var mags = 0;
@@ -30,6 +31,9 @@ var nick = "";
 var withMag : bool = true;
 var lastDealer;
 var targetZoom = INIT_ZOOM;
+
+var border_mins = Vector2(0, 0)
+var border_maxs = Vector2(9999, 9999)
 signal died(id);
 
 @export var bulletScene : PackedScene
@@ -72,7 +76,16 @@ func _ready():
 	updateScore()
 	updateUI()
 	label.updateHP(hp)
+
+func set_borders(mins, maxs):
+	border_mins = mins
+	border_maxs = maxs
 	
+	camera.limit_left = mins.x
+	camera.limit_top = mins.y
+	camera.limit_right = maxs.x
+	camera.limit_bottom = maxs.y
+
 func setAuthority(id):
 	idname = str(id);
 	self.name = str(id);
@@ -102,13 +115,22 @@ func checkDeath():
 			
 			die.rpc_id(1);
 
-	
-
 @rpc("any_peer","reliable")
 func sendpos(id,posit):
 	pos = posit
 
+func process_borders():
+	if position.x < border_mins.x:
+		apply_force(Vector2.RIGHT*BORDER_FORCE)
+	if position.y < border_mins.y:
+		apply_force(Vector2.DOWN*BORDER_FORCE)
+	if position.x > border_maxs.x:
+		apply_force(Vector2.LEFT*BORDER_FORCE)
+	if position.y > border_maxs.y:
+		apply_force(Vector2.UP*BORDER_FORCE)
+
 func _process(delta):
+	process_borders()
 	label.position = position
 	checkDeath()
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
