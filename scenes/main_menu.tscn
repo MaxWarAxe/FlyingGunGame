@@ -1,7 +1,7 @@
 [gd_scene load_steps=31 format=3 uid="uid://cqbxk4mrnbg6w"]
 
-[ext_resource type="Script" path="res://scripts/MainMenu.gd" id="1_kouje"]
-[ext_resource type="VideoStream" path="res://sprites/backgrounds/back.ogv" id="2_akl55"]
+[ext_resource type="Script" uid="uid://b462e7goy7a27" path="res://scripts/MainMenu.gd" id="1_kouje"]
+[ext_resource type="VideoStream" uid="uid://cygvuqfcpv0yw" path="res://sprites/backgrounds/back.ogv" id="2_akl55"]
 [ext_resource type="Texture2D" uid="uid://g11co051emv6" path="res://sprites/ui/gunforce_spots.png" id="3_ikrjt"]
 [ext_resource type="Texture2D" uid="uid://byvdjsnq2qwgb" path="res://sprites/ui/host_unfocus.png" id="3_o1dls"]
 [ext_resource type="Texture2D" uid="uid://cj1hyr3gkhlyx" path="res://sprites/ui/gunforce_logo_2.png" id="4_oa5un"]
@@ -116,7 +116,7 @@ tracks/6/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8rbgy"]
 _data = {
-"logomove": SubResource("Animation_ck8e5")
+&"logomove": SubResource("Animation_ck8e5")
 }
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_doi2s"]
@@ -240,11 +240,11 @@ autoplay = true
 expand = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_8rbgy")
+}
 autoplay = "logomove"
 speed_scale = 0.5
-libraries = {
-"": SubResource("AnimationLibrary_8rbgy")
-}
 
 [node name="GunforceSpots" type="Sprite2D" parent="."]
 position = Vector2(285, 144)
@@ -272,15 +272,15 @@ theme = ExtResource("5_cj1b1")
 
 [node name="NickNameLine" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_colors/font_selected_color = Color(1, 0, 0, 1)
-theme_override_colors/font_uneditable_color = Color(1, 0, 0, 1)
+theme_override_colors/clear_button_color_pressed = Color(1, 0, 0, 1)
+theme_override_colors/clear_button_color = Color(1, 0, 0, 1)
+theme_override_colors/selection_color = Color(1, 0, 0, 1)
+theme_override_colors/caret_color = Color(1, 0, 0, 1)
 theme_override_colors/font_placeholder_color = Color(1, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_colors/caret_color = Color(1, 0, 0, 1)
-theme_override_colors/selection_color = Color(1, 0, 0, 1)
-theme_override_colors/clear_button_color = Color(1, 0, 0, 1)
-theme_override_colors/clear_button_color_pressed = Color(1, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(1, 0, 0, 1)
+theme_override_colors/font_uneditable_color = Color(1, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 max_length = 15
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]

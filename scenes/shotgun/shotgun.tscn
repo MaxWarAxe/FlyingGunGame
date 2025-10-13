@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://cjopwk7hfoibb"]
 
-[ext_resource type="Script" path="res://scenes/shotgun/shotgun.gd" id="1_2ylah"]
+[ext_resource type="Script" uid="uid://cd3t6j0wckio2" path="res://scenes/shotgun/shotgun.gd" id="1_2ylah"]
 [ext_resource type="Texture2D" uid="uid://di8x7pxchmov7" path="res://sprites/shotgun/bolt.png" id="1_uc80y"]
 [ext_resource type="PackedScene" uid="uid://b6pnw0nutsac3" path="res://scenes/ak-47/bullet.tscn" id="2_kyuim"]
 [ext_resource type="Texture2D" uid="uid://bakfc6evdh4ms" path="res://sprites/shotgun/bolt2.png" id="2_wucrf"]
@@ -43,53 +43,48 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_iw2mw"]
 _data = {
-"shoot": SubResource("Animation_rdifq")
+&"shoot": SubResource("Animation_rdifq")
 }
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_g2kmh"]
 properties/0/path = NodePath(".:pos")
 properties/0/spawn = true
-properties/0/sync = true
-properties/0/watch = false
+properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
-properties/1/sync = true
-properties/1/watch = false
+properties/1/replication_mode = 1
 properties/2/path = NodePath("Sprites/Bolt2:position")
 properties/2/spawn = true
-properties/2/sync = true
-properties/2/watch = false
+properties/2/replication_mode = 1
 properties/3/path = NodePath("Sprites/Bolt:position")
 properties/3/spawn = true
-properties/3/sync = true
-properties/3/watch = false
+properties/3/replication_mode = 1
 properties/4/path = NodePath(".:position")
 properties/4/spawn = true
-properties/4/sync = true
-properties/4/watch = false
+properties/4/replication_mode = 1
 properties/5/path = NodePath(".:angular_velocity")
 properties/5/spawn = true
-properties/5/sync = true
-properties/5/watch = false
+properties/5/replication_mode = 1
 
 [node name="shotgun" type="RigidBody2D" groups=["Player"]]
 process_mode = 3
 collision_layer = 3
 collision_mask = 3
 mass = 0.05
-inertia = 1000.0
-center_of_mass_mode = 1
 physics_material_override = SubResource("PhysicsMaterial_6l3e5")
+center_of_mass_mode = 1
+inertia = 1000.0
 can_sleep = false
 angular_damp_mode = 1
 script = ExtResource("1_2ylah")
-SHOOT_FORCE = Vector2(-40000, 0)
+SHOOT_FORCE = Vector2(-10000, 0)
 RECOIL_FORCE = 70000
 MAG_AMMO = 6
 MAG_AMOUNT = 10
 TIME_TO_RELOAD = 1
 SHOOT_TIME_SPEED = 1.0
 BASE_BULLET_DAMAGE = 17
+INIT_ZOOM = 0.3
 bulletScene = ExtResource("2_kyuim")
 shellScene = ExtResource("3_a6351")
 cameraScene = ExtResource("4_b1d6r")
@@ -127,7 +122,7 @@ texture = ExtResource("4_6pfwr")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_iw2mw")
+&"": SubResource("AnimationLibrary_iw2mw")
 }
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]

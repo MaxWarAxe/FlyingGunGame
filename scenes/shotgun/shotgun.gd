@@ -42,6 +42,3 @@ func addAmmo():
 		mags -= 1;
 		withMag = true
 		updateUI()
-
-
-
