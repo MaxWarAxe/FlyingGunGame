@@ -1,6 +1,6 @@
-[gd_scene load_steps=13 format=3 uid="uid://dhp4537vgvxjl"]
+[gd_scene load_steps=15 format=3 uid="uid://dhp4537vgvxjl"]
 
-[ext_resource type="Script" path="res://scripts/node_2d.gd" id="1_twv1q"]
+[ext_resource type="Script" uid="uid://bk65qugheedty" path="res://scripts/node_2d.gd" id="1_twv1q"]
 [ext_resource type="PackedScene" uid="uid://c50nhaxhb3qe6" path="res://scenes/awp/awp.tscn" id="2_voe2t"]
 [ext_resource type="Texture2D" uid="uid://nwrnis3kcpq0" path="res://sprites/backgrounds/342482df88e7767b2331e2ca91dbc5e6.jpeg" id="3_fqdlo"]
 [ext_resource type="PackedScene" uid="uid://ca4lpkrw027nn" path="res://scenes/ak-47/ak-47.tscn" id="3_yjeef"]
@@ -10,11 +10,17 @@
 [ext_resource type="PackedScene" uid="uid://b1ikf0jr4dmwc" path="res://scenes/crates/crate.tscn" id="7_bk5vn"]
 [ext_resource type="PackedScene" uid="uid://dvbc824ynopdc" path="res://scenes/spawner.tscn" id="8_d4mav"]
 [ext_resource type="PackedScene" uid="uid://b72t05x406fl" path="res://scenes/player_spawner.tscn" id="10_2wl38"]
-[ext_resource type="Shader" path="res://shaders/background_shader2.gdshader" id="11_2kp8k"]
+[ext_resource type="Shader" uid="uid://f0j05vp047ia" path="res://shaders/background_shader2.gdshader" id="11_2kp8k"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bfakk"]
 shader = ExtResource("11_2kp8k")
 shader_parameter/bg_color = Vector4(0.085, 0.075, 0.165, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvpfn"]
+size = Vector2(25838, 5110)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dinhu"]
+size = Vector2(6462, 7144)
 
 [node name="game" type="Node2D"]
 position = Vector2(-8, 0)
@@ -130,3 +136,27 @@ offset_left = -9002.0
 offset_top = -9500.0
 offset_right = 14885.0
 offset_bottom = 13145.0
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
+position = Vector2(6929, -2557)
+shape = SubResource("RectangleShape2D_kvpfn")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(6096, 9408)
+shape = SubResource("RectangleShape2D_kvpfn")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
+position = Vector2(-3227, 3558)
+shape = SubResource("RectangleShape2D_dinhu")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="StaticBody2D3"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3/StaticBody2D3"]
+position = Vector2(15417, 3435)
+shape = SubResource("RectangleShape2D_dinhu")
