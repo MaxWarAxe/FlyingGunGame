@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dhp4537vgvxjl"]
+[gd_scene load_steps=13 format=3 uid="uid://dhp4537vgvxjl"]
 
 [ext_resource type="Script" path="res://scripts/node_2d.gd" id="1_twv1q"]
 [ext_resource type="PackedScene" uid="uid://c50nhaxhb3qe6" path="res://scenes/awp/awp.tscn" id="2_voe2t"]
@@ -11,18 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://dvbc824ynopdc" path="res://scenes/spawner.tscn" id="8_d4mav"]
 [ext_resource type="PackedScene" uid="uid://b72t05x406fl" path="res://scenes/player_spawner.tscn" id="10_2wl38"]
 [ext_resource type="Shader" path="res://shaders/background_shader2.gdshader" id="11_2kp8k"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yqc4v"]
-size = Vector2(27317.2, 23655)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_yaceh"]
-size = Vector2(38468.5, 15327)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_55gax"]
-size = Vector2(40667, 19778.4)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_feutb"]
-size = Vector2(27556.9, 26393.5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bfakk"]
 shader = ExtResource("11_2kp8k")
@@ -37,14 +25,15 @@ shotgunScene = ExtResource("4_jijhl")
 uziScene = ExtResource("5_f77r4")
 
 [node name="player_spawner" parent="." instance=ExtResource("10_2wl38")]
-position = Vector2(3370, 2251)
+visible = false
+position = Vector2(6000, 3500)
 scale = Vector2(106.485, 54.883)
 
-[node name="342482Df88e7767b2331e2Ca91Dbc5e6" type="Sprite2D" parent="."]
+[node name="background" type="Sprite2D" parent="."]
 z_index = -100
-position = Vector2(3265.44, 2284)
 scale = Vector2(2.37986, 2.37986)
 texture = ExtResource("3_fqdlo")
+centered = false
 
 [node name="SpawnPoints" type="Node2D" parent="."]
 position = Vector2(-232, -172)
@@ -56,7 +45,7 @@ position = Vector2(699, 544)
 position = Vector2(490, 440)
 
 [node name="Moons" type="Node2D" parent="."]
-position = Vector2(20, -13)
+position = Vector2(2500, 1000)
 
 [node name="Moon" parent="Moons" instance=ExtResource("4_c6b87")]
 position = Vector2(-94, 20)
@@ -115,47 +104,8 @@ position = Vector2(5436, 461)
 [node name="Moon19" parent="Moons" instance=ExtResource("4_c6b87")]
 position = Vector2(5723, 398)
 
-[node name="Walls" type="Node2D" parent="."]
-
-[node name="StaticBody2D3" type="StaticBody2D" parent="Walls"]
-position = Vector2(15, 0)
-collision_layer = 513
-collision_mask = 513
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D3"]
-position = Vector2(-16500.4, -5675.5)
-shape = SubResource("RectangleShape2D_yqc4v")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Walls"]
-position = Vector2(0, 8)
-collision_layer = 513
-collision_mask = 513
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D"]
-position = Vector2(16411.8, -8814.5)
-shape = SubResource("RectangleShape2D_yaceh")
-
-[node name="StaticBody2D4" type="StaticBody2D" parent="Walls"]
-position = Vector2(9870.56, 2217.75)
-collision_layer = 513
-collision_mask = 513
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D4"]
-position = Vector2(-18414.1, 13382)
-shape = SubResource("RectangleShape2D_55gax")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="Walls"]
-position = Vector2(-13, 0)
-collision_layer = 513
-collision_mask = 513
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Walls/StaticBody2D2"]
-position = Vector2(23149.6, 11840.3)
-shape = SubResource("RectangleShape2D_feutb")
-
 [node name="Node2D2" type="Node2D" parent="."]
-visible = false
-position = Vector2(-1166, 3529)
+position = Vector2(1000, 1000)
 
 [node name="crate2" parent="Node2D2" instance=ExtResource("7_bk5vn")]
 position = Vector2(365, -365)
@@ -163,7 +113,8 @@ position = Vector2(365, -365)
 [node name="crate" parent="Node2D2" instance=ExtResource("7_bk5vn")]
 
 [node name="spawner" parent="." instance=ExtResource("8_d4mav")]
-position = Vector2(3318, 2211)
+visible = false
+position = Vector2(6000, 3500)
 scale = Vector2(104.71, 58.42)
 ITEM_TO_SPAWN = ExtResource("7_bk5vn")
 SPAWN_TIME = 0.4
