@@ -1,9 +1,11 @@
-extends "res://scripts/ak-47.gd"
+extends Weapon
 @export var BULLET_AMOUNT = 8
 @export var BULLET_SPREAD = 10;
 
 func shoot():
-	if(ammo != 0 and timerToReload.is_stopped()):
+	if(ammo != 0):
+		makeShootSound()
+		$TimerToReload.stop()
 		var barrel = get_node("Barrel")
 		apply_force(SHOOT_FORCE.rotated(rotation));
 		$AnimationPlayer.play("shoot");
@@ -11,7 +13,9 @@ func shoot():
 		add_shell.rpc()
 		add_bullet.rpc()
 		ammo -= 1;
+		
 		if(ammo == 0):
+			reload()
 			withMag = false;
 		updateUI()
 		
@@ -42,3 +46,6 @@ func addAmmo():
 		mags -= 1;
 		withMag = true
 		updateUI()
+func _on_timer_to_reload_timeout():
+	addAmmo()
+	reload()

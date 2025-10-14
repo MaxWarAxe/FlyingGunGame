@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://xhumjm2iequk"]
+
+[ext_resource type="Script" uid="uid://u1k3md84cec8" path="res://turret/turret.gd" id="1_al2x6"]
+[ext_resource type="PackedScene" uid="uid://b6pnw0nutsac3" path="res://scenes/ak-47/bullet.tscn" id="2_qb3gc"]
+[ext_resource type="PackedScene" uid="uid://2nm3lax5bshq" path="res://scenes/ak-47/shell.tscn" id="3_n6eff"]
+[ext_resource type="PackedScene" uid="uid://cpjons5plii23" path="res://scenes/ak-47/Mag.tscn" id="4_6wotn"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qb3gc"]
+radius = 3.0
+height = 6.0
+
+[sub_resource type="Animation" id="Animation_qb3gc"]
+resource_name = "shoot"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n6eff"]
+_data = {
+&"shoot": SubResource("Animation_qb3gc")
+}
+
+[node name="Turret" type="RigidBody2D" node_paths=PackedStringArray("Barrel")]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_al2x6")
+SHOOT_FORCE = Vector2(0, 0)
+ANGULAR_SPEED = 0
+RECOIL_FORCE = 0
+BASE_BULLET_DAMAGE = 0
+Barrel = NodePath("Barrel")
+bulletScene = ExtResource("2_qb3gc")
+shellScene = ExtResource("3_n6eff")
+magScene = ExtResource("4_6wotn")
+
+[node name="Barrel" type="Marker2D" parent="."]
+gizmo_extents = 32.8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_qb3gc")
+
+[node name="TimerToShoot" type="Timer" parent="."]
+one_shot = true
+
+[node name="TimerToReload" type="Timer" parent="."]
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_n6eff")
+}

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://b6pnw0nutsac3"]
+[gd_scene load_steps=5 format=3 uid="uid://b6pnw0nutsac3"]
 
 [ext_resource type="Texture2D" uid="uid://d0i7y2in00lv5" path="res://sprites/ak-47/bullet.png" id="1_rpmim"]
-[ext_resource type="Script" path="res://scenes/ak-47/bullet.gd" id="1_t46fu"]
+[ext_resource type="Script" uid="uid://b2pwu0pb7agti" path="res://scenes/ak-47/bullet.gd" id="1_t46fu"]
+[ext_resource type="AudioStream" uid="uid://dp1s5hfulwg16" path="res://sounds/buletFlySound.mp3" id="3_qfqx6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bwqe7"]
 size = Vector2(6.5, 30.75)
@@ -21,6 +22,11 @@ texture = ExtResource("1_rpmim")
 
 [node name="LifeTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="BuletFlySound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_qfqx6")
+max_distance = 1000.0
+attenuation = 1.1095695
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="LifeTimer" to="." method="_on_life_timer_timeout"]

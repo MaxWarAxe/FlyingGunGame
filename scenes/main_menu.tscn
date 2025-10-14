@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cqbxk4mrnbg6w"]
+[gd_scene load_steps=33 format=3 uid="uid://cqbxk4mrnbg6w"]
 
 [ext_resource type="Script" uid="uid://b462e7goy7a27" path="res://scripts/MainMenu.gd" id="1_kouje"]
 [ext_resource type="VideoStream" uid="uid://cygvuqfcpv0yw" path="res://sprites/backgrounds/back.ogv" id="2_akl55"]
@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://bp7wy43toi1pg" path="res://sprites/ak-47/ak-47-base.png" id="13_u6u6e"]
 [ext_resource type="Texture2D" uid="uid://cu33c2trme6k7" path="res://sprites/ak-47/mag.png" id="14_xwi6s"]
 [ext_resource type="Texture2D" uid="uid://bxyq6gswpy4ul" path="res://sprites/ak-47/bolt.png" id="15_0q7tp"]
+[ext_resource type="AudioStream" uid="uid://b5xeyefam6cjb" path="res://sounds/whoosh-end-384629.mp3" id="23_1dfpl"]
+[ext_resource type="AudioStream" uid="uid://73wfw8687epi" path="res://sounds/whoosh-pointer-243108.mp3" id="24_qywvv"]
 
 [sub_resource type="Theme" id="Theme_pblbh"]
 
@@ -160,7 +162,7 @@ offset_bottom = 699.0
 position = Vector2(208, 137)
 
 [node name="ak" type="Node2D" parent="Panel/NodeContainer"]
-rotation = 0.145444
+rotation = 0.18411689
 scale = Vector2(0.4, 0.35)
 skew = 0.0314621
 
@@ -178,7 +180,7 @@ texture = ExtResource("15_0q7tp")
 
 [node name="awp" type="Node2D" parent="Panel/NodeContainer"]
 position = Vector2(-484.5, 0)
-rotation = 0.145444
+rotation = 0.18411689
 scale = Vector2(0.3, 0.3)
 
 [node name="Awpsprite" type="Sprite2D" parent="Panel/NodeContainer/awp"]
@@ -196,7 +198,7 @@ texture = ExtResource("7_k43ei")
 
 [node name="shotgun" type="Node2D" parent="Panel/NodeContainer"]
 position = Vector2(-856, 0)
-rotation = 0.145444
+rotation = 0.18411689
 
 [node name="[design]shotgunV1_02" type="Sprite2D" parent="Panel/NodeContainer/shotgun"]
 position = Vector2(0, 1)
@@ -205,7 +207,7 @@ texture = ExtResource("8_ev5dp")
 
 [node name="uzi" type="Node2D" parent="Panel/NodeContainer"]
 position = Vector2(-1286, 13)
-rotation = 0.145444
+rotation = 0.18411689
 
 [node name="UziDesign" type="Sprite2D" parent="Panel/NodeContainer/uzi"]
 position = Vector2(0, 2)
@@ -248,11 +250,12 @@ speed_scale = 0.5
 
 [node name="GunforceSpots" type="Sprite2D" parent="."]
 position = Vector2(285, 144)
-scale = Vector2(0.278, 0.278)
+scale = Vector2(0.28023756, 0.28023756)
 texture = ExtResource("3_ikrjt")
 
 [node name="GunforceLogo2" type="Sprite2D" parent="."]
 position = Vector2(281, 144)
+rotation = -0.040997982
 scale = Vector2(0.232625, 0.232625)
 texture = ExtResource("4_oa5un")
 
@@ -267,44 +270,50 @@ offset_left = -250.44
 offset_top = -242.56
 offset_right = 269.56
 offset_bottom = 316.44
+rotation = 0.008199597
 pivot_offset = Vector2(240, 230)
 theme = ExtResource("5_cj1b1")
 
 [node name="NickNameLine" type="LineEdit" parent="VBoxContainer"]
 layout_mode = 2
-theme_override_colors/clear_button_color_pressed = Color(1, 0, 0, 1)
-theme_override_colors/clear_button_color = Color(1, 0, 0, 1)
-theme_override_colors/selection_color = Color(1, 0, 0, 1)
-theme_override_colors/caret_color = Color(1, 0, 0, 1)
-theme_override_colors/font_placeholder_color = Color(1, 0, 0, 1)
-theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
-theme_override_colors/font_selected_color = Color(1, 0, 0, 1)
-theme_override_colors/font_uneditable_color = Color(1, 0, 0, 1)
 theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_colors/font_uneditable_color = Color(1, 0, 0, 1)
+theme_override_colors/font_selected_color = Color(1, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_colors/font_placeholder_color = Color(1, 0, 0, 1)
+theme_override_colors/caret_color = Color(1, 0, 0, 1)
+theme_override_colors/selection_color = Color(1, 0, 0, 1)
+theme_override_colors/clear_button_color = Color(1, 0, 0, 1)
+theme_override_colors/clear_button_color_pressed = Color(1, 0, 0, 1)
+placeholder_text = "NICKNAME"
 max_length = 15
 
-[node name="StartButton" type="Button" parent="VBoxContainer"]
+[node name="StartButton" type="Button" parent="VBoxContainer" groups=["menu_buttons"]]
+visible = false
 layout_mode = 2
 theme_override_styles/hover = SubResource("StyleBoxTexture_doi2s")
 icon = ExtResource("13_3dyea")
 
-[node name="HostButton" type="Button" parent="VBoxContainer"]
+[node name="HostButton" type="Button" parent="VBoxContainer" groups=["menu_buttons"]]
+visible = false
 layout_mode = 2
 theme = ExtResource("5_cj1b1")
 icon = ExtResource("3_o1dls")
 
-[node name="JoinButton" type="Button" parent="VBoxContainer"]
+[node name="JoinButton" type="Button" parent="VBoxContainer" groups=["menu_buttons"]]
+visible = false
 layout_mode = 2
 theme_override_styles/hover = SubResource("StyleBoxTexture_4rp44")
 icon = ExtResource("4_skbyu")
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
+[node name="QuitButton" type="Button" parent="VBoxContainer" groups=["menu_buttons"]]
+visible = false
 layout_mode = 2
 theme_override_styles/hover = SubResource("StyleBoxTexture_ap4ud")
 icon = ExtResource("7_kkhbx")
 
 [node name="ArrowLeft" type="Button" parent="."]
-layout_mode = 2
+layout_mode = 0
 offset_left = 184.0
 offset_top = 521.0
 offset_right = 434.0
@@ -315,7 +324,7 @@ theme_override_styles/hover = SubResource("StyleBoxTexture_h5wgw")
 icon = ExtResource("12_w5c0n")
 
 [node name="ArrowRight" type="Button" parent="."]
-layout_mode = 2
+layout_mode = 0
 offset_left = 560.0
 offset_top = 517.0
 offset_right = 810.0
@@ -331,6 +340,7 @@ offset_left = 155.0
 offset_top = 336.0
 offset_right = 335.0
 offset_bottom = 367.0
+text = "185.221.215.9"
 
 [node name="portline" type="LineEdit" parent="."]
 layout_mode = 0
@@ -356,7 +366,24 @@ offset_right = 156.0
 offset_bottom = 410.0
 text = "port"
 
+[node name="CheckButton" type="CheckButton" parent="."]
+layout_mode = 0
+offset_left = 463.0
+offset_top = 326.0
+offset_right = 592.0
+offset_bottom = 404.0
+text = "On mobile"
+
+[node name="Whoosh2" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(574, 336)
+stream = ExtResource("23_1dfpl")
+
+[node name="Whoosh" type="AudioStreamPlayer2D" parent="."]
+position = Vector2(576, 328)
+stream = ExtResource("24_qywvv")
+
 [connection signal="finished" from="VideoStreamPlayer" to="." method="_on_video_stream_player_finished"]
+[connection signal="text_changed" from="VBoxContainer/NickNameLine" to="." method="_on_nick_name_line_text_changed"]
 [connection signal="button_down" from="VBoxContainer/StartButton" to="." method="_on_start_button_button_down"]
 [connection signal="button_down" from="VBoxContainer/HostButton" to="." method="_on_host_button_button_down"]
 [connection signal="button_down" from="VBoxContainer/JoinButton" to="." method="_on_join_button_button_down"]
@@ -365,3 +392,4 @@ text = "port"
 [connection signal="pressed" from="ArrowRight" to="." method="_on_arrow_right_pressed"]
 [connection signal="text_changed" from="ip" to="." method="_on_ip_text_changed"]
 [connection signal="text_changed" from="portline" to="." method="_on_portline_text_changed"]
+[connection signal="toggled" from="CheckButton" to="." method="_on_check_button_toggled"]

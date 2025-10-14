@@ -1,6 +1,8 @@
 extends Node
 var Players = {}
 var Crates = {}
+var Player : Weapon
+var shoot_speed = 1.0
 
 signal streakAdded
 # Called when the node enters the scene tree for the first time.

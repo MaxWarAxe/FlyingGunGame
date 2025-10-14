@@ -1,11 +1,14 @@
 [gd_scene load_steps=3 format=3 uid="uid://b0bxe3gpgi154"]
 
 [ext_resource type="PackedScene" uid="uid://cltatitm11wxq" path="res://scenes/UI/PlayerUI.tscn" id="1_4pgjf"]
-[ext_resource type="Script" path="res://scenes/UI/camera.gd" id="1_bhtx5"]
+[ext_resource type="Script" uid="uid://4tjcdgvt2rh6" path="res://scenes/UI/camera.gd" id="1_bhtx5"]
 
 [node name="Camera" type="Camera2D"]
+show_behind_parent = true
+top_level = true
 zoom = Vector2(0.4, 0.4)
 process_callback = 0
+limit_enabled = false
 limit_smoothed = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
@@ -13,11 +16,12 @@ script = ExtResource("1_bhtx5")
 
 [node name="UI" parent="." instance=ExtResource("1_4pgjf")]
 process_mode = 3
-anchors_preset = -1
+auto_translate_mode = 1
+anchors_preset = 9
 anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 2.0
-offset_right = 2.0
+offset_left = -476.99982
+offset_top = -324.99994
+offset_right = 672.57404
+offset_bottom = 323.026
+grow_horizontal = 1
 scale = Vector2(2.5, 2.5)
-pivot_offset = Vector2(0, 0)
-auto_translate = true

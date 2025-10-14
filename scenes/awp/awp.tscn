@@ -1,7 +1,9 @@
-[gd_scene load_steps=16 format=3 uid="uid://c50nhaxhb3qe6"]
+[gd_scene load_steps=17 format=3 uid="uid://c50nhaxhb3qe6"]
 
 [ext_resource type="PackedScene" uid="uid://b6pnw0nutsac3" path="res://scenes/ak-47/bullet.tscn" id="1_eg26o"]
+[ext_resource type="Script" uid="uid://dqkokf0gcx8wc" path="res://scenes/awp/awp.gd" id="1_y1s32"]
 [ext_resource type="PackedScene" uid="uid://2nm3lax5bshq" path="res://scenes/ak-47/shell.tscn" id="2_bbcsp"]
+[ext_resource type="AudioStream" uid="uid://c26l16ewuj0rm" path="res://sounds/awp_shot.mp3" id="2_n0srw"]
 [ext_resource type="PackedScene" uid="uid://b0bxe3gpgi154" path="res://scenes/UI/camera.tscn" id="3_l422y"]
 [ext_resource type="PackedScene" uid="uid://bxjshr3j0xq35" path="res://scenes/awp/Mag.tscn" id="4_hcnql"]
 [ext_resource type="Texture2D" uid="uid://d3q1cmha310ff" path="res://sprites/awp/awpsprite.png" id="5_fnrrm"]
@@ -12,43 +14,6 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c7557"]
 rough = true
 absorbent = true
-
-[sub_resource type="GDScript" id="GDScript_km1r5"]
-resource_name = "awp"
-script/source = "extends \"res://scripts/ak-47.gd\"
-
-var AWP_UNZOOM_VALUE = 0.2
-
-func controls():
-	if(Input.is_action_just_pressed(\"shoot\")):
-		unzoom();
-		
-	if(Input.is_action_just_released(\"shoot\")):
-		camera.targetZoom = Vector2(INIT_ZOOM,INIT_ZOOM)
-		if timerToShoot.is_stopped():
-			shoot();
-			timerToShoot.start();
-		
-	if(Input.is_action_pressed(\"rotate_left\")):
-		rotate_left();
-	if(Input.is_action_just_pressed(\"show_score\")):
-		updateScore()
-		camera.showScore()
-	if(Input.is_action_just_released('show_score')):
-		camera.hideScore();
-		
-	if(Input.is_action_pressed(\"rotate_right\")):
-		rotate_right();
-	if(Input.is_action_just_pressed(\"reload\") and timerToReload.is_stopped()):
-		reload()
-			
-func unzoom():
-	camera.targetZoom = Vector2(AWP_UNZOOM_VALUE,AWP_UNZOOM_VALUE);
-
-
-func _on_timer_to_shoot_timeout():
-	pass
-"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t55nd"]
 
@@ -92,7 +57,7 @@ properties/4/path = NodePath("Sprites/Bolt:position")
 properties/4/spawn = true
 properties/4/replication_mode = 1
 
-[node name="awp" type="RigidBody2D" groups=["Player"]]
+[node name="awp" type="RigidBody2D" node_paths=PackedStringArray("Barrel") groups=["Player"]]
 process_mode = 3
 collision_layer = 3
 collision_mask = 3
@@ -103,16 +68,18 @@ center_of_mass_mode = 1
 inertia = 1000.0
 can_sleep = false
 angular_damp_mode = 1
-script = SubResource("GDScript_km1r5")
+script = ExtResource("1_y1s32")
+SHOOT_SOUND = ExtResource("2_n0srw")
 SHOOT_FORCE = Vector2(-10000, 0)
 ANGULAR_SPEED = 3000
+SOUND_RANGE = 10000
 RECOIL_FORCE = 500000
 BULLET_SPEED = 4000
 MAG_AMMO = 5
 SHOOT_TIME_SPEED = 1.0
-BASE_BULLET_DAMAGE = 100
-BORDER_FORCE = 2500
+BASE_BULLET_DAMAGE = 115
 INIT_ZOOM = 0.3
+Barrel = NodePath("Barrel")
 bulletScene = ExtResource("1_eg26o")
 shellScene = ExtResource("2_bbcsp")
 cameraScene = ExtResource("3_l422y")
@@ -155,7 +122,7 @@ texture = ExtResource("9_gpqc2")
 position = Vector2(1.5, 16.4)
 shape = SubResource("RectangleShape2D_qgijp")
 
-[node name="Barrel" type="Node2D" parent="."]
+[node name="Barrel" type="Marker2D" parent="."]
 position = Vector2(167.5, -11.6)
 rotation = 1.5708
 

@@ -1,8 +1,12 @@
 extends Control
-
+var shoot_speed = GameManager.Player.SHOOT_TIME_SPEED
 var scorelineScene = load("res://scenes/UI/score_line.tscn")
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	$AnimationPlayer.speed_scale = 1/shoot_speed
+	var mobile_buttons = get_tree().get_nodes_in_group("mobile_buttons")
+	for button in mobile_buttons:
+		button.visible = Settings.on_mobile
 	GameManager.connect("streakAdded",playStreakAnimById)
 	pass
 
@@ -54,4 +58,40 @@ func makeReloadAnim(time):
 func _process(delta):
 	scale.x = 1/get_parent().zoom.x
 	scale.y = 1/get_parent().zoom.y
+	if Input.is_action_pressed("shoot"):
+		$AnimationPlayer.play("shoot_mobile_ui")
 	pass
+
+
+func _on_left_pressed() -> void:
+	Input.action_press("rotate_left")
+
+
+func _on_right_pressed() -> void:
+	Input.action_press("rotate_right")
+
+
+
+
+
+func _on_reload_pressed() -> void:
+	Input.action_press("reload")
+
+
+func _on_shoot_button_up() -> void:
+	Input.action_release("shoot")
+
+
+func _on_left_button_up() -> void:
+	Input.action_release("rotate_left")
+
+
+func _on_right_button_up() -> void:
+	Input.action_release("rotate_right")
+
+
+func _on_reload_button_up() -> void:
+	Input.action_release("reload")
+
+func _on_shoot_pressed() -> void:
+	Input.action_press("shoot")

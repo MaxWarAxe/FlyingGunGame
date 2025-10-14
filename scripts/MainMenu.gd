@@ -26,7 +26,9 @@ func updatePoses():
 		
 
 func _ready():
-	
+	Address = "127.0.0.1"
+	if $ip.text:
+		Address = $ip.text
 	multiplayer.peer_connected.connect(peer_connected)
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
@@ -147,6 +149,7 @@ func _on_host_button_mouse_entered():
 
 
 func _on_arrow_right_pressed():
+	$Whoosh.play(0.2)
 	weaponIndex += 1;
 	if(weaponIndex == weaponAmount):
 		weaponIndex = 0;
@@ -155,6 +158,7 @@ func _on_arrow_right_pressed():
 	movePos = $Panel/NodeContainer.global_position.x + target.x - targetWeapon.x
 
 func _on_arrow_left_pressed():
+	$Whoosh.play(0.2)
 	weaponIndex -= 1;
 	if(weaponIndex < 0):
 		weaponIndex = weaponAmount-1;
@@ -173,3 +177,23 @@ func _on_ip_text_changed(new_text):
 
 func _on_portline_text_changed(new_text):
 	port = new_text.to_int()
+
+
+func _on_check_button_toggled(toggled_on: bool) -> void:
+	Settings.on_mobile = toggled_on
+
+
+func _on_nick_name_line_text_changed(new_text: String) -> void:
+	var menu_buttons = get_tree().get_nodes_in_group("menu_buttons")
+	var tween = create_tween()
+	var fade_time = 0.2
+	if $VBoxContainer/NickNameLine.text == '':
+		for button in menu_buttons:
+			tween.tween_property(button, "modulate:a", 0.0, fade_time) # Fade to full opacity
+			await get_tree().create_timer(fade_time).timeout
+			button.visible = false
+	else:
+		for button in menu_buttons:
+			button.modulate.a = 0.0
+			button.visible = true
+			tween.tween_property(button, "modulate:a", 1.0, fade_time)

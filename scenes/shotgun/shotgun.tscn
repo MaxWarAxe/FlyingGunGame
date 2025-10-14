@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://cjopwk7hfoibb"]
+[gd_scene load_steps=16 format=3 uid="uid://cjopwk7hfoibb"]
 
 [ext_resource type="Script" uid="uid://cd3t6j0wckio2" path="res://scenes/shotgun/shotgun.gd" id="1_2ylah"]
 [ext_resource type="Texture2D" uid="uid://di8x7pxchmov7" path="res://sprites/shotgun/bolt.png" id="1_uc80y"]
+[ext_resource type="AudioStream" uid="uid://bpbu5wpviwmpu" path="res://sounds/scatter_gun_shoot_3a1b8.mp3" id="2_byxfy"]
 [ext_resource type="PackedScene" uid="uid://b6pnw0nutsac3" path="res://scenes/ak-47/bullet.tscn" id="2_kyuim"]
 [ext_resource type="Texture2D" uid="uid://bakfc6evdh4ms" path="res://sprites/shotgun/bolt2.png" id="2_wucrf"]
 [ext_resource type="PackedScene" uid="uid://b5tlpc3gx4w7k" path="res://scenes/shotgun/shotgun_shell.tscn" id="3_a6351"]
@@ -66,7 +67,7 @@ properties/5/path = NodePath(".:angular_velocity")
 properties/5/spawn = true
 properties/5/replication_mode = 1
 
-[node name="shotgun" type="RigidBody2D" groups=["Player"]]
+[node name="shotgun" type="RigidBody2D" node_paths=PackedStringArray("Barrel") groups=["Player"]]
 process_mode = 3
 collision_layer = 3
 collision_mask = 3
@@ -77,15 +78,18 @@ inertia = 1000.0
 can_sleep = false
 angular_damp_mode = 1
 script = ExtResource("1_2ylah")
+SHOOT_SOUND = ExtResource("2_byxfy")
 SHOOT_FORCE = Vector2(-10000, 0)
+SOUND_RANGE = 4000
 RECOIL_FORCE = 70000
 MAG_AMMO = 6
 MAG_AMOUNT = 10
-TIME_TO_RELOAD = 1
+TIME_TO_RELOAD = 1.0
 SHOOT_TIME_SPEED = 1.0
 BASE_BULLET_DAMAGE = 17
-BORDER_FORCE = 2500
 INIT_ZOOM = 0.3
+BORDER_FORCE = 2500
+Barrel = NodePath("Barrel")
 bulletScene = ExtResource("2_kyuim")
 shellScene = ExtResource("3_a6351")
 cameraScene = ExtResource("4_b1d6r")
@@ -132,7 +136,7 @@ position = Vector2(66.6528, 11.9554)
 scale = Vector2(19.8611, 2.54464)
 polygon = PackedVector2Array(-5.77273, -7.84211, -7.18252, -2.34035, -9.64966, -2.34037, -9.80071, -1.16142, -9.80071, 0.803493, -9.75036, 8.27017, -9.44826, 11.414, -8.79371, 9.05613, -7.73636, 4.73334, -7.08182, 8.27018, -6.32657, 1.58947, -3.35594, 0.80351, -3.35594, -0.375438, -2.0972, -0.375438, -2.0972, 0.80351, 0.31958, 0.80351, 0.31958, -0.375438, 0.772727, -0.375438, 0.923776, -3.5193, 3.08881, -3.5193, 3.08881, -7.84211, -3.2049, -7.84211)
 
-[node name="Barrel" type="Node2D" parent="."]
+[node name="Barrel" type="Marker2D" parent="."]
 position = Vector2(128, -3)
 rotation = 1.5708
 
