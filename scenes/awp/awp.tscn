@@ -72,44 +72,39 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t55ya"]
 _data = {
-"shoot": SubResource("Animation_aklhc")
+&"shoot": SubResource("Animation_aklhc")
 }
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_jygqt"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
-properties/0/sync = true
-properties/0/watch = false
+properties/0/replication_mode = 1
 properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
-properties/1/sync = true
-properties/1/watch = false
+properties/1/replication_mode = 1
 properties/2/path = NodePath(".:angular_velocity")
 properties/2/spawn = true
-properties/2/sync = true
-properties/2/watch = false
+properties/2/replication_mode = 1
 properties/3/path = NodePath(".:pos")
 properties/3/spawn = true
-properties/3/sync = true
-properties/3/watch = false
+properties/3/replication_mode = 1
 properties/4/path = NodePath("Sprites/Bolt:position")
 properties/4/spawn = true
-properties/4/sync = true
-properties/4/watch = false
+properties/4/replication_mode = 1
 
 [node name="awp" type="RigidBody2D" groups=["Player"]]
 process_mode = 3
 collision_layer = 3
 collision_mask = 3
 mass = 0.05
-inertia = 1000.0
-center_of_mass_mode = 1
 physics_material_override = SubResource("PhysicsMaterial_c7557")
 gravity_scale = 0.0
+center_of_mass_mode = 1
+inertia = 1000.0
 can_sleep = false
 angular_damp_mode = 1
 script = SubResource("GDScript_km1r5")
-SHOOT_FORCE = Vector2(-30000, 0)
+SHOOT_FORCE = Vector2(-10000, 0)
 ANGULAR_SPEED = 3000
 RECOIL_FORCE = 500000
 BULLET_SPEED = 4000
@@ -117,6 +112,7 @@ MAG_AMMO = 5
 SHOOT_TIME_SPEED = 1.0
 BASE_BULLET_DAMAGE = 100
 BORDER_FORCE = 2500
+INIT_ZOOM = 0.3
 bulletScene = ExtResource("1_eg26o")
 shellScene = ExtResource("2_bbcsp")
 cameraScene = ExtResource("3_l422y")
@@ -168,7 +164,7 @@ position = Vector2(-86.964, -11.1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_t55ya")
+&"": SubResource("AnimationLibrary_t55ya")
 }
 
 [node name="BoltPosition" type="Node2D" parent="."]
