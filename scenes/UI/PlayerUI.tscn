@@ -1,32 +1,20 @@
-[gd_scene load_steps=26 format=3 uid="uid://cltatitm11wxq"]
+[gd_scene load_steps=30 format=3 uid="uid://cltatitm11wxq"]
 
 [ext_resource type="Texture2D" uid="uid://cdlkh1w5lliv3" path="res://sprites/ui/arrow.png" id="2_ay8ja"]
 [ext_resource type="Script" uid="uid://dom1g231ljwfg" path="res://scenes/UI/PlayerUI.gd" id="2_ejmo8"]
 [ext_resource type="PackedScene" uid="uid://cvdk7u1plg38l" path="res://scenes/UI/score_line.tscn" id="3_gaj6w"]
 [ext_resource type="Texture2D" uid="uid://c3qkce5yqep70" path="res://sprites/ui/Pistol-2.png" id="3_wp0j6"]
 [ext_resource type="PackedScene" uid="uid://crdl6rubybglb" path="res://scenes/UI/reload_progress.tscn" id="4_2w6g6"]
+[ext_resource type="AudioStream" uid="uid://ba8m7dq6qgy51" path="res://sounds/FirstBloodMan.mp3" id="4_78m44"]
 [ext_resource type="Texture2D" uid="uid://ctlcm33j3nrc7" path="res://sprites/ui/tony.png" id="4_px44n"]
 [ext_resource type="Texture2D" uid="uid://dcsmf52j7e5s5" path="res://sprites/ak-47/ammo.png" id="4_vv1d3"]
 [ext_resource type="AudioStream" uid="uid://b3npnocsomvsu" path="res://sounds/triple-kill.mp3" id="5_da24e"]
 [ext_resource type="AudioStream" uid="uid://08g5ehijy5a7" path="res://sounds/quake-doublekill.mp3" id="6_u5kdx"]
-[ext_resource type="AudioStream" uid="uid://cemtasdgfw87l" path="res://sounds/headshot_1.mp3" id="7_nvtit"]
+[ext_resource type="AudioStream" uid="uid://bbpr2cu0u8wws" path="res://sounds/Dominating.mp3" id="8_4gjbo"]
+[ext_resource type="AudioStream" uid="uid://b02y41vluyxuk" path="res://sounds/LudecrisKill.mp3" id="10_cx3km"]
 [ext_resource type="AudioStream" uid="uid://h6j7uurh6pbm" path="res://sounds/unstoppable_3.mp3" id="10_vv1d3"]
+[ext_resource type="AudioStream" uid="uid://bgo5gwpv41p4c" path="res://sounds/HollyShit.mp3" id="11_i0yih"]
 [ext_resource type="AudioStream" uid="uid://dp8uqtxa1o1u7" path="res://sounds/announcer_kill_rampage_01.mp3" id="11_s8umn"]
-
-[sub_resource type="Animation" id="Animation_vv1d3"]
-resource_name = "shoot_mobile_ui"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("shoot:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.06666667, 1),
-"transitions": PackedFloat32Array(1, 0.21763788, 0.757859),
-"update": 0,
-"values": [0.0, -1.3962634015954636, 0.0]
-}
 
 [sub_resource type="Animation" id="Animation_s8umn"]
 length = 0.001
@@ -43,6 +31,21 @@ tracks/0/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_vv1d3"]
+resource_name = "shoot_mobile_ui"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("shoot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.06666667, 1),
+"transitions": PackedFloat32Array(1, 0.21763788, 0.757859),
+"update": 0,
+"values": [0.0, -1.3962634015954636, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7r0sy"]
 _data = {
 &"RESET": SubResource("Animation_s8umn"),
@@ -57,6 +60,40 @@ bg_color = Color(0.345098, 0.113725, 0.517647, 0.25098)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_lviib"]
 bg_color = Color(1, 1, 1, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_pbb1p"]
+streams_count = 4
+stream_0/stream = ExtResource("8_4gjbo")
+stream_1/stream = ExtResource("11_s8umn")
+stream_2/stream = ExtResource("10_cx3km")
+stream_3/stream = ExtResource("11_i0yih")
+
+[sub_resource type="Animation" id="Animation_rv1q5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../AudioStreamPlayer:stream")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("AudioStreamRandomizer_pbb1p")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AudioStreamPlayer:playing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_jdrlh"]
 resource_name = "streak1"
@@ -83,7 +120,7 @@ tracks/1/keys = {
 "clips": [{
 "end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("7_nvtit")
+"stream": ExtResource("4_78m44")
 }],
 "times": PackedFloat32Array(0)
 }
@@ -317,33 +354,40 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(-131, 105), Vector2(50, 105), Vector2(350, 105), Vector2(350, 105), Vector2(500, 105)]
 }
-tracks/5/type = "audio"
+tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("../AudioStreamPlayer")
+tracks/5/path = NodePath("../AudioStreamPlayer:stream")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"clips": [{
-"end_offset": 0.0,
-"start_offset": 0.0,
-"stream": ExtResource("11_s8umn")
-}],
-"times": PackedFloat32Array(0)
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("AudioStreamRandomizer_pbb1p")]
 }
-tracks/5/use_blend = true
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../AudioStreamPlayer:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_t1jg5"]
 _data = {
+&"RESET": SubResource("Animation_rv1q5"),
 &"streak1": SubResource("Animation_jdrlh"),
 &"streak2": SubResource("Animation_bbfio"),
 &"streak3": SubResource("Animation_o183j"),
 &"streak4": SubResource("Animation_tlux8"),
 &"streak5": SubResource("Animation_44fie")
 }
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vv1d3"]
-bg_color = Color(1, 1, 1, 0)
 
 [node name="Control" type="Control"]
 auto_translate_mode = 2
@@ -444,10 +488,10 @@ anchor_left = 0.477
 anchor_top = 0.5
 anchor_right = 0.477
 anchor_bottom = 0.5
-offset_left = -212.504
-offset_top = 68.0
-offset_right = 218.496
-offset_bottom = 287.0
+offset_left = -181.50403
+offset_top = -12.0
+offset_right = 249.49597
+offset_bottom = 207.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_lviib")
 
 [node name="StreakAnim" type="AnimationPlayer" parent="StreakMask"]
@@ -457,7 +501,7 @@ libraries = {
 
 [node name="Tony1" type="Sprite2D" parent="StreakMask"]
 y_sort_enabled = true
-position = Vector2(-131, 105)
+position = Vector2(500, 105)
 scale = Vector2(0.275556, 0.275556)
 texture = ExtResource("4_px44n")
 
@@ -482,73 +526,31 @@ scale = Vector2(0.276, 0.276)
 texture = ExtResource("4_px44n")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource("AudioStreamRandomizer_pbb1p")
 
-[node name="left" type="Button" parent="." groups=["mobile_buttons"]]
-layout_mode = 1
-offset_left = 264.0
-offset_top = 533.0
-offset_right = 414.0
-offset_bottom = 683.0
+[node name="left" type="TouchScreenButton" parent="." groups=["mobile_buttons"]]
+position = Vector2(272, 522)
 rotation = -3.1415927
-theme_override_colors/font_color = Color(0, 0, 0, 1)
-theme_override_colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
-theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
-theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
-theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
-theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_focus_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-theme_override_colors/icon_disabled_color = Color(1, 1, 1, 0.4)
-action_mode = 0
-icon = ExtResource("2_ay8ja")
-expand_icon = true
+texture_normal = ExtResource("2_ay8ja")
+texture_pressed = ExtResource("2_ay8ja")
+action = "rotate_left"
 
-[node name="right" type="Button" parent="." groups=["mobile_buttons"]]
+[node name="right" type="TouchScreenButton" parent="." groups=["mobile_buttons"]]
 z_index = 3735
-layout_mode = 0
-offset_left = 278.0
-offset_top = 383.0
-offset_right = 428.0
-offset_bottom = 533.0
-action_mode = 0
-icon = ExtResource("2_ay8ja")
-expand_icon = true
+position = Vector2(309, 393)
+texture_normal = ExtResource("2_ay8ja")
+texture_pressed = ExtResource("2_ay8ja")
+action = "rotate_right"
 
-[node name="shoot" type="Button" parent="." groups=["mobile_buttons"]]
-layout_direction = 4
-layout_mode = 0
-offset_left = 850.0
-offset_top = 475.0
-offset_right = 1000.0
-offset_bottom = 625.0
-pivot_offset = Vector2(76.335, 76.61)
-theme_override_styles/focus = SubResource("StyleBoxFlat_vv1d3")
-action_mode = 0
-icon = ExtResource("3_wp0j6")
-flat = true
-expand_icon = true
+[node name="shoot" type="TouchScreenButton" parent="." groups=["mobile_buttons"]]
+position = Vector2(746, 440.00003)
+scale = Vector2(6.155, 6.155)
+texture_normal = ExtResource("3_wp0j6")
+texture_pressed = ExtResource("3_wp0j6")
+action = "shoot"
 
-[node name="reload" type="Button" parent="." groups=["mobile_buttons"]]
-layout_mode = 0
-offset_left = 994.0
-offset_top = 327.0
-offset_right = 1144.0
-offset_bottom = 477.0
-action_mode = 0
-icon = ExtResource("4_vv1d3")
-flat = true
-expand_icon = true
-
-[connection signal="button_up" from="left" to="." method="_on_left_button_up"]
-[connection signal="pressed" from="left" to="." method="_on_left_pressed"]
-[connection signal="button_up" from="right" to="." method="_on_right_button_up"]
-[connection signal="pressed" from="right" to="." method="_on_right_pressed"]
-[connection signal="button_down" from="shoot" to="." method="_on_shoot_button_down"]
-[connection signal="button_up" from="shoot" to="." method="_on_shoot_button_up"]
-[connection signal="pressed" from="shoot" to="." method="_on_shoot_pressed"]
-[connection signal="button_up" from="reload" to="." method="_on_reload_button_up"]
-[connection signal="pressed" from="reload" to="." method="_on_reload_pressed"]
+[node name="reload" type="TouchScreenButton" parent="." groups=["mobile_buttons"]]
+position = Vector2(980, 283)
+texture_normal = ExtResource("4_vv1d3")
+texture_pressed = ExtResource("4_vv1d3")
+action = "reload"

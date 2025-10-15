@@ -1,9 +1,9 @@
 extends Area2D
-
+@export var BREAK_SOUND : AudioStreamMP3
 var EFFECT_ADD_MAG_PROBABILITY = 100
 var EFFECT_ADD_HP_PROBABILITY = 30
 var EFFECT_INVIS_PROBABILITY = 20
-var EFFECT_DD_PROBABILITY = 10
+var EFFECT_DD_PROBABILITY = 5
 
 var TRASH_SPEED = 500
 var TRASH_MAX_TORQUE = 1000
@@ -71,5 +71,14 @@ func explode():
 		GameManager.deleteCrate.rpc(name)
 		emit_signal("destroyed")
 	queue_free()
+func playExplodeSound():
+	if BREAK_SOUND:
+		var sound = AudioStreamPlayer2D.new()
+		sound.global_position = global_position
+		sound.stream = BREAK_SOUND
+		get_tree().get_root().add_child(sound)
+		sound.pitch_scale = randf_range(0.9,1.1)
+		sound.play()
 func _on_animation_player_animation_finished(anim_name):
+	playExplodeSound()
 	explode()

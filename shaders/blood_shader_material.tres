@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=3 format=3 uid="uid://d4mi1cnjbu6cy"]
+
+[ext_resource type="Shader" uid="uid://s84wdwbtyn7j" path="res://shaders/blood.gdshader" id="1_t2tl6"]
+[ext_resource type="Texture2D" uid="uid://bsta0fjf38o7g" path="res://shaders/noice.png" id="2_2mfh8"]
+
+[resource]
+shader = ExtResource("1_t2tl6")
+shader_parameter/noise = ExtResource("2_2mfh8")
+shader_parameter/blood_coef = 0.67500003241176
+shader_parameter/color = Color(1, 0, 0, 1)

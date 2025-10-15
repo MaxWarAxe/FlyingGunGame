@@ -61,37 +61,3 @@ func _process(delta):
 	if Input.is_action_pressed("shoot"):
 		$AnimationPlayer.play("shoot_mobile_ui")
 	pass
-
-
-func _on_left_pressed() -> void:
-	Input.action_press("rotate_left")
-
-
-func _on_right_pressed() -> void:
-	Input.action_press("rotate_right")
-
-
-
-
-
-func _on_reload_pressed() -> void:
-	Input.action_press("reload")
-
-
-func _on_shoot_button_up() -> void:
-	Input.action_release("shoot")
-
-
-func _on_left_button_up() -> void:
-	Input.action_release("rotate_left")
-
-
-func _on_right_button_up() -> void:
-	Input.action_release("rotate_right")
-
-
-func _on_reload_button_up() -> void:
-	Input.action_release("reload")
-
-func _on_shoot_pressed() -> void:
-	Input.action_press("shoot")

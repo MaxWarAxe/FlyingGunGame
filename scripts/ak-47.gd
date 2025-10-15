@@ -1,5 +1,7 @@
 extends RigidBody2D
 class_name Weapon
+@export var MAG_OUT_SOUND : AudioStreamMP3
+@export var MAG_IN_SOUND : AudioStreamWAV
 @export var SHOOT_SOUND : AudioStreamMP3
 @export var SHOOT_FORCE = Vector2(-600,0);
 @export var ANGULAR_SPEED = 5000
@@ -36,6 +38,7 @@ var withMag : bool = true;
 var lastDealer;
 var targetZoom = INIT_ZOOM;
 
+signal damageDealt
 var border_mins = Vector2(0, 0)
 var border_maxs = Vector2(9999, 9999)
 signal died(id);
@@ -69,6 +72,7 @@ func init_data():
 func _ready():
 	itself = self;
 	GameManager.Player = itself
+	damageDealt.connect(Callable(self,"add_blood"))
 	$MultiplayerSynchronizer.set_multiplayer_authority(idname.to_int())
 	
 	name = idname
@@ -121,15 +125,16 @@ func checkDeath():
 func sendpos(id,posit):
 	pos = posit
 
-func _process(delta):
+func bulletPitchCalculate(delta: float):
 	for bullet: Bullet in get_tree().get_nodes_in_group("Bullets"):
 		var distance = global_position.distance_to(bullet.global_position)
 		var vel = distance - bullet.compare_velocity
-		print(vel*delta)
 		bullet.compare_velocity = distance
-		var pitch_factor = 1.0 - vel*delta*10
+		var pitch_factor = 1.5 - vel*0.1
 		bullet.pitch = clamp(pitch_factor,0.1,4.0)
-
+func _process(delta):
+	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+		bulletPitchCalculate(delta)
 	label.position = position 
 	checkDeath()
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
@@ -197,9 +202,25 @@ func show_mag():
 	MagNode.visible = true;
 	$"Mag-Polygon".disabled = false;
 
+func play_reload_start_sound():
+	if MAG_OUT_SOUND:
+		var sound = AudioStreamPlayer2D.new()
+		sound.position = Barrel.position
+		sound.stream = MAG_OUT_SOUND
+		add_child(sound)
+		sound.play()
+
+func play_reload_end_sound():
+	if MAG_IN_SOUND:
+		var sound = AudioStreamPlayer2D.new()
+		sound.position = Barrel.position
+		sound.stream = MAG_IN_SOUND
+		add_child(sound)
+		sound.play()
 @rpc("any_peer","call_local","reliable")
 func drop_mag():
 	if MagNode:
+		play_reload_start_sound()
 		MagNode.visible = false;
 		$"Mag-Polygon".disabled = true;
 		var mag = magScene.instantiate()
@@ -207,8 +228,9 @@ func drop_mag():
 		mag.global_position = MagNode.global_position;
 		mag.apply_force(MAG_SPEED * Vector2.UP.rotated(MagNode.find_child("Position").global_rotation) + linear_velocity);
 		mag.apply_torque(MAG_ROTATION_SPEED)
+@rpc("any_peer","call_local","reliable")
 func makeShootSound():
-	var sound = AudioStreamPlayer2D.new()
+	var sound = load("res://scenes/SoundSpawner.tscn").instantiate()
 	sound.autoplay = true
 	sound.pitch_scale = randf_range(0.95,1.05)
 	sound.max_distance = SOUND_RANGE
@@ -217,7 +239,7 @@ func makeShootSound():
 	get_tree().get_root().add_child(sound)
 func shoot():
 	if(ammo != 0):
-		makeShootSound()
+		makeShootSound.rpc()
 		apply_force(SHOOT_FORCE.rotated(rotation));
 		$AnimationPlayer.play("shoot");
 		apply_torque(-RECOIL_FORCE);
@@ -285,11 +307,22 @@ func _on_timer_timeout():
 	pass # Replace with function body.
 
 func _on_timer_to_reload_timeout():
+	play_reload_end_sound()
 	addAmmo()
 
+func play_damage_sound():
+	var sound : SoundSpawner = load("res://scenes/SoundSpawner.tscn").instantiate()
+	sound.max_distance = 12000
+	sound.stream = load("res://sounds/hitSound.mp3")
+	sound.global_position = global_position
+	get_tree().get_root().add_child(sound)
+	sound.play_sound()
+
 @rpc("any_peer","call_local","reliable")
-func deal(damage,shooterid):
+func deal(damage,shooterid,bullet_velocity,bullet_position):
+	play_damage_sound()
 	hp -= damage;
+	damageDealt.emit(bullet_velocity,bullet_position)
 	lastDealer = shooterid;
 	label.updateHP(hp);
 	GameManager.changeHP(idname,hp)
@@ -297,5 +330,20 @@ func deal(damage,shooterid):
 @rpc("any_peer","call_local","reliable")
 func die():
 	emit_signal("died",idname)
+
+func add_blood(bullet_velocity,bullet_position):
+	print("blood")
+	var material : ShaderMaterial = load("res://shaders/blood_shader_material.tres")
+	material.set_shader_parameter("blood_coef",1 - hp/INIT_HP)
+	get_node("Sprites").material = material
 	
+	var bloodParticles : Particle = load("res://shaders/bloodParticles.tscn").instantiate()
+	bloodParticles.process_material.direction = Vector3(bullet_velocity.x,bullet_velocity.y,0)
+	
+	bloodParticles.velocity = linear_velocity
+	get_tree().get_root().add_child(bloodParticles)
+	bloodParticles.global_position = bullet_position
+	print(bloodParticles.global_position)
+	print(global_position)
+	bloodParticles.emitting = true
 	

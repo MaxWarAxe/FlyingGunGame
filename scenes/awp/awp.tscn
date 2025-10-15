@@ -1,21 +1,29 @@
-[gd_scene load_steps=17 format=3 uid="uid://c50nhaxhb3qe6"]
+[gd_scene load_steps=21 format=3 uid="uid://c50nhaxhb3qe6"]
 
 [ext_resource type="PackedScene" uid="uid://b6pnw0nutsac3" path="res://scenes/ak-47/bullet.tscn" id="1_eg26o"]
 [ext_resource type="Script" uid="uid://dqkokf0gcx8wc" path="res://scenes/awp/awp.gd" id="1_y1s32"]
 [ext_resource type="PackedScene" uid="uid://2nm3lax5bshq" path="res://scenes/ak-47/shell.tscn" id="2_bbcsp"]
+[ext_resource type="AudioStream" uid="uid://d3pqk8u0ctngu" path="res://sounds/mag-slide-in-80901.mp3" id="2_mkawa"]
 [ext_resource type="AudioStream" uid="uid://c26l16ewuj0rm" path="res://sounds/awp_shot.mp3" id="2_n0srw"]
+[ext_resource type="AudioStream" uid="uid://bms7rmrutovrt" path="res://sounds/shotgun-reload-fx_279bpm.wav" id="3_d3uqb"]
 [ext_resource type="PackedScene" uid="uid://b0bxe3gpgi154" path="res://scenes/UI/camera.tscn" id="3_l422y"]
 [ext_resource type="PackedScene" uid="uid://bxjshr3j0xq35" path="res://scenes/awp/Mag.tscn" id="4_hcnql"]
 [ext_resource type="Texture2D" uid="uid://d3q1cmha310ff" path="res://sprites/awp/awpsprite.png" id="5_fnrrm"]
 [ext_resource type="PackedScene" uid="uid://4qjdh10o1oy" path="res://scenes/UI/label_of_player.tscn" id="5_ri7y1"]
 [ext_resource type="Texture2D" uid="uid://ctlnpxqxbxjoa" path="res://sprites/awp/mag.png" id="8_jdx85"]
 [ext_resource type="Texture2D" uid="uid://c1ykg4suesxde" path="res://sprites/awp/bolt.png" id="9_gpqc2"]
+[ext_resource type="Shader" uid="uid://s84wdwbtyn7j" path="res://shaders/blood.gdshader" id="10_hxidt"]
+[ext_resource type="Texture2D" uid="uid://bsta0fjf38o7g" path="res://shaders/noice.png" id="11_t87m6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c7557"]
 rough = true
 absorbent = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_t55nd"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_226rc"]
+shader = ExtResource("10_hxidt")
+shader_parameter/noise = ExtResource("11_t87m6")
+shader_parameter/blood_coef = -0.00499999988824
+shader_parameter/color = Color(0.97566444, 4.5724214e-06, 1.540184e-06, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgijp"]
 size = Vector2(24, 16)
@@ -69,6 +77,8 @@ inertia = 1000.0
 can_sleep = false
 angular_damp_mode = 1
 script = ExtResource("1_y1s32")
+MAG_OUT_SOUND = ExtResource("2_mkawa")
+MAG_IN_SOUND = ExtResource("3_d3uqb")
 SHOOT_SOUND = ExtResource("2_n0srw")
 SHOOT_FORCE = Vector2(-10000, 0)
 ANGULAR_SPEED = 3000
@@ -92,11 +102,10 @@ scale = Vector2(3.10049, 3.40625)
 polygon = PackedVector2Array(-8.53952, 7.91743, -9.18459, 9.97248, -21.4407, 10.2661, -21.4407, 14.0826, -48.8557, 13.789, -58.5316, 14.6697, -65.6273, 15.2569, -71.7553, 20.5413, -94.0099, 18.7798, -94.0099, 11.1468, -76.2707, 11.1468, -72.0779, 6.44954, -75.9482, 6.44954, -75.9482, 3.51376, -55.9514, 3.51376, -56.2739, 8.21101)
 
 [node name="Sprites" type="Node2D" parent="."]
-material = SubResource("ShaderMaterial_t55nd")
 
 [node name="Awpsprite" type="Sprite2D" parent="Sprites"]
 z_index = 1
-use_parent_material = true
+material = SubResource("ShaderMaterial_226rc")
 position = Vector2(34.5, -3.59999)
 scale = Vector2(0.296569, 0.296569)
 texture = ExtResource("5_fnrrm")

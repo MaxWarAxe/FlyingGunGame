@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://bu221bm87fovs"]
+
+[ext_resource type="Script" uid="uid://cwpkn8w7hod7h" path="res://scenes/sound_spawner.gd" id="1_8hoa4"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" node_paths=PackedStringArray("timer")]
+autoplay = true
+script = ExtResource("1_8hoa4")
+timer = NodePath("Timer")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

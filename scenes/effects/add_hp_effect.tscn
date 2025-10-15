@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://bpv3nenkjbhfk"]
+[gd_scene load_steps=3 format=3 uid="uid://bpv3nenkjbhfk"]
 
-[ext_resource type="Script" path="res://scenes/effects/add_hp_effect.gd" id="1_n2i75"]
+[ext_resource type="Script" uid="uid://ce2lr8m8bw8bj" path="res://scenes/effects/add_hp_effect.gd" id="1_n2i75"]
+[ext_resource type="AudioStream" uid="uid://8lcau8mw5755" path="res://sounds/healthUp.mp3" id="2_5lj0e"]
 
 [node name="add_hp_effect" type="Node2D"]
 script = ExtResource("1_n2i75")
+SOUND_EFFECT = ExtResource("2_5lj0e")

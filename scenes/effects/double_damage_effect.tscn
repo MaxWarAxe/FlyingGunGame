@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://b5428pv7t1wt2"]
+[gd_scene load_steps=3 format=3 uid="uid://b5428pv7t1wt2"]
 
-[ext_resource type="Script" path="res://scenes/effects/double_damage_effect.gd" id="1_4h11h"]
+[ext_resource type="Script" uid="uid://ba67xoic522tt" path="res://scenes/effects/double_damage_effect.gd" id="1_4h11h"]
+[ext_resource type="AudioStream" uid="uid://devbtw5v66k0l" path="res://sounds/DoubleDamageSound2.mp3" id="2_j2gq2"]
 
 [node name="double_damage_effect" type="Node2D"]
 script = ExtResource("1_4h11h")
+SOUND_EFFECT = ExtResource("2_j2gq2")
 
 [node name="Timer" type="Timer" parent="."]
 one_shot = true

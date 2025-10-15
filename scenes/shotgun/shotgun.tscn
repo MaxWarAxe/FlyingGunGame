@@ -1,12 +1,14 @@
-[gd_scene load_steps=16 format=3 uid="uid://cjopwk7hfoibb"]
+[gd_scene load_steps=18 format=3 uid="uid://cjopwk7hfoibb"]
 
 [ext_resource type="Script" uid="uid://cd3t6j0wckio2" path="res://scenes/shotgun/shotgun.gd" id="1_2ylah"]
 [ext_resource type="Texture2D" uid="uid://di8x7pxchmov7" path="res://sprites/shotgun/bolt.png" id="1_uc80y"]
 [ext_resource type="AudioStream" uid="uid://bpbu5wpviwmpu" path="res://sounds/scatter_gun_shoot_3a1b8.mp3" id="2_byxfy"]
 [ext_resource type="PackedScene" uid="uid://b6pnw0nutsac3" path="res://scenes/ak-47/bullet.tscn" id="2_kyuim"]
+[ext_resource type="AudioStream" uid="uid://d3pqk8u0ctngu" path="res://sounds/mag-slide-in-80901.mp3" id="2_r8xmy"]
 [ext_resource type="Texture2D" uid="uid://bakfc6evdh4ms" path="res://sprites/shotgun/bolt2.png" id="2_wucrf"]
 [ext_resource type="PackedScene" uid="uid://b5tlpc3gx4w7k" path="res://scenes/shotgun/shotgun_shell.tscn" id="3_a6351"]
 [ext_resource type="Texture2D" uid="uid://y6qppm248lgo" path="res://sprites/shotgun/boltBackground.png" id="3_blw0w"]
+[ext_resource type="AudioStream" uid="uid://bms7rmrutovrt" path="res://sounds/shotgun-reload-fx_279bpm.wav" id="3_jj7gc"]
 [ext_resource type="Texture2D" uid="uid://do1oypkm3qus2" path="res://sprites/shotgun/base.png" id="4_6pfwr"]
 [ext_resource type="PackedScene" uid="uid://b0bxe3gpgi154" path="res://scenes/UI/camera.tscn" id="4_b1d6r"]
 [ext_resource type="PackedScene" uid="uid://cpjons5plii23" path="res://scenes/ak-47/Mag.tscn" id="5_884ws"]
@@ -78,6 +80,8 @@ inertia = 1000.0
 can_sleep = false
 angular_damp_mode = 1
 script = ExtResource("1_2ylah")
+MAG_OUT_SOUND = ExtResource("2_r8xmy")
+MAG_IN_SOUND = ExtResource("3_jj7gc")
 SHOOT_SOUND = ExtResource("2_byxfy")
 SHOOT_FORCE = Vector2(-10000, 0)
 SOUND_RANGE = 4000

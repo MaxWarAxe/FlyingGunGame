@@ -1,8 +1,10 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1ikf0jr4dmwc"]
+[gd_scene load_steps=9 format=3 uid="uid://b1ikf0jr4dmwc"]
 
-[ext_resource type="Script" path="res://scenes/crates/crate.gd" id="1_5tijj"]
+[ext_resource type="Script" uid="uid://bl043b5h2vuad" path="res://scenes/crates/crate.gd" id="1_5tijj"]
 [ext_resource type="Texture2D" uid="uid://187q0k8ae042" path="res://sprites/crate/crate.png" id="1_ao2pt"]
 [ext_resource type="PackedScene" uid="uid://07pia4tcyx40" path="res://scenes/crates/trash.tscn" id="2_vbp5r"]
+[ext_resource type="AudioStream" uid="uid://l3bmry3mdyxv" path="res://sounds/shrinkcrate.mp3" id="4_bl5dt"]
+[ext_resource type="AudioStream" uid="uid://c4ijl0bhisujv" path="res://sounds/breakcreate.mp3" id="5_6dfg1"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_spc6q"]
 size = Vector2(104, 101.5)
@@ -22,19 +24,35 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(0.33098, 0.33098), Vector2(0, 0)]
 }
+tracks/1/type = "audio"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BreakSound")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("4_bl5dt")
+}],
+"times": PackedFloat32Array(0)
+}
+tracks/1/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_khua7"]
 _data = {
-"shrink": SubResource("Animation_f41pd")
+&"shrink": SubResource("Animation_f41pd")
 }
 
 [node name="crate" type="Area2D"]
 script = ExtResource("1_5tijj")
+BREAK_SOUND = ExtResource("5_6dfg1")
 trashScene = ExtResource("2_vbp5r")
 
 [node name="Crate" type="Sprite2D" parent="."]
-position = Vector2(2.38419e-07, 2.38419e-07)
-scale = Vector2(0.33098, 0.33098)
+position = Vector2(5.722046e-06, 0)
+scale = Vector2(0.3322259, 0.3322259)
 texture = ExtResource("1_ao2pt")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -43,8 +61,11 @@ shape = SubResource("RectangleShape2D_spc6q")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_khua7")
+&"": SubResource("AnimationLibrary_khua7")
 }
+
+[node name="BreakSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_6dfg1")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

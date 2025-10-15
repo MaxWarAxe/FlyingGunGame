@@ -1,7 +1,7 @@
-extends Node2D
-
+extends Effect
+class_name DoubleDamageEffect
 var SHADER_PATH_SCENE = "res://shaders/lava.tres"
-var DOUBLE_DAMAGE_TIME = 6
+var DOUBLE_DAMAGE_TIME = 15
 
 func init():
 	var other_dd = get_parent().get_node_or_null("double_damage_effect")
@@ -18,14 +18,13 @@ func setTime(time):
 	$Timer.wait_time = time
 func startTimer():
 	$Timer.start()
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
-
+func _ready():
+	play_sound(DOUBLE_DAMAGE_TIME)
 
 func _on_timer_timeout():
 	get_parent().bullet_damage = get_parent().BASE_BULLET_DAMAGE;

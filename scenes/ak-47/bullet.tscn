@@ -2,10 +2,10 @@
 
 [ext_resource type="Texture2D" uid="uid://d0i7y2in00lv5" path="res://sprites/ak-47/bullet.png" id="1_rpmim"]
 [ext_resource type="Script" uid="uid://b2pwu0pb7agti" path="res://scenes/ak-47/bullet.gd" id="1_t46fu"]
-[ext_resource type="AudioStream" uid="uid://dp1s5hfulwg16" path="res://sounds/buletFlySound.mp3" id="3_qfqx6"]
+[ext_resource type="AudioStream" uid="uid://b177xuhe7l8co" path="res://sounds/Wind2.mp3" id="3_qfqx6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bwqe7"]
-size = Vector2(6.5, 30.75)
+size = Vector2(6.5, 38.75)
 
 [node name="bullet" type="Area2D"]
 collision_layer = 2
@@ -13,7 +13,7 @@ collision_mask = 2
 script = ExtResource("1_t46fu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 6.625)
+position = Vector2(0, 10.625)
 shape = SubResource("RectangleShape2D_bwqe7")
 
 [node name="Bullet" type="Sprite2D" parent="."]

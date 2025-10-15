@@ -33,10 +33,6 @@ akScene = ExtResource("3_yjeef")
 shotgunScene = ExtResource("4_jijhl")
 uziScene = ExtResource("5_f77r4")
 
-[node name="player_spawner" parent="." instance=ExtResource("10_2wl38")]
-position = Vector2(6000, 3500)
-scale = Vector2(106.485, 54.883)
-
 [node name="background" type="Sprite2D" parent="."]
 z_index = -100
 material = SubResource("ShaderMaterial_kvuet")
@@ -126,14 +122,13 @@ visible = false
 position = Vector2(6000, 3500)
 scale = Vector2(104.71, 58.42)
 ITEM_TO_SPAWN = ExtResource("7_bk5vn")
-SPAWN_TIME = 0.4
 MAX_ITEMS = 50
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("..")
 
 [node name="Panel" type="ColorRect" parent="."]
-z_index = -101
+z_index = -4096
 material = SubResource("ShaderMaterial_bfakk")
 offset_left = -9002.0
 offset_top = -9500.0
@@ -167,3 +162,7 @@ shape = SubResource("RectangleShape2D_dinhu")
 [node name="Turret" parent="." instance=ExtResource("12_dinhu")]
 position = Vector2(627, 6326)
 MAG_AMMO = 100000
+
+[node name="player_spawner" parent="." instance=ExtResource("10_2wl38")]
+position = Vector2(811.0005, 5352)
+scale = Vector2(13.945, 7.187)

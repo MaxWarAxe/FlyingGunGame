@@ -1,11 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://cx3bjqtqarltf"]
+[gd_scene load_steps=18 format=3 uid="uid://cx3bjqtqarltf"]
 
 [ext_resource type="Script" uid="uid://b185nua1f64h6" path="res://scenes/uzi/uzi.gd" id="1_3np3i"]
 [ext_resource type="Texture2D" uid="uid://bt6y4w6igcr48" path="res://sprites/uzi/uzi_base.png" id="1_8jkjd"]
 [ext_resource type="Texture2D" uid="uid://cdhp5jtqfnc3e" path="res://sprites/uzi/uzi-mag.png" id="2_bacec"]
 [ext_resource type="AudioStream" uid="uid://clgsqxhr05mdn" path="res://sounds/Silencer Shot 3 - QuickSounds.com.mp3" id="2_e8nxl"]
+[ext_resource type="AudioStream" uid="uid://d3pqk8u0ctngu" path="res://sounds/mag-slide-in-80901.mp3" id="2_jgiro"]
 [ext_resource type="PackedScene" uid="uid://b6pnw0nutsac3" path="res://scenes/ak-47/bullet.tscn" id="2_y7io5"]
 [ext_resource type="PackedScene" uid="uid://2nm3lax5bshq" path="res://scenes/ak-47/shell.tscn" id="3_bhu07"]
+[ext_resource type="AudioStream" uid="uid://bms7rmrutovrt" path="res://sounds/shotgun-reload-fx_279bpm.wav" id="3_cudv7"]
 [ext_resource type="Texture2D" uid="uid://3fmjlvocnybu" path="res://sprites/uzi/uzi_bolt.png" id="3_u270w"]
 [ext_resource type="PackedScene" uid="uid://b0bxe3gpgi154" path="res://scenes/UI/camera.tscn" id="4_2rsv2"]
 [ext_resource type="PackedScene" uid="uid://x6txbt3folt7" path="res://scenes/uzi/Mag.tscn" id="5_lhx1k"]
@@ -68,6 +70,8 @@ inertia = 1000.0
 can_sleep = false
 angular_damp_mode = 1
 script = ExtResource("1_3np3i")
+MAG_OUT_SOUND = ExtResource("2_jgiro")
+MAG_IN_SOUND = ExtResource("3_cudv7")
 SHOOT_SOUND = ExtResource("2_e8nxl")
 SHOOT_FORCE = Vector2(-700, 0)
 SOUND_RANGE = 2000

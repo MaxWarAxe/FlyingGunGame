@@ -1,9 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://dro7ccuig7r5u"]
+[gd_scene load_steps=3 format=3 uid="uid://dro7ccuig7r5u"]
 
-[ext_resource type="Script" path="res://scenes/effects/invis_effect.gd" id="1_50cjt"]
+[ext_resource type="Script" uid="uid://duahxg3yykdql" path="res://scenes/effects/invis_effect.gd" id="1_50cjt"]
+[ext_resource type="AudioStream" uid="uid://qckruxtott62" path="res://sounds/invisSound.mp3" id="2_vjyr0"]
 
 [node name="invis_effect" type="Node2D"]
 script = ExtResource("1_50cjt")
+SOUND_EFFECT = ExtResource("2_vjyr0")
 
 [node name="Timer" type="Timer" parent="."]
 

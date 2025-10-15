@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://ca4lpkrw027nn"]
+[gd_scene load_steps=19 format=3 uid="uid://ca4lpkrw027nn"]
 
 [ext_resource type="Texture2D" uid="uid://bp7wy43toi1pg" path="res://sprites/ak-47/ak-47-base.png" id="1_mm34q"]
 [ext_resource type="Script" uid="uid://bkc7r5toq1cm6" path="res://scripts/ak-47.gd" id="1_pvrhg"]
@@ -11,6 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://4qjdh10o1oy" path="res://scenes/UI/label_of_player.tscn" id="6_c6o0t"]
 [ext_resource type="PackedScene" uid="uid://b6pnw0nutsac3" path="res://scenes/ak-47/bullet.tscn" id="7_ocxwt"]
 [ext_resource type="AudioStream" uid="uid://cf60hldyeg6oa" path="res://sounds/072807_heavy-machine-gun-50-caliber-39765.mp3" id="11_83c31"]
+[ext_resource type="AudioStream" uid="uid://bms7rmrutovrt" path="res://sounds/shotgun-reload-fx_279bpm.wav" id="12_figqm"]
+[ext_resource type="AudioStream" uid="uid://d3pqk8u0ctngu" path="res://sounds/mag-slide-in-80901.mp3" id="13_8tior"]
+[ext_resource type="PackedScene" uid="uid://dlbe7n0uric8x" path="res://shaders/bloodParticles.tscn" id="14_6rfid"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_3sdts"]
 rough = true
@@ -68,6 +71,8 @@ inertia = 1000.0
 can_sleep = false
 angular_damp_mode = 1
 script = ExtResource("1_pvrhg")
+MAG_OUT_SOUND = ExtResource("13_8tior")
+MAG_IN_SOUND = ExtResource("12_figqm")
 SHOOT_SOUND = ExtResource("11_83c31")
 SOUND_RANGE = 4000
 INIT_ZOOM = 0.3
@@ -155,6 +160,10 @@ default_color = Color(1, 0, 0, 1)
 replication_config = SubResource("SceneReplicationConfig_swqss")
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Node2D" parent="." instance=ExtResource("14_6rfid")]
+visible = false
+position = Vector2(18, -49)
 
 [connection signal="timeout" from="TimerToShoot" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="TimerToReload" to="." method="_on_timer_to_reload_timeout"]

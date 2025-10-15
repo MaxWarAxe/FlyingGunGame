@@ -39,6 +39,7 @@ func reload():
 		updateUI()
 
 func addAmmo():
+	play_reload_end_sound()
 	if(!withMag):
 		$AnimationPlayer.play("shoot");
 	if(ammo < MAG_AMMO):
