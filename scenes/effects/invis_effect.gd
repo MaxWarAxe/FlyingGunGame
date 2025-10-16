@@ -19,7 +19,7 @@ func setTime(time):
 	$Timer.wait_time = time
 func startTimer():
 	$Timer.start()
-func _process(delta):
+func _process(_delta):
 	pass
 
 

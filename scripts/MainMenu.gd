@@ -35,18 +35,14 @@ func _ready():
 	multiplayer.connection_failed.connect(connection_failed)
 	if "--server" in OS.get_cmdline_args():
 		HostGame()
-	
-	
-	$AnimationPlayer.set_autoplay("logomove")
 	$AnimationPlayer.play("logomove")
-	
 	updatePoses()
-	
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+
+# Called every frame. '_delta' is the elapsed time since the previous frame.
+func _process(_delta):
 	$Panel/NodeContainer.global_position.x = lerp($Panel/NodeContainer.global_position.x,movePos,WEAPON_SWITCH_SPEED)
-	
-	
+
+
 func peer_connected(id):
 	print("Player connected" + str(id));
 	#sync.rpc_id(id,GameManager.Players)
@@ -59,7 +55,7 @@ func peer_disconnected(id):
 		if i.name == str(id):
 			i.label.queue_free()
 			i.queue_free()
-	
+
 func connected_to_server():
 	print("connected to Server");
 	SendPlayerInformation.rpc_id(1, $VBoxContainer/NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName,0,0,Vector2.ZERO,0,100,null)
@@ -83,7 +79,7 @@ func connection_failed():
 func _on_host_button_button_down():
 	HostGame()
 	SendPlayerInformation($VBoxContainer/NickNameLine.text,multiplayer.get_unique_id(),currentWeaponName,0,0,Vector2.ZERO,0,100,null)
-	
+
 func _on_join_button_button_down():
 	peer = ENetMultiplayerPeer.new()
 	peer.create_client(Address,port)
@@ -109,10 +105,10 @@ func HostGame():
 		return
 	multiplayer.set_multiplayer_peer(peer)
 	print("waiting for players")
-	
+
 
 @rpc("any_peer","reliable")
-func SendPlayerInformation(name,id,weapon,kills,deaths,pos,killsinarow,hp,crates):
+func SendPlayerInformation(new_name,id,weapon,kills,deaths,pos,killsinarow,hp,crates):
 	print(weapon)
 	
 	if !GameManager.Players.has(id):
@@ -120,7 +116,7 @@ func SendPlayerInformation(name,id,weapon,kills,deaths,pos,killsinarow,hp,crates
 			GameManager.Crates = crates
 			print(crates)	
 		GameManager.Players[id] = {
-			"name" : name,
+			"name" : new_name,
 			"id" : id,
 			"kills" : kills,
 			"deaths" : deaths,
@@ -136,7 +132,7 @@ func _on_start_button_button_down():
 	StartGame.rpc()
 	
 
-@rpc("any_peer")
+@rpc("any_peer","reliable")
 func sync(players):
 	GameManager.Players = players;
 
@@ -183,7 +179,7 @@ func _on_check_button_toggled(toggled_on: bool) -> void:
 	Settings.on_mobile = toggled_on
 
 
-func _on_nick_name_line_text_changed(new_text: String) -> void:
+func _on_nick_name_line_text_changed(_new_text: String) -> void:
 	var menu_buttons = get_tree().get_nodes_in_group("menu_buttons")
 	var tween = create_tween()
 	var fade_time = 0.2
@@ -197,3 +193,12 @@ func _on_nick_name_line_text_changed(new_text: String) -> void:
 			button.modulate.a = 0.0
 			button.visible = true
 			tween.tween_property(button, "modulate:a", 1.0, fade_time)
+
+
+func _on_check_button_2_pressed() -> void:
+	if !$smol.button_pressed:
+		get_window().mode = Window.MODE_FULLSCREEN
+		get_window().set_size(Vector2i(1920, 1080))
+	else:
+		get_window().mode = Window.MODE_WINDOWED
+		get_window().set_size(Vector2i(1152, 648))

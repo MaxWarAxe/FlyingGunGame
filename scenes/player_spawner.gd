@@ -12,5 +12,5 @@ func calculatePos():
 	var transf = Transform2D(0.0, pos)
 	return transf
 
-func _process(delta):
+func _process(_delta):
 	pass

@@ -22,8 +22,8 @@ func _ready():
 	pass
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+# Called every frame. '_delta' is the elapsed time since the previous frame.
+func _process(_delta):
 	pass
 
 func processEffect():
@@ -79,6 +79,6 @@ func playExplodeSound():
 		get_tree().get_root().add_child(sound)
 		sound.pitch_scale = randf_range(0.9,1.1)
 		sound.play()
-func _on_animation_player_animation_finished(anim_name):
+func _on_animation_player_animation_finished(_anim_name):
 	playExplodeSound()
 	explode()

@@ -1,7 +1,7 @@
 extends Weapon
 func _ready():
 	init_data()
-func _process(delta):
+func _process(_delta):
 	if timerToShoot.is_stopped() and Input.is_action_pressed("test"):
 		shoot()
 		timerToShoot.start()

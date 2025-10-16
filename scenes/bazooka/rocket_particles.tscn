@@ -1,0 +1,23 @@
+[gd_scene load_steps=2 format=3 uid="uid://cx21b00ayjq6f"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bvcgm"]
+particle_flag_disable_z = true
+angle_min = -720.0
+angle_max = 720.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+flatness = 1.0
+initial_velocity_min = 19.51
+initial_velocity_max = 134.14
+angular_velocity_min = -159.20001
+angular_velocity_max = 89.43998
+gravity = Vector3(0, 98, 0)
+scale_min = 5.0
+scale_max = 10.0
+color = Color(1, 1, 0, 1)
+
+[node name="GPUParticles2D" type="GPUParticles2D"]
+amount = 64
+lifetime = 0.3
+visibility_rect = Rect2(-50000, -50000, 100000, 100000)
+process_material = SubResource("ParticleProcessMaterial_bvcgm")

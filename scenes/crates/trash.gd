@@ -10,8 +10,8 @@ func _ready():
 	$Sprites.get_child(randi_range(0,size-1)).visible = true
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+# Called every frame. '_delta' is the elapsed time since the previous frame.
+func _process(_delta):
 	pass
 
 

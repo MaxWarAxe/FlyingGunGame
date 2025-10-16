@@ -8,13 +8,13 @@ func _ready():
 	clear()
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+# Called every frame. '_delta' is the elapsed time since the previous frame.
+func _process(_delta):
 	pass
 
 func clear():
 	$Circle.value = 0
 	$AmmoIcon.value = 0
 	
-func _on_animation_player_animation_finished(anim_name):
+func _on_animation_player_animation_finished(_anim_name):
 	clear()

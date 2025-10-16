@@ -17,7 +17,7 @@ func play_sound():
 
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if TARGET:
 		global_position = TARGET.global_position 
 #Sound Ended

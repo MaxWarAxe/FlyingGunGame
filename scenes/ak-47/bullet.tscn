@@ -1,16 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://b6pnw0nutsac3"]
+[gd_scene load_steps=6 format=3 uid="uid://b6pnw0nutsac3"]
 
 [ext_resource type="Texture2D" uid="uid://d0i7y2in00lv5" path="res://sprites/ak-47/bullet.png" id="1_rpmim"]
 [ext_resource type="Script" uid="uid://b2pwu0pb7agti" path="res://scenes/ak-47/bullet.gd" id="1_t46fu"]
+[ext_resource type="PackedScene" uid="uid://dx7vcrdke1pfo" path="res://shaders/particle.tscn" id="2_mm2cx"]
 [ext_resource type="AudioStream" uid="uid://b177xuhe7l8co" path="res://sounds/Wind2.mp3" id="3_qfqx6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bwqe7"]
 size = Vector2(6.5, 38.75)
 
-[node name="bullet" type="Area2D"]
+[node name="bullet" type="Area2D" node_paths=PackedStringArray("particles")]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_t46fu")
+particles = NodePath("GPUParticles2D")
+
+[node name="GPUParticles2D" parent="." instance=ExtResource("2_mm2cx")]
+emitting = false
+sub_emitter = NodePath(".")
+one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 10.625)

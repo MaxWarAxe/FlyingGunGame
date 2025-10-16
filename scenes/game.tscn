@@ -7,11 +7,11 @@
 [ext_resource type="PackedScene" uid="uid://cm57n0ojdlknm" path="res://scenes/moon.tscn" id="4_c6b87"]
 [ext_resource type="PackedScene" uid="uid://cjopwk7hfoibb" path="res://scenes/shotgun/shotgun.tscn" id="4_jijhl"]
 [ext_resource type="PackedScene" uid="uid://cx3bjqtqarltf" path="res://scenes/uzi/uzi.tscn" id="5_f77r4"]
+[ext_resource type="PackedScene" uid="uid://bvekpk06vely5" path="res://scenes/bazooka.tscn" id="6_dinhu"]
 [ext_resource type="PackedScene" uid="uid://b1ikf0jr4dmwc" path="res://scenes/crates/crate.tscn" id="7_bk5vn"]
 [ext_resource type="PackedScene" uid="uid://dvbc824ynopdc" path="res://scenes/spawner.tscn" id="8_d4mav"]
 [ext_resource type="PackedScene" uid="uid://b72t05x406fl" path="res://scenes/player_spawner.tscn" id="10_2wl38"]
 [ext_resource type="Shader" uid="uid://f0j05vp047ia" path="res://shaders/background_shader2.gdshader" id="11_2kp8k"]
-[ext_resource type="PackedScene" uid="uid://xhumjm2iequk" path="res://turret/Turret.tscn" id="12_dinhu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kvuet"]
 
@@ -32,6 +32,7 @@ awpScene = ExtResource("2_voe2t")
 akScene = ExtResource("3_yjeef")
 shotgunScene = ExtResource("4_jijhl")
 uziScene = ExtResource("5_f77r4")
+bazookaScene = ExtResource("6_dinhu")
 
 [node name="background" type="Sprite2D" parent="."]
 z_index = -100
@@ -122,7 +123,8 @@ visible = false
 position = Vector2(6000, 3500)
 scale = Vector2(104.71, 58.42)
 ITEM_TO_SPAWN = ExtResource("7_bk5vn")
-MAX_ITEMS = 50
+SPAWN_TIME = 0.4
+MAX_ITEMS = 15
 
 [node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
 spawn_path = NodePath("..")
@@ -141,6 +143,12 @@ offset_bottom = 13145.0
 position = Vector2(6929, -2557)
 shape = SubResource("RectangleShape2D_kvpfn")
 
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(15417, 3435)
+shape = SubResource("RectangleShape2D_dinhu")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
@@ -153,16 +161,7 @@ shape = SubResource("RectangleShape2D_kvpfn")
 position = Vector2(-3227, 3558)
 shape = SubResource("RectangleShape2D_dinhu")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="StaticBody2D3"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3/StaticBody2D3"]
-position = Vector2(15417, 3435)
-shape = SubResource("RectangleShape2D_dinhu")
-
-[node name="Turret" parent="." instance=ExtResource("12_dinhu")]
-position = Vector2(627, 6326)
-MAG_AMMO = 100000
-
 [node name="player_spawner" parent="." instance=ExtResource("10_2wl38")]
-position = Vector2(811.0005, 5352)
-scale = Vector2(13.945, 7.187)
+visible = false
+position = Vector2(6131.0005, 3367)
+scale = Vector2(105.02, 54.125)

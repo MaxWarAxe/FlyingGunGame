@@ -4,12 +4,12 @@ extends Node2D
 @export var akScene : PackedScene
 @export var shotgunScene : PackedScene
 @export var uziScene : PackedScene
+@export var bazookaScene : PackedScene
 
 
 @onready var spawner = get_node("spawner")
 var QueueToConnect : Array
 var mainMenu
-signal discon
 
 
 func weaponChoose(i) -> Node:
@@ -22,11 +22,12 @@ func weaponChoose(i) -> Node:
 				return shotgunScene.instantiate()
 			"uzi":
 				return uziScene.instantiate()
+			"bazooka":
+				return bazookaScene.instantiate()
 	return null;
 
 @rpc("any_peer","call_local","reliable")
 func spawn():
-	var index = 0
 	var currentPlayer
 	for i in GameManager.Players:
 		
@@ -42,7 +43,6 @@ func spawn():
 
 		currentPlayer.demandingPos = $player_spawner.calculatePos()
 		currentPlayer.respawning = true;
-		index += 1
 	pass
 
 func _ready():
@@ -50,8 +50,8 @@ func _ready():
 		spawn.rpc();
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+# Called every frame. '_delta' is the elapsed time since the previous frame.
+func _process(_delta):
 	if(QueueToConnect.size() != 0):
 		for unID in QueueToConnect:
 			QueueToConnect.erase(unID)
@@ -68,7 +68,6 @@ func cloneToNewPlayer():
 	print("WTF")
 	for k in GameManager.Crates:
 		spawner.spawn(GameManager.Crates[k].pos,GameManager.Crates[k].name)
-	var index = 0
 	for i in GameManager.Players:
 		var currentPlayer
 		if str(GameManager.Players[i].id) != str(multiplayer.get_unique_id()):
@@ -112,7 +111,6 @@ func addConnectedPlayer(id):
 
 @rpc("any_peer","call_local","reliable")
 func respawnCall(id):
-	var index = 0
 	var currentPlayer = get_node(id)
 	if currentPlayer != null:
 		currentPlayer.hp = currentPlayer.INIT_HP

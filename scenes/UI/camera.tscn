@@ -10,6 +10,7 @@ zoom = Vector2(0.4, 0.4)
 process_callback = 0
 limit_enabled = false
 limit_smoothed = true
+position_smoothing_enabled = true
 editor_draw_limits = true
 editor_draw_drag_margin = true
 script = ExtResource("1_bhtx5")

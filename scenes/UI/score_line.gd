@@ -1,7 +1,7 @@
 extends HBoxContainer
 
-func changeValues(name,kills,deaths,weapon,hp,streak):
-	$Name.text = str(name)
+func changeValues(new_name,kills,deaths,weapon,hp,streak):
+	$Name.text = str(new_name)
 	$Kills.text = str(kills)
 	$Deaths.text = str(deaths)
 	$Weapon.text = str(weapon)
@@ -12,6 +12,6 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+# Called every frame. '_delta' is the elapsed time since the previous frame.
+func _process(_delta):
 	pass

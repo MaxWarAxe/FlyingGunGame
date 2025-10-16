@@ -26,14 +26,14 @@ func addDeath(id):
 		if Players[i].id == id.to_int():
 			Players[i].deaths += 1;
 			Players[i].killsinarow = 0;
-func addCrate(pos,name):
+func addCrate(pos,new_name):
 	Crates[name] = {
 		"pos" : pos,
-		"name": name
+		"name": new_name
 	}
 @rpc("any_peer","call_local","reliable")
-func deleteCrate(name):
-	Crates.erase(name)
+func deleteCrate(new_name):
+	Crates.erase(new_name)
 
 @rpc("any_peer","call_local","reliable")
 func changeHP(id,hp):
@@ -41,7 +41,8 @@ func changeHP(id,hp):
 		if Players[i].id == id.to_int():
 			Players[i].hp = hp;
 
+	
 
 	
-func _process(delta):
+func _process(_delta):
 	pass

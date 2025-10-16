@@ -1,7 +1,7 @@
 extends Node2D
 
-func setup(name,hp):
-	$HBoxContainer/NickNameLabel.text = name
+func setup(new_name,hp):
+	$HBoxContainer/NickNameLabel.text = new_name
 	$HBoxContainer/HPValueLabel.text = str(hp)
 func updateHP(hp):
 	$HBoxContainer/HPValueLabel.text = str(hp)
@@ -11,6 +11,6 @@ func _ready():
 	pass # Replace with function body.
 
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+# Called every frame. '_delta' is the elapsed time since the previous frame.
+func _process(_delta):
 	pass

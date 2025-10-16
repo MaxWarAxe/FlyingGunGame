@@ -3,7 +3,9 @@ class_name Weapon
 @export var MAG_OUT_SOUND : AudioStreamMP3
 @export var MAG_IN_SOUND : AudioStreamWAV
 @export var SHOOT_SOUND : AudioStreamMP3
+@export var SHELL_BASE_ROTATION : float
 @export var SHOOT_FORCE = Vector2(-600,0);
+@export var SEMI_AUTO : bool = false
 @export var ANGULAR_SPEED = 5000
 @export var SOUND_RANGE = 2500
 @export var ANGULAR_VELOCITY = 0;
@@ -49,10 +51,12 @@ signal died(id);
 @export var magScene : PackedScene
 @export var labelScene : PackedScene
 var RemoteTransform
-var MagNode
+@export var MagNode : Sprite2D 
 
 var timerToShoot : Timer 
 var timerToReload : Timer
+
+@rpc("any_peer","call_local","reliable")
 func init_data():
 	timerToShoot = get_node("TimerToShoot")
 	timerToReload = get_node("TimerToReload")
@@ -64,8 +68,9 @@ func init_data():
 	mags = MAG_AMOUNT;
 	hp = INIT_HP;
 	targetZoom = INIT_ZOOM;
-	MagNode = $Sprites/Mag
-	setUpLabel();
+	get_node("Sprites").material = null
+	print(get_node("Sprites").material)
+	updateUI()
 	updateScore()
 	
 	
@@ -74,7 +79,7 @@ func _ready():
 	GameManager.Player = itself
 	damageDealt.connect(Callable(self,"add_blood"))
 	$MultiplayerSynchronizer.set_multiplayer_authority(idname.to_int())
-	
+	setUpLabel();
 	name = idname
 	print("authority " + str($MultiplayerSynchronizer.get_multiplayer_authority()))
 	print("unique " + str(multiplayer.get_unique_id()))
@@ -83,11 +88,12 @@ func _ready():
 		camera = cameraScene.instantiate();
 		get_tree().get_root().add_child(camera)
 		#add_child(camera)
-		camera.nodeToSpectate = self
-		camera.targetZoom = Vector2(INIT_ZOOM,INIT_ZOOM)
+		camera.node_to_spectate = self
+		camera.basic_node_to_spectate = self
+		camera.target_zoom = Vector2(INIT_ZOOM,INIT_ZOOM)
 		
 		$Line2D.visible = true;
-	init_data()
+	init_data.rpc()
 	updateUI()
 	label.updateHP(hp)
 
@@ -122,19 +128,19 @@ func checkDeath():
 			die.rpc_id(1);
 
 @rpc("any_peer","reliable")
-func sendpos(id,posit):
+func sendpos(_id,posit):
 	pos = posit
 
-func bulletPitchCalculate(delta: float):
+func bulletPitchCalculate(_delta: float):
 	for bullet: Bullet in get_tree().get_nodes_in_group("Bullets"):
 		var distance = global_position.distance_to(bullet.global_position)
 		var vel = distance - bullet.compare_velocity
 		bullet.compare_velocity = distance
 		var pitch_factor = 1.5 - vel*0.1
 		bullet.pitch = clamp(pitch_factor,0.1,4.0)
-func _process(delta):
+func _process(_delta):
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
-		bulletPitchCalculate(delta)
+		bulletPitchCalculate(_delta)
 	label.position = position 
 	checkDeath()
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
@@ -157,9 +163,14 @@ func discon():
 			scene.queue_free()
 
 func controls():
-	if(Input.is_action_pressed("shoot") and timerToShoot.is_stopped()):
-		shoot();
-		timerToShoot.start();
+	if !SEMI_AUTO:
+		if(Input.is_action_pressed("shoot") and timerToShoot.is_stopped()):
+			shoot();
+			timerToShoot.start()
+	else:
+		if(Input.is_action_just_pressed("shoot") and timerToShoot.is_stopped()):
+			shoot();
+			timerToShoot.start()
 	if(Input.is_action_pressed("rotate_left")):
 		rotate_left();
 	if(Input.is_action_just_pressed("show_score")):
@@ -252,12 +263,13 @@ func shoot():
 			withMag = false;
 		updateUI()
 
-@rpc("any_peer","call_local","reliable")
+@rpc("any_peer","call_local","unreliable")
 func add_shell():
 	if $BoltPosition:
 		var shell = shellScene.instantiate();
 		get_tree().get_root().add_child(shell)
 		shell.apply_force(SHELL_SPEED * Vector2.UP.rotated($BoltPosition.global_rotation) + linear_velocity)
+		#shell.basis = Basis(Vector3(0, 1, 0), SHELL_BASE_ROTATION)
 		shell.global_position = $BoltPosition.global_position;
 		shell.apply_torque(SHELL_ROTATION_SPEED)
 
@@ -268,9 +280,9 @@ func add_bullet():
 	bullet.damage = bullet_damage;
 	bullet.shooter = self.idname;
 	bullet.add_child(load("res://shaders/particle.tscn").instantiate());
-	bullet.global_position = $Barrel.global_position;
-	bullet.global_rotation = $Barrel.global_rotation;
-	bullet.velocity = BULLET_SPEED * Vector2.UP.rotated($Barrel.global_rotation);
+	bullet.global_position = Barrel.global_position;
+	bullet.global_rotation = Barrel.global_rotation;
+	bullet.velocity = BULLET_SPEED * Vector2.UP.rotated(Barrel.global_rotation);
 	
 func rotate_left():
 	ANGULAR_VELOCITY += -ANGULAR_SPEED * get_process_delta_time();
@@ -317,7 +329,13 @@ func play_damage_sound():
 	sound.global_position = global_position
 	get_tree().get_root().add_child(sound)
 	sound.play_sound()
-
+func play_hit_marker_sound():
+	var sound : SoundSpawner = load("res://scenes/SoundSpawner.tscn").instantiate()
+	sound.max_distance = 1000
+	sound.stream = load("res://sounds/HitMarker.mp3")
+	sound.position = position
+	add_child(sound)
+	sound.play_sound()
 @rpc("any_peer","call_local","reliable")
 func deal(damage,shooterid,bullet_velocity,bullet_position):
 	play_damage_sound()
@@ -329,17 +347,18 @@ func deal(damage,shooterid,bullet_velocity,bullet_position):
 	
 @rpc("any_peer","call_local","reliable")
 func die():
+	init_data.rpc()
 	emit_signal("died",idname)
 
 func add_blood(bullet_velocity,bullet_position):
 	print("blood")
-	var material : ShaderMaterial = load("res://shaders/blood_shader_material.tres")
-	material.set_shader_parameter("blood_coef",1 - hp/INIT_HP)
-	get_node("Sprites").material = material
+	if $MultiplayerSynchronizer.get_multiplayer_authority() != multiplayer.get_unique_id():
+		var new_material : ShaderMaterial = load("res://shaders/blood_shader_material.tres")
+		new_material.set_shader_parameter("blood_coef",1 - hp/INIT_HP)
+		get_node("Sprites").material = new_material
 	
 	var bloodParticles : Particle = load("res://shaders/bloodParticles.tscn").instantiate()
 	bloodParticles.process_material.direction = Vector3(bullet_velocity.x,bullet_velocity.y,0)
-	
 	bloodParticles.velocity = linear_velocity
 	get_tree().get_root().add_child(bloodParticles)
 	bloodParticles.global_position = bullet_position

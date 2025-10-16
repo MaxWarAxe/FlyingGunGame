@@ -10,16 +10,16 @@ func _ready():
 	$SpawnTimer.wait_time = SPAWN_TIME
 	$SpawnTimer.start()
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+# Called every frame. '_delta' is the elapsed time since the previous frame.
+func _process(_delta):
 	pass
 
 func onCrateDestroy():
 	if multiplayer.get_unique_id() == 1:
 		amount -= 1
 @rpc("any_peer","call_local","reliable")
-func addCrateInfo(pos,name):
-	GameManager.addCrate(pos,name)
+func addCrateInfo(pos,new_name):
+	GameManager.addCrate(pos,new_name)
 
 @rpc("any_peer","call_local","reliable")
 func spawn(pos,named):

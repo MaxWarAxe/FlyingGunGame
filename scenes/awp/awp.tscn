@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c50nhaxhb3qe6"]
+[gd_scene load_steps=18 format=3 uid="uid://c50nhaxhb3qe6"]
 
 [ext_resource type="PackedScene" uid="uid://b6pnw0nutsac3" path="res://scenes/ak-47/bullet.tscn" id="1_eg26o"]
 [ext_resource type="Script" uid="uid://dqkokf0gcx8wc" path="res://scenes/awp/awp.gd" id="1_y1s32"]
@@ -12,18 +12,10 @@
 [ext_resource type="PackedScene" uid="uid://4qjdh10o1oy" path="res://scenes/UI/label_of_player.tscn" id="5_ri7y1"]
 [ext_resource type="Texture2D" uid="uid://ctlnpxqxbxjoa" path="res://sprites/awp/mag.png" id="8_jdx85"]
 [ext_resource type="Texture2D" uid="uid://c1ykg4suesxde" path="res://sprites/awp/bolt.png" id="9_gpqc2"]
-[ext_resource type="Shader" uid="uid://s84wdwbtyn7j" path="res://shaders/blood.gdshader" id="10_hxidt"]
-[ext_resource type="Texture2D" uid="uid://bsta0fjf38o7g" path="res://shaders/noice.png" id="11_t87m6"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_c7557"]
 rough = true
 absorbent = true
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_226rc"]
-shader = ExtResource("10_hxidt")
-shader_parameter/noise = ExtResource("11_t87m6")
-shader_parameter/blood_coef = -0.00499999988824
-shader_parameter/color = Color(0.97566444, 4.5724214e-06, 1.540184e-06, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qgijp"]
 size = Vector2(24, 16)
@@ -65,7 +57,7 @@ properties/4/path = NodePath("Sprites/Bolt:position")
 properties/4/spawn = true
 properties/4/replication_mode = 1
 
-[node name="awp" type="RigidBody2D" node_paths=PackedStringArray("Barrel") groups=["Player"]]
+[node name="awp" type="RigidBody2D" node_paths=PackedStringArray("Barrel", "MagNode") groups=["Player"]]
 process_mode = 3
 collision_layer = 3
 collision_mask = 3
@@ -95,6 +87,7 @@ shellScene = ExtResource("2_bbcsp")
 cameraScene = ExtResource("3_l422y")
 magScene = ExtResource("4_hcnql")
 labelScene = ExtResource("5_ri7y1")
+MagNode = NodePath("Sprites/Mag")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 position = Vector2(193.977, -42.5687)
@@ -105,7 +98,7 @@ polygon = PackedVector2Array(-8.53952, 7.91743, -9.18459, 9.97248, -21.4407, 10.
 
 [node name="Awpsprite" type="Sprite2D" parent="Sprites"]
 z_index = 1
-material = SubResource("ShaderMaterial_226rc")
+use_parent_material = true
 position = Vector2(34.5, -3.59999)
 scale = Vector2(0.296569, 0.296569)
 texture = ExtResource("5_fnrrm")

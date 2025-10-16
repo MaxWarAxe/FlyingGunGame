@@ -58,7 +58,7 @@ _data = {
 &"shoot": SubResource("Animation_47dnm")
 }
 
-[node name="uzi" type="RigidBody2D" node_paths=PackedStringArray("Barrel") groups=["Player"]]
+[node name="uzi" type="RigidBody2D" node_paths=PackedStringArray("Barrel", "MagNode") groups=["Player"]]
 process_mode = 3
 collision_layer = 3
 collision_mask = 3
@@ -85,6 +85,7 @@ shellScene = ExtResource("3_bhu07")
 cameraScene = ExtResource("4_2rsv2")
 magScene = ExtResource("5_lhx1k")
 labelScene = ExtResource("6_y885a")
+MagNode = NodePath("Sprites/Mag")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
 polygon = PackedVector2Array(-8, -21, 23, -21, 28, -27, 31, -27, 31, -20, 35, -21, 34, -14, 102, -14, 102, -4, 37, -4, 26, -4, 23, 0, 15, 0, 15, 6, 12, 8, 5, 8, 2, 6, 2, 21, -14, 21, -14, 15, -14, 9, -12, 2, -21, -2, -27, -2, -27, -18, -24, -21, -21, -21, -21, -25, -15, -25, -13, -23, -12, -19, -8, -18.2915)
@@ -115,6 +116,7 @@ scale = Vector2(0.13, 0.13)
 texture = ExtResource("3_u270w")
 
 [node name="UziMag" type="Sprite2D" parent="Sprites"]
+use_parent_material = true
 position = Vector2(72.63331, -9)
 rotation = -1.5707964
 scale = Vector2(0.119403325, 0.28865212)

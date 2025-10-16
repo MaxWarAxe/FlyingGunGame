@@ -54,8 +54,8 @@ func playStreakAnim(streak):
 			$StreakMask/StreakAnim.play("streak5")
 func makeReloadAnim(time):
 	$ReloadProgress.reload(time)
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+# Called every frame. '_delta' is the elapsed time since the previous frame.
+func _process(_delta):
 	scale.x = 1/get_parent().zoom.x
 	scale.y = 1/get_parent().zoom.y
 	if Input.is_action_pressed("shoot"):
