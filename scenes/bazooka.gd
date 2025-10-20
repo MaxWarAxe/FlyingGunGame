@@ -40,6 +40,8 @@ func add_bullet():
 		var bullet : ExplosiveProjectile = bulletScene.instantiate();
 		bullet.shooter = self.idname;
 		bullet.set_multiplayer_authority(get_multiplayer_authority())
+		bullet.name = str(self.idname) + str(rocketId)
+		rocketId += 1
 		bullet.CONTROL_SPEED = BULLET_SPEED
 		bullet.UNCONTROL_SPEED = UNCONTROLL_ROCKET_SPEED
 		bullet.velocity = UNCONTROLL_ROCKET_SPEED * Vector2.UP.rotated(new_rotation);
@@ -50,4 +52,4 @@ func add_bullet():
 		bullet.EXPLOSIVE_DAMAGE = EXPLOSIVE_DAMAGE;
 		bullet.global_position = Barrel.global_position;
 		bullet.global_rotation = new_rotation;
-		
+var rocketId = 1
