@@ -279,11 +279,16 @@ func add_bullet():
 	get_tree().get_root().add_child(bullet)
 	bullet.damage = bullet_damage;
 	bullet.shooter = self.idname;
-	bullet.add_child(load("res://shaders/particle.tscn").instantiate());
-	bullet.global_position = Barrel.global_position;
+	#bullet.add_child(load("res://shaders/particle.tscn").instantiate());
+	
+	#Trail scene
+	var trail : Trail = load("res://trail.tscn").instantiate()
+	get_tree().get_root().add_child(trail)
+	
+	bullet.global_position = Barrel.global_position
 	bullet.global_rotation = Barrel.global_rotation;
 	bullet.velocity = BULLET_SPEED * Vector2.UP.rotated(Barrel.global_rotation);
-	
+	trail.create(bullet,Barrel.global_position)
 func rotate_left():
 	ANGULAR_VELOCITY += -ANGULAR_SPEED * get_process_delta_time();
 	apply_torque(-ANGULAR_SPEED* get_process_delta_time()*100);

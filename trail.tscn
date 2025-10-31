@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cc4ixcixrsn6g"]
+
+[ext_resource type="Script" uid="uid://clqjhmr2jhl58" path="res://trail.gd" id="1_xjhlx"]
+
+[node name="Line2D" type="Line2D"]
+points = PackedVector2Array(0, 0, 0, 0)
+default_color = Color(1, 1, 1, 0.60784316)
+script = ExtResource("1_xjhlx")

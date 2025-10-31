@@ -18,7 +18,7 @@ func _ready():
 	$LifeTimer.wait_time = LIFE_TIME;
 	$LifeTimer.start()
 	$BuletFlySound.play()
-	particles.emitting = true
+	#particles.emitting = true
 	pass # Replace with function body.
 
 
